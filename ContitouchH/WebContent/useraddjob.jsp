@@ -26,6 +26,7 @@ String assignedto =  session.getAttribute("User").toString();
 
 session.setAttribute("pname_session1",project);
 session.setAttribute("pid_session1",project_id);
+session.setAttribute("llead",lead);
 
 %>
 
@@ -35,7 +36,7 @@ session.setAttribute("pid_session1",project_id);
     <div class="modal-dialog modal-lg" style="width:1200px;">
         <div class="modal-content">
             <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel-2">Task for: [<%out.print(project); %>]</h5>
+                          <h5 class="modal-title" id="exampleModalLabel-2">Create Task for: [<%out.print(project); %>]</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>

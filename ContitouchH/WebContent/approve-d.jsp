@@ -16,6 +16,8 @@
             table tr:not(:first-child):hover{background-color: #ddd;}
         </style>
         
+
+        
         
         
 <title>Contitouch</title>
@@ -37,7 +39,8 @@
 
 		  
 		  <%@include file = 'sessions.jsp' %>
-		  <%String userName2 =  session.getAttribute("User").toString();%>
+		  
+		     		  <%String userName2 =  session.getAttribute("User").toString();%>
 		  
 		  
 		<script>
@@ -51,7 +54,7 @@
 		     }else{
 		         alert("Cancel");
 
-		        window.location.href = 'alljobs.jsp';
+		        window.location.href = 'alltasks.jsp';
 		     }
 		 }
 		</script>
@@ -121,32 +124,31 @@
 		
 		
 		
-<%@include file = '/Views/nav/header.jsp' %>							
+<%@include file = '/Views/nav/header.jsp' %>		
 
-								
-	
-			<br><br>	
+
+		<br><br>		
 		<div class="card">
             <div class="card-body">
-              <h4 class="card-title">View all records</h4>
+              <h4 class="card-title">Tasks Review</h4>
               <div class="row">
                 <div class="col-12">
                   <div class="table-responsive">
-                  <form name="form1" id="form1" action="/ContitouchH/DelItem"  method="post">
+                  <form name="form1" id="form1" action="/ContitouchH/ProjectActions"  method="post">
                     <table id="order-listing" class="table">
                      
 					  <thead>
                         <tr>
-                            <th>ID #</th>
-                            <th>Job Name</th>
-                            <th>Description</th>
-                            <th>Priority</th>
-                            <th>TimeTaken</th>
+                            <th>Task-ID#</th>
+                            <th>Task Name</th>
+                            <th>AssignedTo</th>
+                            <th>Lead</th>
                             <th>AssignedDate</th>
-                            <th>DateCompleted</th>
+                            <th>DueDate</th>
+                            <th>Priority</th>
+                            <th>ProjectName</th>
                             <th>CLient</th>
                             <th>Actions</th>
-                            
                         </tr>
                       </thead>
                       
@@ -162,21 +164,22 @@
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
-						String query="select *  from jobs where del_indicator != '"+val+"'   ";
+						String query="select *  from tasks where del_indicator != '"+val+"'   ";
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){  %>
                         <tr>
                         
                         
-                        	<td><%=rs.getString("id") %></td>
-        		  			<td><%=rs.getString("jname") %></td>
-            	  			<td><%=rs.getString("jobdesc") %></td>
-            	  			<td><%=rs.getString("priority") %></td>
-            	  			<td><%=rs.getString("timetaken") %></td>
+                        	<td><%=rs.getString("task_id") %></td>
+        		  			<td><%=rs.getString("tname") %></td>
+            	  			<td><%=rs.getString("assignedto") %></td>
+            	  			<td><%=rs.getString("lead") %></td>
             	  			<td><%=rs.getString("assigneddate") %></td>
-            	  			<td><%=rs.getString("datecompleted") %></td>
-            	  			<td><%=rs.getString("Client") %></td>
+            	  			<td><%=rs.getString("duedate") %></td>
+            	  			<td><%=rs.getString("priority") %></td>
+            	  			<td><%=rs.getString("project_name") %></td>
+            	  			<td><%=rs.getString("client") %></td>
                            
                             <td>
                             
@@ -188,15 +191,15 @@
        							 <input type="hidden" name="third" id="third">
 	  							 <!------------buttons ------ -->
                               <!-- <button class="btn btn-outline-primary" onclick="window.location.href = 'alljobs.jsp';">View</button> -->
-                              <button  class="btn btn-info" name="view" id="view">View</button>
+                              <button  class="btn btn-info" name="viewtasks" id="viewtasks">View</button>
                             
                             
                          
-                              <button class="btn btn-outline-warning" name="update" id="update"  onclick="showSwal('auto-close')" >Update</button>
+                              <button class="btn btn-outline-primary" name="updatetask1" id="updatetask1" >Approve</button>
                          
                             
                             
-                              <button class="btn btn-outline-danger" name="delete" id="delete">Delete</button>
+                              <button class="btn btn-outline-danger" name="deletetask" id="deletetask">Decline</button>
                             
                               
                               

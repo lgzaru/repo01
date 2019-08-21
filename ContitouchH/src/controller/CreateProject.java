@@ -43,15 +43,19 @@ public class CreateProject extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		String pname = request.getParameter("pname");
+		session.setAttribute("pname_session",pname);
 		
 		
 		String status = request.getParameter("pstatus");
 		String time = request.getParameter("time");
 		String company = request.getParameter("company");
+		session.setAttribute("cclient",company);
 	
 		
 		//String assignedto = request.getParameter("assignedto");
-		String lead = request.getParameter("lead");		
+		String lead = request.getParameter("lead");
+		session.setAttribute("llead",lead);
+		
 		String requester = request.getParameter("requester");
 		String rrd = request.getParameter("rrd");
 		String red = request.getParameter("red");
@@ -70,10 +74,15 @@ public class CreateProject extends HttpServlet {
 		String filename =  session.getAttribute("filename").toString();	
 		String fileurl =  session.getAttribute("fileurl").toString();	
 		
+	
+		
+		
 		
 		
 		int projectid = OTP.getOTP();
 		String projectidnew = "PJCT"+projectid;
+		session.setAttribute("pid_session",projectidnew);
+		
 		System.out.println(projectidnew);
 		
 
@@ -105,7 +114,7 @@ try{
 			out.println("});");
 			out.println("</script>");
 			
-			RequestDispatcher rd = request.getRequestDispatcher("project.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("uaddjobcreate.jsp");
 			rd.include(request, response);
 
 	

@@ -53,7 +53,7 @@ public class PopulateClientBrief extends HttpServlet {
 			Statement stmt = null;
 			stmt = mysqlConn.createStatement();
 			ResultSet rs =null;
-			int val = 0;
+			int val = 0,val1 = 1;
 			String query="select * from clientbrief where id = '"+clientbriefid+"' and project_created = '"+val+"'  ";
 			rs=stmt.executeQuery(query);
 	
@@ -81,6 +81,10 @@ public class PopulateClientBrief extends HttpServlet {
 				
 				
 			}
+			
+			
+			stmt.executeUpdate("UPDATE clientbrief SET project_created='"+val1+"'  WHERE  id ='"+clientbriefid+"'  ");
+			System.out.print("Update Successfull!");
 			
 			RequestDispatcher rd = request.getRequestDispatcher("projectp.jsp");
 			rd.include(request, response);

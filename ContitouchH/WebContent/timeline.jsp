@@ -359,20 +359,21 @@
                                <textarea class="text-danger form-control" id="mycomments" name="mycomments" rows="6"  ><%=rs.getString("usercomments") %></textarea><br>
                                
                            <div class="row">     
-                           <div class="form-check form-check-info">
+                           <div class="form-check form-check-primary">
                             <label class="form-check-label">
-                              <input type="checkbox" name="statusval" class="form-check-input" value="1">
+                              <input type="checkbox" name="statusval" class="form-check-input" >
                               Completed
-                            </label>
+                            <i class="input-helper"></i></label>
                           </div>
-                          &nbsp;
-                          <!-- <div class="form-check form-check-danger">
+                          &nbsp;&nbsp;&nbsp;
+                          <!--  <div class="form-check form-check-danger">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input">
+                              <input type="checkbox" class="form-check-input">
                               Cancel
                             </label>
-                          </div>
                           </div> -->
+                 
+                         
                           </div>
                           
                           <div align="right"><button type="submit" name="update_addnote" align="center" class="btn btn-outline-info btn-icon-text " >Update<i class="mdi mdi-file-check btn-icon-append"></i> </button></div>

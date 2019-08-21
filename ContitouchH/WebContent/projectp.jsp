@@ -254,7 +254,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Project Start Date</label>
                           <div class="col-sm-9">
-                            <input name="project_start" id="project_start" type="date" class="form-control" />
+                            <input name="project_start" id="project_start" type="date" value="<%out.print(datereceived); %>" class="form-control" />
                           </div>
                         </div>
                       </div>
@@ -447,7 +447,8 @@
 				Statement stmt = null;
 				stmt = mysqlConn.createStatement();
 				ResultSet resultset =null;
-				resultset =stmt.executeQuery("select * from clientbrief ") ;
+				int val1 = 0;
+				resultset =stmt.executeQuery("select * from clientbrief  where project_created = '"+val1+"' ") ;
 				%>
                             
                <select name="clientbrief" id="clientbrief" class="form-control">

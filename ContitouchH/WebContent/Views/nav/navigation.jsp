@@ -49,6 +49,7 @@
                  <li class="nav-item"> <a class="nav-link" href="addtask.jsp">Create Task</a></li>
                  <li class="nav-item"> <a class="nav-link" href="project-tasks.jsp">All Tasks/Project</a></li>
                  <li class="nav-item"> <a class="nav-link" href="alltasks.jsp">All Tasks </a></li>
+                 <li class="nav-item"> <a class="nav-link" href="approve-d.jsp">Approve/Decline Tasks </a></li>
                 <li class="nav-item"> <a class="nav-link" href="allprojects.jsp">Project Stats </a></li>
                 <li class="nav-item"> <a class="nav-link" href="alloverdue.jsp">Overdue Tasks<span class="badge badge-pill badge-danger"><% if(overduetasksadmin != 0){ out.print(overduetasksadmin); } else{}%> </span></a></li>
              

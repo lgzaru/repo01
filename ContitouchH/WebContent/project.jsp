@@ -22,6 +22,7 @@
   <%@include file = 'sessions.jsp' %>
   
   
+  
   		 <script>
 		 function Log_out()
 		 {
@@ -420,7 +421,8 @@
 				Statement stmt = null;
 				stmt = mysqlConn.createStatement();
 				ResultSet resultset =null;
-				resultset =stmt.executeQuery("select * from clientbrief ") ;
+				int val1 = 0;
+				resultset =stmt.executeQuery("select * from clientbrief where project_created = '"+val1+"' ") ;
 				%>
                             
                <select name="clientbrief" id="clientbrief" class="form-control">
