@@ -7,9 +7,9 @@ public class ConMysqlLocalhost {
 	
 	public static Connection getMySqlConnection() throws Exception {
 
-		String url="jdbc:mysql://localhost:3306/residents";
-
-		String username="root";
+		String url="jdbc:mysql://localhost:3306/residents?autoReconnect=true&useSSL=false";
+		
+		String username="developer";
 		String password="#pass123";
 
 		Class.forName("com.mysql.jdbc.Driver"); // load MySQL driver
