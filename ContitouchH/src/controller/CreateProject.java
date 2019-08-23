@@ -95,8 +95,11 @@ try{
 	
 	Statement stmt = null;
 	stmt = mysqlConn.createStatement();
-	int i = stmt.executeUpdate("insert into projects(id, pname, status, time, company, lead,requester,rrd,red,project_start,project_end,cmonth,prore,comments,responsibility,rdate,priority,createdby,regdate,filename,fileurl) "
-			+ "values ('"+projectidnew+"','"+pname+"','"+status+"','"+time+"','"+company+"','"+lead+"','"+requester+"','"+rrd+"','"+red+"','"+project_start+"','"+project_end+"','"+cmonth+"','"+prore+"','"+comments+"','"+responsibility+"','"+rdate+"','"+priority+"','"+username+"',CURDATE(), '"+filename+"','"+fileurl+"' ) ");
+	int i = stmt.executeUpdate("insert into projects(id, pname, status, time, company, leader,requester,rrd,red,project_start,project_end,"
+			+ "prore,comments,responsibility,priority,createdby,regdate,filename,fileurl) "
+			+ "values ('"+projectidnew+"','"+pname+"','"+status+"','"+time+"','"+company+"','"+lead+"','"+requester+"','"+rrd+"',"
+					+ "'"+red+"','"+project_start+"','"+project_end+"','"+prore+"','"+comments+"','"+responsibility+"',"
+							+ "'"+priority+"','"+username+"',CURDATE(), '"+filename+"','"+fileurl+"' ) ");
 	
 
 		
@@ -132,7 +135,7 @@ try{
 
 catch(Exception e)
 {
-      System.out.println(e); 
+      out.println(e); 
 		out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
 		out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
 		out.println("<script src='js/alerts.js'></script>");

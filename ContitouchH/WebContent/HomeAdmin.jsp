@@ -298,7 +298,7 @@
                         	<td><%=rs.getString("id") %></td>
         		  			<td><%=rs.getString("pname") %></td>
             	  			<td><%=rs.getString("company") %></td>
-            	  			<td><%=rs.getString("lead") %></td>
+            	  			<td><%=rs.getString("leader") %></td>
             	  			<td><%=rs.getString("project_start") %></td>
             	  			<td><%=rs.getString("project_end") %></td>
                                 

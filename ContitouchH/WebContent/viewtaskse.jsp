@@ -74,7 +74,7 @@
                         
                         	<td><input class=" form-control type="text" name="taskid"  value="<%=rs.getString("task_id") %>" disabled></td>
         		  			<td><input class=" form-control type="text" name="assignedto" value="<%=rs.getString("assignedto") %>" disabled ></td>
-        		  			<td><input class=" form-control type="text" name="lead" value="<%=rs.getString("lead") %>" disabled ></td>
+        		  			<td><input class=" form-control type="text" name="lead" value="<%=rs.getString("leader") %>" disabled ></td>
         		  			<td><input class="form-control type="text" name="project_name" value="<%=rs.getString("project_name") %>" disabled></td>
             	  			<td><input class=" form-control type="text" name="client" value="<%=rs.getString("client") %>" disabled ></td>
         		  			<td><input class=" form-control type="text" name="tname" value="<%=rs.getString("tname") %>"  ></td>

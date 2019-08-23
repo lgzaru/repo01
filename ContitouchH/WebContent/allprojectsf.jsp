@@ -207,7 +207,7 @@
         		  			<td><%=rs.getString("pname") %></td>
             	  			<td><%=rs.getString("company") %></td>
             	  			<td><%=rs.getString("assignedto") %></td>
-            	  			<td><%=rs.getString("lead") %></td>
+            	  			<td><%=rs.getString("leader") %></td>
             	  			<td><%=rs.getString("priority") %></td>
             	  			<td><%=rs.getString("project_start") %></td>
             	  			<td><%=rs.getString("project_end") %></td>

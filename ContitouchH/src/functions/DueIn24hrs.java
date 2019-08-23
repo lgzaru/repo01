@@ -33,7 +33,7 @@ public static void main(String[] args) {
 			while(rs.next()){
 				 
 				 String pname = rs.getString("project_name");
-				 lead = rs.getString("lead");
+				 lead = rs.getString("leader");
 				 assignedto = rs.getString("assignedto");
 				 String duedate = rs.getString("duedate");
 				 String projectid = rs.getString("projectid");

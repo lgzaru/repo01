@@ -468,7 +468,7 @@ public class ProjectActions extends HttpServlet {
 					ResultSet rs =null;
 					String val = "TRUE";
 					String val2 = "Completed";
-					String query="select pname, id,company,lead,filename,fileurl  from projects where del_indicator != '"+val+"' and status != '"+val2+"' and id = '"+jid+"'   ";
+					String query="select pname, id,company,leader,filename,fileurl  from projects where del_indicator != '"+val+"' and status != '"+val2+"' and id = '"+jid+"'   ";
 					rs=stmt.executeQuery(query);
 			
 					while(rs.next()) {
@@ -476,7 +476,7 @@ public class ProjectActions extends HttpServlet {
 						String pid = rs.getString("id");
 						String pname = rs.getString("pname");
 						String client = rs.getString("company");
-						String lead = rs.getString("lead");
+						String lead = rs.getString("leader");
 						String filename = rs.getString("filename");
 						String fileurl = rs.getString("fileurl");
 						
@@ -588,7 +588,7 @@ public class ProjectActions extends HttpServlet {
 			
 			
 			
-			int i = stmt.executeUpdate("insert into tasks(tname, priority, assignedto,duedate,project_name,projectid,tdesc,assigneddate,createdby,client,lead,filename,fileurl) "
+			int i = stmt.executeUpdate("insert into tasks(tname, priority, assignedto,duedate,project_name,projectid,tdesc,assigneddate,createdby,client,leader,filename,fileurl) "
 					+ "values ('"+tname+"','"+priority+"','"+assignedto+"','"+duedate+"','"+projectname+"','"+projectid+"','"+tdesc+"',CURDATE(),'"+username+"','"+client+"','"+lead+"','"+filename+"','"+fileurl+"' ) ");
 			
 

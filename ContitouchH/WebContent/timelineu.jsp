@@ -167,7 +167,7 @@
                               <i class="mdi mdi-check icon-sm text-primary align-self-center mr-3"></i>
                               <div class="media-body">
                                 <h6 class="mb-1">Task Name:<%=rs.getString("tname") %></h6>
-                                <h6 class="text-danger">Lead:<%=rs.getString("lead") %></h6>
+                                <h6 class="text-danger">Lead:<%=rs.getString("leader") %></h6>
                                 <h6 class="text-warning">Project:<%=rs.getString("project_name") %></h6>
                                 
                                 <p class="mb-0 text-info">

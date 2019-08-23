@@ -220,7 +220,7 @@
                                 <h6 class="text-secondary">Task Name: <%=rs.getString("tname") %></h6>
                                 <h6 class="text-secondary">Assigned On: <%=rs.getString("assigneddate") %></h6>
                                 <h6 class="text-danger">Due On: <%=rs.getString("duedate") %></h6>
-                                <h6 class="text-info">Lead: <%=rs.getString("lead") %></h6>
+                                <h6 class="text-info">Lead: <%=rs.getString("leader") %></h6>
                                 <h6 class="text-warning">Project: <%=rs.getString("project_name") %></h6>
                                 
                                 <p class="mb-0 text-info">
@@ -316,7 +316,7 @@
                                 <br>Days Left: <%out.print(dueOn); %>
                                 <br><a class="text-primary">Description: <%=rs.getString("tdesc") %></a> 
                                 </pre>
-                                <h6 class="text-info">Lead: <%=rs.getString("lead") %></h6>
+                                <h6 class="text-info">Lead: <%=rs.getString("leader") %></h6>
                                 <h6 class="text-secondary">Project:<%=rs.getString("project_name") %></h6>
                                 
                                 <p class="text-secondary">

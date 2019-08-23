@@ -257,7 +257,7 @@
                                   
                                 </div>
                                 <p class="font-weight-medium ellipsis">Client: [<%=rs.getString("Client") %>]</p>
-                                <p class="text-gray font-weight-medium">Project Lead: [<%=rs.getString("lead") %>]</p>
+                                <p class="text-gray font-weight-medium">Project Lead: [<%=rs.getString("leader") %>]</p>
                                 <p class="text-gray font-weight-medium">Date Created: [<%=rs.getString("assigneddate") %>]</p>
                                 
                                 <p class="text-gray font-weight-medium">Comments:[<%=rs.getString("comments") %>]</p>
@@ -376,7 +376,7 @@
                         	<td><%=rs.getString("task_id") %></td>
         		  			<td><%=rs.getString("tname") %></td>
             	  			<td><%=rs.getString("client") %></td>
-            	  			<td><%=rs.getString("lead") %></td>
+            	  			<td><%=rs.getString("leader") %></td>
             	  			<td><%=rs.getString("assigneddate") %></td>
             	  			<td><%=rs.getString("duedate") %></td>
                                 

@@ -73,7 +73,7 @@
                      <td><%=rs.getString("task_id") %></td>
         		  			<td><%=rs.getString("tname") %></td>
             	  			<td><%=rs.getString("assignedto") %></td>
-            	  			<td><%=rs.getString("lead") %></td>
+            	  			<td><%=rs.getString("leader") %></td>
             	  			<td><%=rs.getString("assigneddate") %></td>
             	  			<td><%=rs.getString("duedate") %></td>
             	  			<td><%=rs.getString("priority") %></td>
