@@ -158,7 +158,7 @@ public class UploadDownloadFileServlet extends HttpServlet {
 			out.println("});");
 			out.println("</script>");
 			
-			RequestDispatcher rd = request.getRequestDispatcher("clientbrief.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("project.jsp");
 			rd.include(request, response);
 		
 

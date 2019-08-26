@@ -68,8 +68,7 @@ public class UserDash extends HttpServlet {
 		//2. Total in progress
 			stmt2 = mysqlConn.createStatement();
 			String stus1 = "1";
-			String stuss1 = "0";
-			rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks where assignedto = '"+username+"' AND todo_status='"+stus1+"' AND complete_status ='"+stuss1+"' AND del_indicator != '"+val+"' ");
+			rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks where assignedto = '"+username+"' AND todo_status='"+stus1+"'  AND del_indicator != '"+val+"' ");
 			
 			while(rs.next()){
 				 
@@ -86,8 +85,8 @@ public class UserDash extends HttpServlet {
 			//3. Total Completed tasks
 			 
 				stmt2 = mysqlConn.createStatement();
-				String stus2 = "1";
-				rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks where assignedto='"+username+"' AND todo_status = '"+stus2+"' AND  complete_status='"+stus2+"' AND del_indicator != '"+val+"' ");
+				String stus2 = "3";
+				rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks where assignedto='"+username+"' AND todo_status = '"+stus2+"'  AND del_indicator != '"+val+"' ");
 				
 				while(rs.next()){
 					 

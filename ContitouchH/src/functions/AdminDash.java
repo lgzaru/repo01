@@ -58,7 +58,7 @@ public class AdminDash extends HttpServlet {
 		 
 	    Statement stmt2 = null;
 		stmt2 = mysqlConn.createStatement();
-		String stus = "Completed";
+		String stus = "9";
 		rs = stmt2.executeQuery("SELECT COUNT(status) AS 'result'  FROM projects where status='"+stus+"' AND del_indicator != '"+val+"' ");
 		 
 		while(rs.next()){
@@ -74,7 +74,7 @@ public class AdminDash extends HttpServlet {
 		 
 		//2. Total Pending Projects
 			stmt2 = mysqlConn.createStatement();
-			String stus1 = "Pending";
+			String stus1 = "1";
 			rs = stmt2.executeQuery("SELECT COUNT(status) AS 'result'  FROM projects where status='"+stus1+"' AND del_indicator != '"+val+"' ");
 			
 			while(rs.next()){
@@ -95,8 +95,8 @@ public class AdminDash extends HttpServlet {
 			//3. Open Tasks
 			 
 				stmt2 = mysqlConn.createStatement();
-				String stus2 = "0";
-				rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks where complete_status='"+stus2+"' AND del_indicator != '"+val+"' ");
+				String stus2 = "3";
+				rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks where todo_status !='"+stus2+"' AND del_indicator != '"+val+"' ");
 				
 				while(rs.next()){
 					 
@@ -113,8 +113,8 @@ public class AdminDash extends HttpServlet {
 				 
 				//4. Closed TAsks
 				 stmt2 = mysqlConn.createStatement();
-				    String stus3 = "1";
-					rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where complete_status = '"+stus3+"' AND  del_indicator != '"+val+"'   ");
+				    String stus3 = "3";
+					rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where todo_status = '"+stus3+"' AND  del_indicator != '"+val+"'   ");
 					while(rs.next()){
 						 
 						 String countp = rs.getString(1);
@@ -159,8 +159,8 @@ public class AdminDash extends HttpServlet {
 							
 							//7. Tasks due today
 							 stmt2 = mysqlConn.createStatement();
-							    String stus6 = "0";
-								rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where duedate = CURDATE() AND complete_status = '"+stus6+"' AND  del_indicator != '"+val+"'   ");
+							    String stus6 = "3";
+								rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where duedate = CURDATE() AND todo_status != '"+stus6+"' AND  del_indicator != '"+val+"'   ");
 								while(rs.next()){
 									 
 									 String countp = rs.getString(1);
@@ -208,8 +208,9 @@ public class AdminDash extends HttpServlet {
 										
 										//9. OverDue Tasks
 										 stmt2 = mysqlConn.createStatement();
-										    String stus9 = "1";
-											rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where duedate < CURDATE() AND complete_status !='"+stus9+"' AND del_indicator != '"+val+"'   ");
+										    String condition1 = "3";
+											rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where duedate < CURDATE() AND todo_status !='"+condition1+"' AND del_indicator != '"+val+"'   ");
+											
 											while(rs.next()){
 												 
 												 String countp = rs.getString(1);
@@ -217,6 +218,7 @@ public class AdminDash extends HttpServlet {
 													
 													HttpSession session = request.getSession(true);
 													session.setAttribute("overduetasks",countp);
+													
 													
 													
 													

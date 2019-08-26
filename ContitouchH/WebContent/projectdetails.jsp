@@ -277,10 +277,7 @@
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){ 
-							
-							String complete_status = rs.getString("complete_status");
-							int taskstatus = Integer.parseInt(complete_status);
-							
+						
 							String todo_status = rs.getString("todo_status");
 							int todostatus = Integer.parseInt(todo_status);%>
                         <tr>
@@ -295,17 +292,26 @@
             	  			<td><%=rs.getString("priority") %></td>
             	  			<td><%=rs.getString("project_name") %></td>
             	  			<td><%=rs.getString("client") %></td>
-            	  			<% if(taskstatus == 1 && todostatus == 1 ) { %>
+            	  			
+            	  			<% if(todostatus == 1 ) { %>
             	  				<td><label class="badge badge-success">Completed</label></td>
             	  			
-            	  			<%} else if(todostatus == 1 && taskstatus == 0 ){%>
+            	  			<%} else if(todostatus == 2){%>
             	  			<td><label class="badge badge-info">In Progress</label>
+            	  			
+            	  			
+            	  			<%} else if(todostatus == 2){%>
+            	  			<td><label class="badge badge-success">Pending Approval</label>
+            	  			
+            	  			
             	  			<input type="hidden" name="first" id="first" >
             	  			
             	  			</td>
-                           <%} else if(todostatus == 0 && taskstatus == 0 ){ %>
+                           <%} else if(todostatus == 0 ){ %>
                             <td><label class="badge badge-warning">Pending Action</label></td>
                            <%} %>
+						   
+						
                            
                            
                            

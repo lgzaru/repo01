@@ -50,8 +50,8 @@ public class UserNotifications extends HttpServlet {
 							
 							//7. Tasks due today
 							 stmt2 = mysqlConn.createStatement();
-							    String stus6 = "0";
-								rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where assignedto = '"+username+"' AND duedate = CURDATE() AND complete_status = '"+stus6+"' AND  del_indicator != '"+val+"'   ");
+							    String stus6 = "3";
+								rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where assignedto = '"+username+"' AND duedate = CURDATE() AND todo_status != '"+stus6+"' AND  del_indicator != '"+val+"'   ");
 								while(rs.next()){
 									 
 									 int countp = rs.getInt(1);

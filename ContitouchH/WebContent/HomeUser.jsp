@@ -227,7 +227,7 @@
 						ResultSet resultset =null;
 						String val = "0";
 						String val2 = "Completed";
-						String query="select *  from tasks where assignedto = '"+username+"' AND todo_status='"+val+"' AND complete_status ='"+val+"' GROUP BY task_id DESC limit 1";
+						String query="select *  from tasks where assignedto = '"+username+"' AND todo_status='"+val+"'  order by task_id desc limit 1";
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){  %>
@@ -367,8 +367,8 @@
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
-						String val2 = "1";
-						String query="select *  from tasks where assignedto='"+username+"' AND del_indicator != '"+val+"' and complete_status = '"+val2+"'   ";
+						String val2 = "3";
+						String query="select *  from tasks where assignedto='"+username+"' AND del_indicator != '"+val+"' and todo_status = '"+val2+"'   ";
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){  %>

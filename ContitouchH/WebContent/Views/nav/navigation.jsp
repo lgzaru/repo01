@@ -6,8 +6,10 @@
      			 //String duetoday_notify = session.getAttribute("duetoday").toString();
      			 
         		  String overduetasks_notify = session.getAttribute("overduetasks").toString();
+        		  String tototaloverdueprojects = session.getAttribute("totalcancelled").toString();
         		  
                   int overduetasksadmin = Integer.parseInt(overduetasks_notify);
+                  int tototaloverdue = Integer.parseInt(tototaloverdueprojects);
 
                   
                   %>
@@ -36,6 +38,13 @@
             </a>
           </li>
           
+          <li class="nav-item">
+            <a class="nav-link" href="client.jsp">
+            <i class="mdi mdi-checkbox-multiple-marked-circle-outline menu-icon"></i>
+            <span class="menu-title">Easy Nav </span>
+            </a>
+          </li>
+          
                     <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
             <i class="mdi mdi-view-quilt menu-icon"></i>
@@ -52,7 +61,8 @@
                  <li class="nav-item"> <a class="nav-link" href="approve-d.jsp">Approve/Decline Tasks </a></li>
                 <li class="nav-item"> <a class="nav-link" href="allprojects.jsp">Project Stats </a></li>
                 <li class="nav-item"> <a class="nav-link" href="alloverdue.jsp">Overdue Tasks<span class="badge badge-pill badge-danger"><% if(overduetasksadmin != 0){ out.print(overduetasksadmin); } else{}%> </span></a></li>
-             
+				<li class="nav-item"> <a class="nav-link" href="allprojects.jsp">Overdue Projects<span class="badge badge-pill badge-danger"><% if(tototaloverdue != 0){ out.print(tototaloverdue); } else{}%> </span></a></li>
+				             
               </ul>
             </div>
          
@@ -86,9 +96,10 @@
             </a>
             <div class="collapse" id="icons">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="client.jsp">Create</a></li>
-                <li class="nav-item"> <a class="nav-link" href="allclients.jsp">View All</a></li>
+                <li class="nav-item"> <a class="nav-link" href="client.jsp">Add Client</a></li>
                 <li class="nav-item"> <a class="nav-link" href="clientbrief.jsp">Client Brief</a></li>
+                <li class="nav-item"> <a class="nav-link" href="allclients.jsp">View All</a></li>
+                
               
               </ul>
             </div>

@@ -32,7 +32,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="css/vertical-layout-light/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="shortcut icon" href="images/favicon.ico" />
    <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
    
    
@@ -164,8 +164,8 @@
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
-						String val2 = "0";
-						String query="select *  from tasks where del_indicator != '"+val+"' AND duedate < CURDATE() AND complete_status ='"+val2+"'   ";
+						String val2 = "3";
+						String query="select *  from tasks where del_indicator != '"+val+"' AND duedate < CURDATE() AND todo_status !='"+val2+"'   ";
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){  %>

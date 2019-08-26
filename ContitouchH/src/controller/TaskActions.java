@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 //import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import conn.ConMysqlLocalhost;
+import functions.ContiSMS;
 import functions.SendEmail;
 
 /**
@@ -68,7 +70,7 @@ public class TaskActions extends HttpServlet {
 				String username = session.getAttribute("User").toString();
 
 				//String val2 = "1";
-				String todo_status = "1";
+				String todo_status = "2";
 				
 				System.out.println("taskid is="+taskid);
 				
@@ -78,9 +80,8 @@ public class TaskActions extends HttpServlet {
 					
 				case "1":
 					
-					stmt.executeUpdate("UPDATE tasks SET usercomments='"+mycomments+"',todo_status='"+todo_status+"',complete_status='"+statusval+"', taskenddate=CURDATE()    WHERE  task_id ='"+taskid+"'   ");
-					System.out.print("Task completed Successfully!");
-					
+					stmt.executeUpdate("UPDATE tasks SET usercomments='"+mycomments+"',todo_status='"+todo_status+"', taskenddate=CURDATE()    WHERE  task_id ='"+taskid+"'   ");
+					System.out.print("Task completed, pending Approval!");
 					
 					ResultSet rs = null;
 					rs = stmt.executeQuery("select * from tasks where assignedto = '"+username+"'    ");
@@ -93,13 +94,12 @@ public class TaskActions extends HttpServlet {
 						
 						SendEmail.SendMailTaskCompleted(adminemail, taskname, projectname,useremail, request, response);
 					
-						
 						out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
 						out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
 						out.println("<script src='js/alerts.js'></script>");
 						out.println("<script>");
 						out.println("$(document).ready(function(){  ");
-						out.println("  showSwal('auto-close')        ");
+						out.println("  showSwal('task_pending_approval')        ");
 						out.println("});");
 						out.println("</script>");
 						
@@ -121,7 +121,8 @@ public class TaskActions extends HttpServlet {
 						out.println("  showSwal('warning-message-and-cancel')  ");
 						out.println("});");
 						out.println("</script>");
-						response.sendRedirect("timeline.jsp");
+						RequestDispatcher rd = request.getRequestDispatcher("timeline.jsp");
+						rd.include(request, response);
 						
 					}
 					
@@ -132,7 +133,7 @@ public class TaskActions extends HttpServlet {
 					
 				case "null":
 					
-					stmt.executeUpdate("UPDATE tasks SET usercomments='"+mycomments+"',todo_status='"+todo_status+"'    WHERE  task_id ='"+taskid+"'   ");
+					stmt.executeUpdate("UPDATE tasks SET usercomments='"+mycomments+"'  WHERE  task_id ='"+taskid+"'   ");
 					System.out.print("Note Added Successfully!");
 										
 					out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
@@ -271,17 +272,152 @@ public class TaskActions extends HttpServlet {
 				}
 			}//close if condition = true
 			
-			
-			
-			
-			
-			
-			
-			
-			
+	
 			
 				
 			}
+ 
+ 
+	    else if (request.getParameter("approved_tasks") != null) {
+	    	
+	    	
+			String taskid = request.getParameter("first");
+			System.out.println("The taskid is :"+taskid);
+	    	
+			try{
+				
+				mysqlConn = ConMysqlLocalhost.getMySqlConnection();
+				
+				String val = "3";
+				String val1 = "2";
+				String cond = "FALSE";
+				String gsm = null;
+			
+
+				Statement stmt = null;
+				stmt = mysqlConn.createStatement();
+				ResultSet rs =null;
+				
+				String query="SELECT users.pnumber "
+				+ "FROM tasks "
+				+ "INNER JOIN users "
+				+ "ON tasks.assignedto=users.email "
+			    + "WHERE tasks.task_id = '"+taskid+"'  ";
+				rs=stmt.executeQuery(query);
+
+				while(rs.next()) {
+					
+					//String assignedto = rs.getString("assignedto");
+					gsm = rs.getString(1);
+					System.out.println("Phone number: :"+gsm);
+				
+				}
+
+				stmt.executeUpdate("UPDATE tasks SET todo_status='"+val+"'   WHERE  task_id ='"+taskid+"' AND del_indicator = '"+cond+"'  ");
+				System.out.print("Approved Successfull!");
+				
+				String msg = "Task ID-"+taskid+", has been approved";
+				ContiSMS.SendSMS(gsm, msg);
+				
+				out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+				out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+				out.println("<script src='js/alerts.js'></script>");
+				out.println("<script>");
+				out.println("$(document).ready(function(){  ");
+				out.println("  showSwal('auto-close')        ");
+				out.println("});");
+				out.println("</script>");
+				
+				RequestDispatcher rd = request.getRequestDispatcher("approve-d.jsp");
+				rd.include(request, response);
+				
+			}
+			
+			catch(Exception e){
+				
+			      System.out.println(e); 
+			     
+			}
+
+			finally {		
+				try {
+					mysqlConn.close();
+				}
+				catch (Exception ignore) {
+				}
+			}//close if condition = true
+	    	
+	    }
+ 
+	    else if (request.getParameter("decline_tasks") != null) {
+	    	
+	    	String taskid = request.getParameter("first");
+			System.out.println("The taskid is :"+taskid);
+	    	
+			try{
+				
+				mysqlConn = ConMysqlLocalhost.getMySqlConnection();
+				
+				String val = "0";
+				String val1 = "0";
+				String cond = "FALSE";
+				String gsm = null;
+			
+
+				Statement stmt = null;
+				stmt = mysqlConn.createStatement();
+				ResultSet rs =null;
+				
+				String query="SELECT users.pnumber "
+				+ "FROM tasks "
+				+ "INNER JOIN users "
+				+ "ON tasks.assignedto=users.email "
+			    + "WHERE tasks.task_id = '"+taskid+"'  ";
+				rs=stmt.executeQuery(query);
+
+				while(rs.next()) {
+					
+					//String assignedto = rs.getString("assignedto");
+					gsm = rs.getString(1);
+					System.out.println("Phone number: :"+gsm);
+				
+				}
+
+				stmt.executeUpdate("UPDATE tasks SET todo_status='"+val+"'   WHERE  task_id ='"+taskid+"' AND del_indicator = '"+cond+"'  ");
+				System.out.print("Approved Successfull!");
+				
+				String msg = "Task ID-"+taskid+", has been rejected.Please login for more info...";
+				ContiSMS.SendSMS(gsm, msg);
+				
+				RequestDispatcher rd = request.getRequestDispatcher("approve-d.jsp");
+				rd.include(request, response);
+				
+				out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+				out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+				out.println("<script src='js/alerts.js'></script>");
+				out.println("<script>");
+				out.println("$(document).ready(function(){  ");
+				out.println("  showSwal('task_rejected')        ");
+				out.println("});");
+				out.println("</script>");
+				
+			}
+			
+			catch(Exception e){
+				
+			      System.out.println(e); 
+			     
+			}
+
+			finally {		
+				try {
+					mysqlConn.close();
+				}
+				catch (Exception ignore) {
+				}
+			}//close if condition = true
+	    	
+	    }
 	    
 	    
 		

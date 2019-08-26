@@ -32,7 +32,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="css/vertical-layout-light/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="shortcut icon" href="images/favicon.ico" />
    <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
    
    
@@ -134,7 +134,7 @@
               <div class="row">
                 <div class="col-12">
                   <div class="table-responsive">
-                  <form name="form1" id="form1" action="/ContitouchH/ProjectActions"  method="post">
+                  <form name="form1" id="form1" action="/ContitouchH/TaskActions"  method="post">
                     <table id="order-listing" class="table">
                      
 					  <thead>
@@ -164,7 +164,8 @@
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
-						String query="select *  from tasks where del_indicator != '"+val+"'   ";
+						String val2 = "2";
+						String query="select *  from tasks where todo_status = '"+val2+"' AND  del_indicator != '"+val+"'   ";
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){  %>
@@ -191,15 +192,15 @@
        							 <input type="hidden" name="third" id="third">
 	  							 <!------------buttons ------ -->
                               <!-- <button class="btn btn-outline-primary" onclick="window.location.href = 'alljobs.jsp';">View</button> -->
-                              <button  class="btn btn-info" name="viewtasks" id="viewtasks">View</button>
+                              <!-- <button  class="btn btn-info" name="viewtasks" id="viewtasks">View</button> -->
                             
                             
                          
-                              <button class="btn btn-outline-primary" name="updatetask1" id="updatetask1" >Approve</button>
+                              <button class="btn btn-outline-primary" name="approved_tasks" id="approved_tasks" >Approve</button>
                          
                             
                             
-                              <button class="btn btn-outline-danger" name="deletetask" id="deletetask">Decline</button>
+                              <button class="btn btn-outline-danger" name="decline_tasks" id="decline_tasks">Decline</button>
                             
                               
                               

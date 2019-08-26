@@ -80,7 +80,7 @@
           </button>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav" >
             <li class="nav-item  dropdown d-none align-items-center d-lg-flex d-none">
               <a class="dropdown-toggle btn btn-outline-secondary btn-fw"  href="#" data-toggle="dropdown" id="pagesDropdown">
               <span class="nav-profile-name">Ctrl Links</span>
@@ -99,26 +99,7 @@
      
            
           </ul>
-          <ul class="navbar-nav navbar-nav-right">
-            <li class="nav-item nav-search d-none d-lg-flex">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="search">
-                  <i class="mdi mdi-magnify"></i>
-                  </span>
-                </div>
-                <input type="text" class="form-control" placeholder="Type to search..." aria-label="search" aria-describedby="search">
-              </div>
-            </li>
-           
-           
-            
-            <li class="nav-item nav-settings d-none d-lg-flex">
-              <a class="nav-link" href="#">
-              <i class="mdi mdi-dots-horizontal"></i>
-              </a>
-            </li>
-          </ul>
+      
           <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="mdi mdi-menu"></span>
           </button>
@@ -289,7 +270,7 @@
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
-						String val2 = "Completed";
+						String val2 = "9";
 						String query="select *  from projects where del_indicator != '"+val+"' and status = '"+val2+"'   ";
 						ResultSet rs=stmt.executeQuery(query);
 				

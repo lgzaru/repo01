@@ -83,7 +83,7 @@ try{
 			
 			ContiSMS.SendSMS(pnumber, msg);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("client.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("clientbrief.jsp");
 			rd.include(request, response);
 		
 		

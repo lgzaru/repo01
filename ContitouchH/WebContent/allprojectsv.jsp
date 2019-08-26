@@ -32,7 +32,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="css/vertical-layout-light/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="shortcut icon" href="images/favicon.ico" />
    <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
    
   <%@include file = 'viewprojects.jsp' %>
@@ -166,7 +166,10 @@
 						String query="select *  from projects where del_indicator != '"+val+"'   ";
 						ResultSet rs=stmt.executeQuery(query);
 				
-						while(rs.next()){  %>
+						while(rs.next()){ 
+							
+							String status = rs.getString("status");
+							int statusp = Integer.parseInt(status);%>
                         <tr>
                         
                         
@@ -178,7 +181,38 @@
             	  			<td><%=rs.getString("priority") %></td>
             	  			<td><%=rs.getString("project_start") %></td>
             	  			<td><%=rs.getString("project_end") %></td>
-            	  			<td><%=rs.getString("status") %></td>
+            	  			
+            	  			<% if(statusp == 9 ) { %>
+            	  				<td><label class="badge badge-success">Completed</label></td>
+            	  	            	  			
+            	  			<%} else if(statusp == 8){%>
+            	  			<td><label class="badge badge-info">In Progress</label>
+            	  			
+            	  			<%} else if(statusp == 2){%>
+            	  			<td><label class="badge badge-info">In Studio</label>
+            	  			
+            	  			<%} else if(statusp == 4){%>
+            	  			<td><label class="badge badge-info">In Photography</label>
+            	  			
+            	  			<%} else if(statusp == 3){%>
+            	  			<td><label class="badge badge-warning">Waiting Further Details From Client</label>
+            	  			
+            	  			<%} else if(statusp == 5){%>
+            	  			<td><label class="badge badge-warning">Waiting Approval</label>
+            	  			
+            	  			<%} else if(statusp == 6){%>
+            	  			<td><label class="badge badge-warning">Waiting Feedback</label>
+            	  			
+            	  			<%} else if(statusp == 7){%>
+            	  			<td><label class="badge badge-warning">Client Still Reviewing</label>
+            	  			
+            	  			
+            	  			<input type="hidden" name="first" id="first" >
+            	  			
+            	  			</td>
+                           <%} else if(statusp == 1 ){ %>
+                            <td><label class="badge badge-danger">Pending Action</label></td>
+                           <%} %>
                            
                             <td>
                             

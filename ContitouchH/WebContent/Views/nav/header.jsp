@@ -3,11 +3,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-								<div class="row">
-									<div class="col-sm-6 mb-4 mb-xl-0">
+							<%-- 	<div class="row">
+									<!-- <div class="col-sm-6 mb-4 mb-xl-0">
 										<h3>Project Tracking System</h3>
 										<h6 class="font-weight-normal mb-0 text-muted">Dashboard...</h6>
-									</div>
+									</div> -->
 									<div class="col-sm-6">
 										<div class="d-flex align-items-center justify-content-md-end">
 											<div class="border-right-dark pr-4 mb-3 mb-xl-0 d-xl-block d-none">
@@ -26,12 +26,12 @@
 											
 										</div>
 									</div>
-								</div>
+								</div> --%>
 								<div class="page-header-tab mt-xl-4">
 									<div class="col-12 pl-0 pr-0">
 										<div class="row ">
 											<div class="col-12 col-sm-6 mb-xs-4  pt-2 pb-2 mb-xl-0">
-												<ul class="nav nav-tabs tab-transparent" role="tablist">
+												<!-- <ul class="nav nav-tabs tab-transparent" role="tablist">
 													<li class="nav-item">
 														<a class="nav-link active" id="overview-tab" data-toggle="tab" href="#" role="tab" aria-controls="overview" aria-selected="true">Project</a>
 													</li>
@@ -42,7 +42,13 @@
 														<a class="nav-link" id="returns-tab" data-toggle="tab" href="#" role="tab" aria-controls="returns" aria-selected="false">System</a>
 													</li>
 													
-												</ul>
+												</ul> -->
+												
+												<div class="col-sm-6 mb-4 mb-xl-0">
+													<h3>Project Tracking System</h3>
+													<h6 class="font-weight-normal mb-0 text-muted">Dashboard...</h6>
+												</div>
+												
 											</div>
 									 		<div class="col-12 col-sm-6 mb-xs-4 mb-xl-0 pt-2 pb-2 text-md-right d-none d-md-block">
 												<div class="d-inline-flex">

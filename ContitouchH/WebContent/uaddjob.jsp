@@ -159,7 +159,7 @@
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
-						String val2 = "Completed";
+						String val2 = "9";
 						String query="select *  from projects where assignedto = '"+username+"' AND del_indicator != '"+val+"' and status != '"+val2+"'   ";
 						ResultSet rs=stmt.executeQuery(query);
 				

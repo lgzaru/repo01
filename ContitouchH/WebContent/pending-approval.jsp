@@ -19,7 +19,8 @@
   <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
   <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
-  <%@include file = 'sessions.jsp' %>
+  <%-- <%@include file = 'fviewprojects.jsp' %> --%>
+  
   
   <!-- endinject -->
   <!-- plugin css for this page -->
@@ -38,7 +39,7 @@
 		     var hi= confirm("Are you sure you want to logout?");
 		     if (hi== true){
 		         //alert("Ok");
-		         window.location.href = 'login.jsp';
+		         window.location.href = 'logout.jsp';
 		         
 		     }else{
 		         alert("Cancel");
@@ -126,124 +127,7 @@
                         
                       
                 <div class="card-body">
-                <div class="alert alert-info" role="alert">
-                  <h4 class="card-title">Recently Assigned task</h4>
-                  </div>
-                  
-               <!--    <div class="row grid-margin">
-                    <div class="col-12">
-                      <div class="alert alert-secondary" role="alert">
-                          <strong>Completed Project!</strong> This table shows all completed projects.<br><br> -->
-                          
-                      
-                          
-                        <%Connection mysqlConn = null;
-						try{
-    					mysqlConn = ConMysqlLocalhost.getMySqlConnection();
-
-						Statement stmt = null;
-						stmt = mysqlConn.createStatement();
-						ResultSet resultset =null;
-						String val = "TRUE";
-						String val2 = "9";
-						String query="select *  from projects where del_indicator != '"+val+"' and status = '"+val2+"' ORDER BY regdate limit 1   ";
-						ResultSet rs=stmt.executeQuery(query);
-				
-						while(rs.next()){  %>
-						<div class="row">
-						<div class="col-12">
-                        <div class="card">
-						
-						<div class="card-body">
-                          <div class="d-flex flex-wrap justify-content-between">
-                          	<h4 class="card-title">Task ID-<%=rs.getString("id") %></h4>
-
-                          </div>
-						
-					
-                          <div class="container-fluid">
-                          <div class="row ticket-card mt-3 pb-2 border-bottom pb-3 mb-3">
-                          
-                          
-                            
-                              <div class="col-md-1">
-                                <img class="img-sm rounded-circle mb-4 mb-md-0" src="images/favicon.ico" alt="profile image">
-                              </div>
-                              <div class="ticket-details col-md-9">
-                                <div class="d-md-flex">
-                                  <h4 class="text-dark mr-2 no-wrap">Project Name:<%=rs.getString("pname") %></h4>
-                                  <h5 class="mr-1 text-primary">[ID # - <%=rs.getString("id") %>]</h5><br>
-                                  
-                                </div>
-                                <p class="font-weight-medium ellipsis">Company Requester: [<%=rs.getString("company") %>]</p>
-                                <p class="text-gray font-weight-medium">Project Lead: [<%=rs.getString("leader") %>]</p>
-                                <p class="text-gray font-weight-medium">Date Created: [<%=rs.getString("regdate") %>]</p>
-                                
-                                <p class="text-gray font-weight-medium">Comments:[<%=rs.getString("comments") %>]</p>
-                                <div class="row text-muted d-md-flex d-none">
-                                  <div class="col-12 d-flex">
-                                    <p class=" mdi mdi-alarm-multiple">Estimated Duration:From[<%=rs.getString("project_start")%>]To[<%=rs.getString("project_end")%>]</p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="ticket-actions col-md-2 text-lg-right pr-md-0">
-                                <div class="btn-group dropdown">
-                                  <button type="button" class="btn btn-success btn-md d-flex">Action..</button>
-                                </div>
-                              </div>
-                            </div>
-                           
-
-                          </div>
-                          
-                            
-                            
-                        </div>
-                        
-                      </div>
-                      
-                      <br>
-                      <%}%>
-                      
-                      
-                         <%rs.close();
-			    			stmt.close();
-    						mysqlConn.close();
-    							}
-							catch(Exception e){
-    							e.printStackTrace();
-    			
-									}%>
-                      
-                      
-                      
-                    </div>
-                  </div>
-                </div>
-                
-                
-                
-                 
-             <div class="card col-12">
-                <div class="card-body">
-                  <h4 class="card-title">All My TAsks</h4>
-                  <p class="card-description">Please click the<code>drop down arrow</code> to view</p>
-                  <div class="mt-4">
-                    <div class="accordion accordion-multi-colored" id="accordion-6" role="tablist">
-                      <div class="card">
-                        <div class="card-header" role="tab" id="heading-16">
-                          <h6 class="mb-0">
-                            <a data-toggle="collapse" href="#collapse-16" aria-expanded="false" aria-controls="collapse-16">
-                              My Completed Projects!
-                            </a>
-                          </h6>
-                        </div>
-                        <div id="collapse-16" class="collapse show" role="tabpanel" aria-labelledby="heading-16" data-parent="#accordion-6">
-                          <div class="card-body">
-                            <!-- -------------- -->
-                            
-                              <div class="card-body">
-                  <h4 class="card-title">View All</h4>
+                  <h4 class="card-title">Pending Approval Tasks!</h4>
                <!--    <div class="row grid-margin">
                     <div class="col-12">
                       <div class="alert alert-secondary" role="alert">
@@ -256,21 +140,20 @@
                       <div class="table-responsive">
                       <form name="form1" id="form1" action="/ContitouchH/ProjectActions"  method="post">
                       
-                        <table id="order-listing" class="table table-bordered" bgcolor="#FFFFFF">
+                        <table id="order-listing" class="table ">
                           <thead>
                             <tr class="bg-primary text-white">
-                                <th>Project #</th>
-                                <th>Project Name</th>
+                                  <th>Task #</th>
+                                <th>Task Name</th>
                                 <th>Company</th>
                                 <th>Lead-Developer</th>
-                                <th>Project-Start</th>
-                                <th>Project-End</th>
+                                <th>Task-Start</th>
+                                <th>Task-End</th>
                                 <th>Status</th>
-                                <th>Actions</th>
                             </tr>
                           </thead>
                           <tbody>
-                       <%
+                       <%Connection mysqlConn = null;
 						try{
     					mysqlConn = ConMysqlLocalhost.getMySqlConnection();
 
@@ -278,37 +161,25 @@
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
-						String val2 = "9";
-						String query="select *  from projects where del_indicator != '"+val+"' and status != '"+val2+"'   ";
+						String val2 = "2";
+						String user01 = session.getAttribute("User").toString();
+						String query="select *  from tasks where del_indicator != '"+val+"' AND todo_status = '"+val2+"' AND assignedto = '"+user01+"'   ";
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){  %>
                             <tr>
-                        	<td><%=rs.getString("id") %></td>
-        		  			<td><%=rs.getString("pname") %></td>
-            	  			<td><%=rs.getString("company") %></td>
+                        		<td><%=rs.getString("task_id") %></td>
+        		  			<td><%=rs.getString("tname") %></td>
+            	  			<td><%=rs.getString("client") %></td>
             	  			<td><%=rs.getString("leader") %></td>
-            	  			<td><%=rs.getString("project_start") %></td>
-            	  			<td><%=rs.getString("project_end") %></td>
+            	  			<td><%=rs.getString("assigneddate") %></td>
+            	  			<td><%=rs.getString("duedate") %></td>
+                     
                                 
-                                <td><%=rs.getString("status") %></td>
-                                <td class="text-right">
-                                  <!-- Hidden field with table id -->
-                                  <input type="hidden" name="first" id="first" >
-                                  <button class="btn btn-light" name="viewf" id="viewf">
-                                  
-                         
-                                    <i class="mdi mdi-eye text-primary"></i>View
-                                  </button>
-                                  
-                                  <button class="btn btn-light" name="viewf" id="viewf">
-                                    
-                         
-                                    <i class="mdi mdi-pin text-primary"></i>Add job
-                                  </button>
-                                  
-                             
+                                <td>
+                                  <label class="badge badge-warning">Pending Approval</label>
                                 </td>
+                  
                             </tr>
         
                        <%}%>
@@ -331,74 +202,152 @@
                     </div>
                   </div>
                 </div>
-                            
-                            <!-- -------------- -->
+				</div>
+				</div>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </div>
+                      </div>
+
+                  
+                  <!-- <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="d-flex flex-wrap justify-content-between">
+                            <h4 class="card-title">Tasks</h4>
+                            <div class="dropdown">
+                              <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuSizeButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              2019
+                              </button>
+                              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuSizeButton3" data-x-placement="bottom-end">
+                                <a class="dropdown-item" href="#">2015</a>
+                                <a class="dropdown-item" href="#">2016</a>
+                                <a class="dropdown-item" href="#">2017</a>
+                                <a class="dropdown-item" href="#">2018</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="container-fluid">
+                            <div class="row ticket-card mt-3 pb-2 border-bottom pb-3 mb-3">
+                              <div class="col-md-1">
+                                <img class="img-sm rounded-circle mb-4 mb-md-0" src="https://via.placeholder.com/37x37" alt="profile image">
+                              </div>
+                              <div class="ticket-details col-md-9">
+                                <div class="d-md-flex">
+                                  <h4 class="text-dark mr-2 no-wrap">Dustin Lucas</h4>
+                                  <h5 class="mr-1 text-primary">[#46687]</h5>
+                                  <p class="font-weight-medium ellipsis">Will The Democrats Be Able To Reverse The Online Gambling Ban</p>
+                                </div>
+                                <p class="text-gray font-weight-medium">People who have a ticket reservation of the event is automatically mark as interested. Harness The Power Of Words In</p>
+                                <div class="row text-muted d-md-flex d-none">
+                                  <div class="col-12 d-flex">
+                                    <p class="mb-0 mr-2 text-gray text-small">30 Min ago - Due in 1 days</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="ticket-actions col-md-2 text-lg-right pr-md-0">
+                                <div class="btn-group dropdown">
+                                  <button type="button" class="btn btn-success btn-md d-flex">Action</button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row ticket-card mt-3 pb-2 border-bottom pb-3 mb-3">
+                              <div class="col-md-1">
+                                <img class="img-sm rounded-circle mb-4 mb-md-0" src="https://via.placeholder.com/37x37" alt="profile image">
+                              </div>
+                              <div class="ticket-details col-md-9">
+                                <div class="d-md-flex">
+                                  <h4 class="text-dark mr-2 no-wrap">Ida Manning</h4>
+                                  <h5 class="mr-1 text-primary">[#23135]</h5>
+                                  <p class="font-weight-medium mb-0 ellipsis">Choosing The Best Audio Player Software For Your Computer</p>
+                                </div>
+                                <p class="text-muted font-weight-medium">People who have a ticket reservation of the event is automatically mark as interested. Harness The Power Of Words In</p>
+                                <div class="row text-muted d-md-flex d-none">
+                                  <div class="col-12 d-flex">
+                                    <p class="mb-0 mr-2 text-gray text-small">30 Min ago - Due in 2 days</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="ticket-actions col-md-2 text-lg-right pr-md-0">
+                                <div class="btn-group dropdown">
+                                  <button type="button" class="btn btn-success btn-md d-flex">Action</button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row ticket-card mt-3 pb-2 pb-3 mb-3">
+                              <div class="col-md-1">
+                                <img class="img-sm rounded-circle mb-4 mb-md-0" src="https://via.placeholder.com/37x37" alt="profile image">
+                              </div>
+                              <div class="ticket-details col-md-9">
+                                <div class="d-md-flex">
+                                  <h4 class="text-dark mr-2 no-wrap">Flora Hunter</h4>
+                                  <h5 class="mr-1 text-primary">[#23135]</h5>
+                                  <p class="font-weight-medium mb-0 ellipsis">A Discount Toner Cartridge Is Better Than Ever And You Will Save 50 Or More</p>
+                                </div>
+                                <p class="text-muted mb-2 font-weight-medium">People who have a ticket reservation of the event is automatically mark as interested. Harness The Power Of Words In</p>
+                                <div class="row text-muted d-md-flex d-none">
+                                  <div class="col-12 d-flex">
+                                    <p class="mb-0 mr-2 text-gray text-small">30 Min ago - Due in 8 days</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="ticket-actions col-md-2 text-lg-right pr-md-0">
+                                <div class="btn-group dropdown">
+                                  <button type="button" class="btn btn-success btn-md d-flex">Action</button>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-                      
-                      
-                      
-                      <!-- ---------------------end card-------------- -->
-             
-            
                     </div>
                   </div>
                 </div>
-              </div>  
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-          
+                <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+                  Tab Item
+                </div>
+                <div class="tab-pane fade" id="returns-1" role="tabpanel" aria-labelledby="returns-tab">
+                  Tab Item
+                </div>
+                <div class="tab-pane fade" id="more" role="tabpanel" aria-labelledby="more-tab">
+                  Tab Item
+                </div>
               </div>
             </div>
           </div>
-        </div> 
+        </div> -->
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
         
-        
-        
-        </div>
-        </div></div></div>
-        
-        
-        
-                <div class="footer-wrapper">
+        <div class="footer-wrapper">
        
           <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
               <span class="text-center text-sm-left d-block d-sm-inline-block">Copyright &copy; 2019. All rights reserved. </span>
-              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Designed by: <a href="#" target="_blank">Contitouch</a></span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Designed by: <a href="#" target="_blank">Contitouch</a>. </span>
             </div>
           </footer>
         </div>
-        
-        </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        
-
         <!-- partial -->
-     
+      <!-- main-panel ends -->
+      </div>
     <!-- page-body-wrapper ends -->
-  
+    </div>
+  </div>
   <!-- container-scroller -->
   <!-- base:js -->
   
-  		   <script>
+    		   <script>
     
                 var table = document.getElementById('order-listing');
                 
@@ -416,9 +365,7 @@
     
     
          </script>
-  
-  
-  
+         
   <script src="vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page-->

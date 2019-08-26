@@ -61,23 +61,22 @@ public class CreateProject extends HttpServlet {
 		String red = request.getParameter("red");
 		String project_start = request.getParameter("project_start");		
 		String project_end = request.getParameter("project_end");
-		String cmonth = request.getParameter("cmonth");
+		//String cmonth = request.getParameter("cmonth");
 		
 		String prore = request.getParameter("prore");
 		String comments = request.getParameter("comments");		
 		String responsibility = request.getParameter("responsibility");
-		String rdate = request.getParameter("rdate");
+		//String rdate = request.getParameter("rdate");
 		String priority = request.getParameter("priority");
 		
 		
 		String username =  session.getAttribute("User").toString();	
 		String filename =  session.getAttribute("filename").toString();	
-		String fileurl =  session.getAttribute("fileurl").toString();	
+		session.setAttribute("ffilename",filename);
 		
+		String fileurl =  session.getAttribute("fileurl").toString();
+		session.setAttribute("ffileurl",fileurl);
 	
-		
-		
-		
 		
 		int projectid = OTP.getOTP();
 		String projectidnew = "PJCT"+projectid;
@@ -91,6 +90,9 @@ try{
 
 	
     mysqlConn = ConMysqlLocalhost.getMySqlConnection();
+    int val1 = 1;
+    String clientbriefid = session.getAttribute("clientbriefid").toString();
+    
 
 	
 	Statement stmt = null;
@@ -101,13 +103,13 @@ try{
 					+ "'"+red+"','"+project_start+"','"+project_end+"','"+prore+"','"+comments+"','"+responsibility+"',"
 							+ "'"+priority+"','"+username+"',CURDATE(), '"+filename+"','"+fileurl+"' ) ");
 	
+	
+
+	stmt.executeUpdate("UPDATE clientbrief SET project_created='"+val1+"'  WHERE  id ='"+clientbriefid+"'  ");
+	System.out.print("Update Successfull!");
 
 		
-		if (i > 0) {
-			
-			
-			System.out.println("Saved successfully");
-			
+		if (i > 0) { System.out.println("Saved successfully");
 			out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
 			out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
 			out.println("<script src='js/alerts.js'></script>");
@@ -116,6 +118,7 @@ try{
 			out.println("  showSwal('auto-close')        ");
 			out.println("});");
 			out.println("</script>");
+			
 			
 			RequestDispatcher rd = request.getRequestDispatcher("uaddjobcreate.jsp");
 			rd.include(request, response);

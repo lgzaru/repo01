@@ -54,6 +54,37 @@
 
   }
     
+    else if (type === 'task_rejected') {
+        swal({
+          title: 'Rejected!',
+          text: 'User was notified via email and Whatsapp',
+          icon: 'warning',
+          button: {
+            text: "Continue",
+            value: true,
+            visible: true,
+            className: "btn btn-warning"
+          }
+        })
+
+      }
+    
+    else if (type === 'task_pending_approval') {
+        swal({
+          title: 'Submitted Pending Approval!',
+          text: 'Your request has being submitted, you will be notified via email or Whatsapp when approved',
+          icon: 'success',
+          button: {
+            text: "Continue",
+            value: true,
+            visible: true,
+            className: "btn btn-info"
+          }
+        })
+
+      }
+    
+    
     else if (type === 'success-message') {
         swal({
           title: 'Congratulations!',

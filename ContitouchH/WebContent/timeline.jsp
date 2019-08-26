@@ -207,7 +207,7 @@
 						ResultSet resultset =null;
 						String val = "0";
 						String val2 = "Completed";
-						String query="select *  from tasks where assignedto = '"+username+"' AND todo_status='"+val+"' AND complete_status ='"+val+"' GROUP BY task_id DESC     ";
+						String query="select *  from tasks where assignedto = '"+username+"' AND todo_status='"+val+"'  order by task_id DESC     ";
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){  %>
@@ -279,8 +279,7 @@
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
 						String val = "1";
-						String val2 = "1";
-						String query="select *  from tasks where assignedto = '"+username+"' AND todo_status='"+val+"' AND complete_status !='"+val2+"' GROUP BY task_id DESC     ";
+						String query="select *  from tasks where assignedto = '"+username+"' AND todo_status='"+val+"'  ORDER BY task_id DESC     ";
 						ResultSet rs=stmt.executeQuery(query);
 						
 						
@@ -361,7 +360,7 @@
                            <div class="row">     
                            <div class="form-check form-check-primary">
                             <label class="form-check-label">
-                              <input type="checkbox" name="statusval" class="form-check-input" >
+                              <input type="checkbox" name="statusval" value="1" class="form-check-input" >
                               Completed
                             <i class="input-helper"></i></label>
                           </div>

@@ -152,13 +152,14 @@
                           <label class="col-sm-3 col-form-label">Status</label>
                           <div class="col-sm-9">
                           <select name="pstatus" id="pstatus" class="form-control">
-                              <option value="Pending">Pending</option>
-                              <option value="In Studio">In Studio</option>
-                              <option value="Waiting Details">Waiting Further Details From Client</option>
-                              <option value="In Photography">In Photography</option>
-                              <option value="Waiting Approval">Waiting Approval</option>
-                              <option value="Waiting Feedback">Waiting Feedback</option>
-                              <option value="Client Still Reviewing">Client Still Reviewing</option>
+                            <option value="1">Pending Action</option>
+            	  			<!--  <option value="8">In Progress</option>
+                              <option value="2">In Studio</option>
+                              <option value="3">Waiting Further Details From Client</option>
+                              <option value="4">In Photography</option>
+                              <option value="5">Waiting Approval</option>
+                              <option value="6">Waiting Feedback</option>
+                              <option value="7">Client Still Reviewing</option> -->
                             </select>
 
                           </div>

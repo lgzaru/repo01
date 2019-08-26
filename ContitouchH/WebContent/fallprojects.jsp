@@ -161,8 +161,10 @@
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
-						String val2 = "1";
-						String query="select *  from tasks where del_indicator != '"+val+"' and complete_status = '"+val2+"'   ";
+						String val2 = "3";
+						String user01 = session.getAttribute("User").toString();
+
+						String query="select *  from tasks where del_indicator != '"+val+"' AND todo_status = '"+val2+"' AND assignedto = '"+user01+"'  ";
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){  %>

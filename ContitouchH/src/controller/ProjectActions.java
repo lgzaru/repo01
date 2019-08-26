@@ -185,7 +185,7 @@ public class ProjectActions extends HttpServlet {
 					Statement stmt = null;
 					ResultSet rs = null;
 					String val = "TRUE";
-					String val1="1";
+					String val1="3";
 					String val0="0";
 					stmt = mysqlConn.createStatement();
 					
@@ -202,7 +202,7 @@ public class ProjectActions extends HttpServlet {
 			 	System.out.println("The project name is:" +projectselected);
 				
 				//completed tasks count
-				rs = stmt.executeQuery("SELECT COUNT(projectid) AS 'result'  FROM tasks  where complete_status = '"+val1+"' AND todo_status ='"+val1+"'  AND  del_indicator != '"+val+"' AND projectid = '"+projectid+"'   ");
+				rs = stmt.executeQuery("SELECT COUNT(projectid) AS 'result'  FROM tasks  where todo_status ='"+val1+"'  AND  del_indicator != '"+val+"' AND projectid = '"+projectid+"'   ");
 				while(rs.next()){
 					 
 					 	String countp = rs.getString(1);
@@ -211,7 +211,7 @@ public class ProjectActions extends HttpServlet {
 						session.setAttribute("completedtasksp",countp);
 				}
 				//overdue tasks count
-				rs = stmt.executeQuery("SELECT COUNT(projectid) AS 'result'  FROM tasks  where duedate < CURDATE() AND complete_status ='"+val0+"' AND todo_status='"+val1+"' AND del_indicator != '"+val+"' AND projectid = '"+projectid+"'    ");
+				rs = stmt.executeQuery("SELECT COUNT(projectid) AS 'result'  FROM tasks  where duedate < CURDATE() AND todo_status !='"+val1+"' AND del_indicator != '"+val+"' AND projectid = '"+projectid+"'    ");
 				while(rs.next()){
 					 
 					 	String countp = rs.getString(1);
@@ -220,7 +220,8 @@ public class ProjectActions extends HttpServlet {
 						session.setAttribute("overduetasksp",countp);
 				}
 				//inprogress count
-				rs = stmt.executeQuery("SELECT COUNT(projectid) AS 'result'  FROM tasks  where todo_status='"+val1+"' AND complete_status ='"+val0+"' AND del_indicator != '"+val+"' AND projectid = '"+projectid+"'   ");
+				int val2 = 1;
+				rs = stmt.executeQuery("SELECT COUNT(projectid) AS 'result'  FROM tasks  where todo_status='"+val2+"'  AND del_indicator != '"+val+"' AND projectid = '"+projectid+"'   ");
 				while(rs.next()){
 					 
 					 	String countp = rs.getString(1);
@@ -230,7 +231,7 @@ public class ProjectActions extends HttpServlet {
 				}
 				
 				//Assigned tasks but not yet picked by user count
-				rs = stmt.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where todo_status ='"+val0+"' AND complete_status ='"+val0+"' AND del_indicator != '"+val+"' AND projectid = '"+projectid+"'   ");
+				rs = stmt.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where todo_status ='"+val0+"'  AND del_indicator != '"+val+"' AND projectid = '"+projectid+"'   ");
 				while(rs.next()){
 					 
 					 	String countp = rs.getString(1);
@@ -467,7 +468,7 @@ public class ProjectActions extends HttpServlet {
 					stmt = mysqlConn.createStatement();
 					ResultSet rs =null;
 					String val = "TRUE";
-					String val2 = "Completed";
+					String val2 = "9";
 					String query="select pname, id,company,leader,filename,fileurl  from projects where del_indicator != '"+val+"' and status != '"+val2+"' and id = '"+jid+"'   ";
 					rs=stmt.executeQuery(query);
 			
@@ -558,7 +559,7 @@ public class ProjectActions extends HttpServlet {
 				String username =  session.getAttribute("User").toString();	
 				String lead =  session.getAttribute("llead").toString();	
 				String client =  session.getAttribute("cclient").toString();
-				//String status = "Completed";
+				
 				String messagebody = "You have being assigned a new task:-"+tname+". Task Details:-"+tdesc;
 				String pnumber = null;
 				
@@ -594,8 +595,10 @@ public class ProjectActions extends HttpServlet {
 
 				
 				if (i > 0) {
-					
-					
+				
+				//Updating 
+				int projstatus = 8;	
+				stmt.executeUpdate("update projects set status= " + projstatus + " where id = '" + projectid +"' ");	
 				
 				//Send sms and email to user.
 				System.out.println(pnumber);
