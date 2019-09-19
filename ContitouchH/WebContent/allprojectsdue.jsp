@@ -34,12 +34,13 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.ico" />
    <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-       <%@include file = 'sessions.jsp' %>
    
    
-   
-   		  <%String userName2 =  session.getAttribute("User").toString();%>
 
+		  
+		  <%@include file = 'sessions.jsp' %>
+		  
+		     		  <%String userName2 =  session.getAttribute("User").toString();%>
 		  
 		  
 		<script>
@@ -53,7 +54,7 @@
 		     }else{
 		         alert("Cancel");
 
-		        window.location.href = 'allclients.jsp';
+		        window.location.href = 'allprojects.jsp';
 		     }
 		 }
 		</script>
@@ -123,26 +124,30 @@
 		
 		
 		
-<%@include file = '/Views/nav/header.jsp' %>							
+<%@include file = '/Views/nav/header.jsp' %>		
 
-								
-	
-		<br><br><br>		
+
+				
 		<div class="card">
             <div class="card-body">
-              <h4 class="card-title">View all Clients</h4>
+              <h4 class="card-title">View all Projects</h4>
               <div class="row">
                 <div class="col-12">
                   <div class="table-responsive">
-                  <form name="form1" id="form1" action="/ContitouchH/ClientsAction"  method="post">
+                  <form name="form1" id="form1" action="/ContitouchH/ProjectActions"  method="post">
                     <table id="order-listing" class="table">
                      
 					  <thead>
                         <tr>
-                              <th>ID #</th>
-                            <th>Client Name</th>
-                            <th>CreatedBy</th>
-                            <th>Actions</th>
+                            <th>ID #</th>
+                            <th>Project Name</th>
+                           <!--  <th>Company</th> -->
+                            <!-- <th>AssignedTo</th> -->
+                            <th>Lead</th>
+                          <!--   <th>Priority</th> -->
+                            <th>StartDate</th>
+                            <th>EndDate</th>
+                            <th>Status</th>
                         </tr>
                       </thead>
                       
@@ -158,47 +163,42 @@
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
-						//String query="select *  from clients where del_indicator != '"+val+"'   ";
+						//String query="select *  from projects where project_end < CURDATE() AND del_indicator != '"+val+"'   ";
 						
-						String query="select clients.id, clients.name,  clients.createdby,users.name"
-								+	" from clients INNER JOIN users ON clients.createdby=users.email"
-								+	" where clients.del_indicator != '"+val+"'   ";
+						String query="select projects.status, projects.id, projects.pname, users.name,projects.priority, projects.project_start, projects.project_end"
+								+	" from projects INNER JOIN users ON projects.leader=users.email"
+								+	" where projects.project_end < CURDATE() AND projects.del_indicator != '"+val+"'   ";
+
 						
 						ResultSet rs=stmt.executeQuery(query);
 				
-						while(rs.next()){  %>
+						while(rs.next()){ 
+							
+							String status = rs.getString("projects.status");
+							int statusp = Integer.parseInt(status);
+							
+							%>
                         <tr>
                         
                         
-                        	<td><%=rs.getString("clients.id") %></td>
-        		  			<td><%=rs.getString("clients.name") %></td>
+                        	<td><%=rs.getString("projects.id") %></td>
+        		  			<td><%=rs.getString("projects.pname") %></td>
+            	  			<%-- <td><%=rs.getString("company") %></td> --%>
+            	  			<%-- <td><%=rs.getString("assignedto") %></td> --%>
             	  			<td><%=rs.getString("users.name") %></td>
-                           
-                            <td>
-                            
-                            
-                            
-                            	   <!-- get table values -->						
-	  							 <input type="hidden" name="first" id="first" >
-       							 <input type="hidden" name="second" id="second">
-       							 <input type="hidden" name="third" id="third">
-	  							 <!------------buttons ------ -->
-                              <!-- <button class="btn btn-outline-primary" onclick="window.location.href = 'alljobs.jsp';">View</button> -->
-                              <button  class="btn btn-info" name="view" id="view">View</button>
-                            
-                            
+            	  			<%-- <td><%=rs.getString("projects.priority") %></td> --%>
+            	  			<td><%=rs.getString("projects.project_start") %></td>
+            	  			<td><%=rs.getString("projects.project_end") %></td>
+            	  			<td><label class="badge badge-danger">Overdue</label>
+            	  	            	  			
+            	  			
+            	  			
+            	  			
+            	  			<input type="hidden" name="first" id="first" >
+            	  			
+            	  			</td>
                          
-                              <button class="btn btn-outline-warning" name="update" id="update" >Update</button>
-                         
-                            
-                            
-                              <button class="btn btn-outline-danger" name="delete" id="delete">Delete</button>
-                            
-                              
-                              
-                              
-                              
-                            </td>
+                      
                         </tr>
                    
 							<%}%>

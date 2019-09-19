@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Statement;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -88,10 +89,17 @@ try{
 catch(Exception e)
 {
       System.out.println(e); 
-      out.println("<script type=\"text/javascript\">");  
-		out.println("alert('Error Error');");
-		out.println("window.location = 'HomeAdmin.jsp'  ");
+      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+		out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+		out.println("<script src='js/alerts.js'></script>");
+		out.println("<script>");
+		out.println("$(document).ready(function(){  ");
+		out.println("  showSwal('warning-message-and-cancel')        ");
+		out.println("});");
 		out.println("</script>");
+		
+		RequestDispatcher rd = request.getRequestDispatcher("HomeAdmin.jsp");
+		rd.include(request, response);
 }
 
 finally {		
@@ -102,9 +110,6 @@ finally {
 	}
 }
 
-
-	    
-	    System.out.print(" All good");
 		
 	
 	}

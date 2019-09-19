@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import conn.ConMysqlLocalhost;
 import functions.ContiSMS;
-import functions.JavaSMS;
 import functions.SendEmail;
 
 /**
@@ -101,7 +100,18 @@ public class ProjectActions extends HttpServlet {
 
 			catch(Exception e){
 			
-			      System.out.println(e); 
+			      System.out.println(e);
+			      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+					out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+					out.println("<script src='js/alerts.js'></script>");
+					out.println("<script>");
+					out.println("$(document).ready(function(){  ");
+					out.println("  showSwal('error-occured')        ");
+					out.println("});");
+					out.println("</script>");
+					
+					RequestDispatcher rd = request.getRequestDispatcher("HomeAdmin.jsp");
+					rd.include(request, response);
 			     
 			}
 
@@ -156,6 +166,17 @@ public class ProjectActions extends HttpServlet {
 	catch(Exception e){
 	
 	      System.out.println(e); 
+	      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+			out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+			out.println("<script src='js/alerts.js'></script>");
+			out.println("<script>");
+			out.println("$(document).ready(function(){  ");
+			out.println("  showSwal('error-occured')        ");
+			out.println("});");
+			out.println("</script>");
+			
+			RequestDispatcher rd = request.getRequestDispatcher("HomeAdmin.jsp");
+			rd.include(request, response);
 	     
 	}
 
@@ -185,8 +206,8 @@ public class ProjectActions extends HttpServlet {
 					Statement stmt = null;
 					ResultSet rs = null;
 					String val = "TRUE";
-					String val1="3";
-					String val0="0";
+					
+					
 					stmt = mysqlConn.createStatement();
 					
 					
@@ -202,6 +223,7 @@ public class ProjectActions extends HttpServlet {
 			 	System.out.println("The project name is:" +projectselected);
 				
 				//completed tasks count
+			 	String val1="3";
 				rs = stmt.executeQuery("SELECT COUNT(projectid) AS 'result'  FROM tasks  where todo_status ='"+val1+"'  AND  del_indicator != '"+val+"' AND projectid = '"+projectid+"'   ");
 				while(rs.next()){
 					 
@@ -230,7 +252,19 @@ public class ProjectActions extends HttpServlet {
 						session.setAttribute("inprogresstasksp",countp);
 				}
 				
+				//Completed Pending Approval
+				int val3 = 2;
+				rs = stmt.executeQuery("SELECT COUNT(projectid) AS 'result'  FROM tasks  where todo_status='"+val3+"'  AND del_indicator != '"+val+"' AND projectid = '"+projectid+"'   ");
+				while(rs.next()){
+					 
+					 	String countp = rs.getString(1);
+					 	System.out.println("Inprogress tasks per project:" +countp);
+						
+						session.setAttribute("pendingapprovaltasksp",countp);
+				}
+				
 				//Assigned tasks but not yet picked by user count
+				String val0="0";
 				rs = stmt.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where todo_status ='"+val0+"'  AND del_indicator != '"+val+"' AND projectid = '"+projectid+"'   ");
 				while(rs.next()){
 					 
@@ -269,6 +303,17 @@ public class ProjectActions extends HttpServlet {
 	    	catch(Exception e) {
 	    		
 	    		  System.out.println(e);
+	    		  out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+					out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+					out.println("<script src='js/alerts.js'></script>");
+					out.println("<script>");
+					out.println("$(document).ready(function(){  ");
+					out.println("  showSwal('error-occured')        ");
+					out.println("});");
+					out.println("</script>");
+					
+					RequestDispatcher rd = request.getRequestDispatcher("HomeAdmin.jsp");
+					rd.include(request, response);
 	    		
 	    	}
 
@@ -299,6 +344,8 @@ public class ProjectActions extends HttpServlet {
 			System.out.println("newID="+newid);
 			
 			String status = request.getParameter("status");
+			String project_start = request.getParameter("project_start");
+			String project_end = request.getParameter("project_end");
 	    	
 	    	String priority = request.getParameter("priority");
 			System.out.println("hw far2="+priority);
@@ -312,7 +359,7 @@ public class ProjectActions extends HttpServlet {
 				java.sql.Statement stmt = null;
 				stmt = mysqlConn.createStatement();
 				
-				stmt.executeUpdate("UPDATE projects SET priority='"+priority+"', status = '"+status+"'   WHERE  id ='"+newid+"'  ");
+				stmt.executeUpdate("UPDATE projects SET priority='"+priority+"', status = '"+status+"',project_start = '"+project_start+"', project_end = '"+project_end+"'   WHERE  id ='"+newid+"'  ");
 				System.out.print("Update Successfull!");
 		
 				out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
@@ -333,6 +380,17 @@ public class ProjectActions extends HttpServlet {
 			catch(Exception e){
 			
 			      System.out.println(e); 
+			      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+					out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+					out.println("<script src='js/alerts.js'></script>");
+					out.println("<script>");
+					out.println("$(document).ready(function(){  ");
+					out.println("  showSwal('error-occured')        ");
+					out.println("});");
+					out.println("</script>");
+					
+					RequestDispatcher rd = request.getRequestDispatcher("HomeAdmin.jsp");
+					rd.include(request, response);
 			     
 			}
 
@@ -395,6 +453,17 @@ public class ProjectActions extends HttpServlet {
 			catch(Exception e){
 			
 			      System.out.println(e); 
+			      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+					out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+					out.println("<script src='js/alerts.js'></script>");
+					out.println("<script>");
+					out.println("$(document).ready(function(){  ");
+					out.println("  showSwal('error-occured')        ");
+					out.println("});");
+					out.println("</script>");
+					
+					RequestDispatcher rd = request.getRequestDispatcher("HomeAdmin.jsp");
+					rd.include(request, response);
 			     
 			}
 
@@ -498,10 +567,17 @@ public class ProjectActions extends HttpServlet {
 				catch(Exception e)
 				{
 				      System.out.println(e); 
-				      out.println("<script type=\"text/javascript\">");  
-						out.println("alert('Error Error');");
-						out.println("window.location = 'addtask.jsp'  ");
+				      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+						out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+						out.println("<script src='js/alerts.js'></script>");
+						out.println("<script>");
+						out.println("$(document).ready(function(){  ");
+						out.println("  showSwal('error-occured')        ");
+						out.println("});");
 						out.println("</script>");
+						
+						RequestDispatcher rd = request.getRequestDispatcher("addtask.jsp");
+						rd.include(request, response);
 				}
 
 				finally {		
@@ -547,6 +623,7 @@ public class ProjectActions extends HttpServlet {
 				//String client = request.getParameter("client");		
 				String assignedto = request.getParameter("assignedto");
 				String priority = request.getParameter("priority");
+				String assigneddate = request.getParameter("assigneddate");
 
 				
 				String duedate = request.getParameter("duedate");
@@ -555,6 +632,7 @@ public class ProjectActions extends HttpServlet {
 		    	String projectid =  session.getAttribute("pid_session1").toString();
 		    	
 				String tdesc = request.getParameter("tdesc");
+				String completedstatus = request.getParameter("completedstatus");
 				
 				String username =  session.getAttribute("User").toString();	
 				String lead =  session.getAttribute("llead").toString();	
@@ -586,55 +664,183 @@ public class ProjectActions extends HttpServlet {
 			}
 			
 			
+			switch(String.valueOf(completedstatus)) {
 			
-			
-			
-			int i = stmt.executeUpdate("insert into tasks(tname, priority, assignedto,duedate,project_name,projectid,tdesc,assigneddate,createdby,client,leader,filename,fileurl) "
-					+ "values ('"+tname+"','"+priority+"','"+assignedto+"','"+duedate+"','"+projectname+"','"+projectid+"','"+tdesc+"',CURDATE(),'"+username+"','"+client+"','"+lead+"','"+filename+"','"+fileurl+"' ) ");
-			
+			case "3":
+				
+				
+				int i = stmt.executeUpdate("insert into tasks(tname, priority, assignedto,duedate,project_name,projectid,tdesc,assigneddate,createdby,client,leader,filename,fileurl,todo_status) "
+						+ "values ('"+tname+"','"+priority+"','"+assignedto+"','"+duedate+"','"+projectname+"','"+projectid+"','"+tdesc+"','"+assigneddate+"','"+username+"','"+client+"','"+lead+"','"+filename+"','"+fileurl+"','"+completedstatus+"' ) ");
+				
 
-				
-				if (i > 0) {
-				
-				//Updating 
-				int projstatus = 8;	
-				stmt.executeUpdate("update projects set status= " + projstatus + " where id = '" + projectid +"' ");	
-				
-				//Send sms and email to user.
-				System.out.println(pnumber);
-				
-				//JavaSMS.SendSMS(pnumber, messagebody);
-				ContiSMS.SendSMS(pnumber, messagebody);
-				
-				
-				//Email to User
-				SendEmail.SendMailTaskAssigned(username, tname, projectname,projectid, assignedto,duedate,tdesc,lead, request, response);
-
-				System.out.print("Task Successfully saved!");
-
-				//Send Email
-				//SendEmail.SendMail(fname,lname,email,pass);	
-
-				out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
-				out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
-				out.println("<script src='js/alerts.js'></script>");
-				out.println("<script>");
-				out.println("$(document).ready(function(){  ");
-				out.println("  showSwal('auto-close')        ");
-				out.println("});");
-				out.println("</script>");
-				
-				RequestDispatcher rd = request.getRequestDispatcher("uaddjobcreate.jsp");
-				rd.include(request, response);
-			
-		} 
-				
-				
-				
-				else {
 					
-				    response.sendRedirect("job.jsp");
-				}
+					if (i > 0) {
+					
+					//Updating 
+					int projstatus = 8;	
+					stmt.executeUpdate("update projects set status= " + projstatus + " where id = '" + projectid +"' ");	
+					
+					//Send sms and email to user.
+					System.out.println(pnumber);
+					
+					//JavaSMS.SendSMS(pnumber, messagebody);
+					try {
+						ContiSMS.SendSMS(pnumber, messagebody);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+						out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+						out.println("<script src='js/alerts.js'></script>");
+						out.println("<script>");
+						out.println("$(document).ready(function(){  ");
+						out.println("  showSwal('no-internet1')        ");
+						out.println("});");
+						out.println("</script>");
+						
+						RequestDispatcher rd = request.getRequestDispatcher("HomeAdmin.jsp");
+						rd.include(request, response);
+						e.printStackTrace();
+					}
+					
+					
+					//Email to User
+					try {
+						SendEmail.SendMailTaskAssigned(username, tname, projectname,projectid, assignedto,duedate,tdesc,lead, request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+						out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+						out.println("<script src='js/alerts.js'></script>");
+						out.println("<script>");
+						out.println("$(document).ready(function(){  ");
+						out.println("  showSwal('no-internet2')        ");
+						out.println("});");
+						out.println("</script>");
+						
+						RequestDispatcher rd = request.getRequestDispatcher("HomeAdmin.jsp");
+						rd.include(request, response);
+					}
+
+					System.out.print("Task Successfully saved!");
+
+					//Send Email
+					//SendEmail.SendMail(fname,lname,email,pass);	
+
+					out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+					out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+					out.println("<script src='js/alerts.js'></script>");
+					out.println("<script>");
+					out.println("$(document).ready(function(){  ");
+					out.println("  showSwal('auto-close')        ");
+					out.println("});");
+					out.println("</script>");
+					
+					RequestDispatcher rd = request.getRequestDispatcher("uaddjobcreate.jsp");
+					rd.include(request, response);
+				
+			} 
+					
+					
+					
+					else {
+						
+					    response.sendRedirect("job.jsp");
+					}
+					
+					
+					break;
+					
+			case "null":
+				
+				String val3 = "0";
+				
+				int x = stmt.executeUpdate("insert into tasks(tname, priority, assignedto,duedate,project_name,projectid,tdesc,assigneddate,createdby,client,leader,filename,fileurl,todo_status) "
+						+ "values ('"+tname+"','"+priority+"','"+assignedto+"','"+duedate+"','"+projectname+"','"+projectid+"','"+tdesc+"','"+assigneddate+"','"+username+"','"+client+"','"+lead+"','"+filename+"','"+fileurl+"','"+val3+"' ) ");
+				
+
+					
+					if (x > 0) {
+					
+					//Updating 
+					int projstatus = 8;	
+					stmt.executeUpdate("update projects set status= " + projstatus + " where id = '" + projectid +"' ");	
+					
+					//Send sms and email to user.
+					System.out.println(pnumber);
+					
+					//JavaSMS.SendSMS(pnumber, messagebody);
+					try {
+						ContiSMS.SendSMS(pnumber, messagebody);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+						out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+						out.println("<script src='js/alerts.js'></script>");
+						out.println("<script>");
+						out.println("$(document).ready(function(){  ");
+						out.println("  showSwal('no-internet1')        ");
+						out.println("});");
+						out.println("</script>");
+						
+						RequestDispatcher rd = request.getRequestDispatcher("HomeAdmin.jsp");
+						rd.include(request, response);
+						e.printStackTrace();
+					}
+					
+					
+					//Email to User
+					try {
+						SendEmail.SendMailTaskAssigned(username, tname, projectname,projectid, assignedto,duedate,tdesc,lead, request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+						out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+						out.println("<script src='js/alerts.js'></script>");
+						out.println("<script>");
+						out.println("$(document).ready(function(){  ");
+						out.println("  showSwal('no-internet2')        ");
+						out.println("});");
+						out.println("</script>");
+						
+						RequestDispatcher rd = request.getRequestDispatcher("HomeAdmin.jsp");
+						rd.include(request, response);
+						e.printStackTrace();
+					}
+
+					System.out.print("Task Successfully saved!");
+
+					//Send Email
+					//SendEmail.SendMail(fname,lname,email,pass);	
+
+					out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+					out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+					out.println("<script src='js/alerts.js'></script>");
+					out.println("<script>");
+					out.println("$(document).ready(function(){  ");
+					out.println("  showSwal('auto-close')        ");
+					out.println("});");
+					out.println("</script>");
+					
+					RequestDispatcher rd = request.getRequestDispatcher("uaddjobcreate.jsp");
+					rd.include(request, response);
+				
+			} 
+					
+					
+					
+					else {
+						
+					    response.sendRedirect("job.jsp");
+					}
+					
+					
+					break;
+			
+			
+			
+			}
+			
+
 				
 				
 		}
@@ -642,10 +848,17 @@ public class ProjectActions extends HttpServlet {
 		catch(Exception e)
 		{
 		      System.out.println(e); 
-		      out.println("<script type=\"text/javascript\">");  
-				out.println("alert('Error Error');");
-				out.println("window.location = 'addtask.jsp'  ");
+		      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+				out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+				out.println("<script src='js/alerts.js'></script>");
+				out.println("<script>");
+				out.println("$(document).ready(function(){  ");
+				out.println("  showSwal('no-internet1')        ");
+				out.println("});");
 				out.println("</script>");
+				
+				RequestDispatcher rd = request.getRequestDispatcher("addtask.jsp");
+				rd.include(request, response);
 		}
 
 		finally {		
@@ -704,11 +917,7 @@ public class ProjectActions extends HttpServlet {
 				response.sendRedirect("project-tasksv.jsp");
 				
 			}
- 
- 
- 
 
-	
 		        
 	}
 

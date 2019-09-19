@@ -92,7 +92,25 @@ public class TaskActions extends HttpServlet {
 						String projectname = rs.getString("project_name");
 						String useremail = rs.getString("assignedto");
 						
-						SendEmail.SendMailTaskCompleted(adminemail, taskname, projectname,useremail, request, response);
+						try {
+							SendEmail.SendMailTaskCompleted(adminemail, taskname, projectname,useremail, request, response);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+							out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+							out.println("<script src='js/alerts.js'></script>");
+							out.println("<script>");
+							out.println("$(document).ready(function(){  ");
+							out.println("  showSwal('no-internet2')        ");
+							out.println("});");
+							out.println("</script>");
+							
+							RequestDispatcher rd = request.getRequestDispatcher("timeline.jsp");
+							rd.include(request, response);
+							
+							
+							e.printStackTrace();
+						}
 					
 						out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
 						out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
@@ -161,6 +179,16 @@ public class TaskActions extends HttpServlet {
 			catch(Exception e){
 			
 			      System.out.println(e); 
+			      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+					out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+					out.println("<script src='js/alerts.js'></script>");
+					out.println("<script>");
+					out.println("$(document).ready(function(){  ");
+					out.println("  showSwal('error-occured')        ");
+					out.println("});");
+					out.println("</script>");
+					
+					response.sendRedirect("timeline.jsp");
 			     
 			}
 
@@ -261,6 +289,16 @@ public class TaskActions extends HttpServlet {
 			catch(Exception e){
 			
 			      System.out.println(e); 
+			      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+					out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+					out.println("<script src='js/alerts.js'></script>");
+					out.println("<script>");
+					out.println("$(document).ready(function(){  ");
+					out.println("  showSwal('error-occured')        ");
+					out.println("});");
+					out.println("</script>");
+					
+					response.sendRedirect("timeline.jsp");
 			     
 			}
 
@@ -289,7 +327,6 @@ public class TaskActions extends HttpServlet {
 				mysqlConn = ConMysqlLocalhost.getMySqlConnection();
 				
 				String val = "3";
-				String val1 = "2";
 				String cond = "FALSE";
 				String gsm = null;
 			
@@ -317,7 +354,22 @@ public class TaskActions extends HttpServlet {
 				System.out.print("Approved Successfull!");
 				
 				String msg = "Task ID-"+taskid+", has been approved";
-				ContiSMS.SendSMS(gsm, msg);
+				try {
+					ContiSMS.SendSMS(gsm, msg);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					 out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+						out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+						out.println("<script src='js/alerts.js'></script>");
+						out.println("<script>");
+						out.println("$(document).ready(function(){  ");
+						out.println("  showSwal('no-internet1')        ");
+						out.println("});");
+						out.println("</script>");
+						
+						
+					e.printStackTrace();
+				}
 				
 				out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
 				out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
@@ -359,7 +411,6 @@ public class TaskActions extends HttpServlet {
 				mysqlConn = ConMysqlLocalhost.getMySqlConnection();
 				
 				String val = "0";
-				String val1 = "0";
 				String cond = "FALSE";
 				String gsm = null;
 			
@@ -387,7 +438,21 @@ public class TaskActions extends HttpServlet {
 				System.out.print("Approved Successfull!");
 				
 				String msg = "Task ID-"+taskid+", has been rejected.Please login for more info...";
-				ContiSMS.SendSMS(gsm, msg);
+				try {
+					ContiSMS.SendSMS(gsm, msg);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					 out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+						out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+						out.println("<script src='js/alerts.js'></script>");
+						out.println("<script>");
+						out.println("$(document).ready(function(){  ");
+						out.println("  showSwal('no-internet1')        ");
+						out.println("});");
+						out.println("</script>");
+						
+						e.printStackTrace();
+				}
 				
 				RequestDispatcher rd = request.getRequestDispatcher("approve-d.jsp");
 				rd.include(request, response);
@@ -406,6 +471,16 @@ public class TaskActions extends HttpServlet {
 			catch(Exception e){
 				
 			      System.out.println(e); 
+			      
+			      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+					out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+					out.println("<script src='js/alerts.js'></script>");
+					out.println("<script>");
+					out.println("$(document).ready(function(){  ");
+					out.println("  showSwal('error-occured')        ");
+					out.println("});");
+					out.println("</script>");
+					
 			     
 			}
 

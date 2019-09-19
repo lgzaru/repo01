@@ -148,8 +148,8 @@
                             <tr class="bg-primary text-white">
                                 <th>Project #</th>
                                 <th>Project Name</th>
-                                <th>Company</th>
-                                <th>Lead-Developer</th>
+                                <!-- <th>Company</th>
+                                <th>Lead-Developer</th> -->
                                 <th>Project-Start</th>
                                 <th>Project-End</th>
                                 <th>Status</th>
@@ -176,12 +176,11 @@
                             <tr>
                         	<td><%=rs.getString("id") %></td>
         		  			<td><%=rs.getString("pname") %></td>
-            	  			<td><%=rs.getString("company") %></td>
-            	  			<td><%=rs.getString("leader") %></td>
+            	  			<%-- <td><%=rs.getString("company") %></td>
+            	  			<td><%=rs.getString("leader") %></td> --%>
             	  			<td><%=rs.getString("project_start") %></td>
             	  			<td><%=rs.getString("project_end") %></td>
-                                
-                                 <% if(statusp == 9 ) { %>
+                         	<% if(statusp == 9 ) { %>
             	  				<td><label class="badge badge-success">Completed</label></td>
             	  	            	  			
             	  			<%} else if(statusp == 8){%>
@@ -204,6 +203,9 @@
             	  			
             	  			<%} else if(statusp == 7){%>
             	  			<td><label class="badge badge-warning">Client Still Reviewing</label>
+            	  			
+            	  			<%} else if(statusp == 10){%>
+            	  			<td><label class="badge badge-warning">UAT</label>
             	  			
             	  			
             	  			<input type="hidden" name="first" id="first" >
@@ -352,6 +354,13 @@
   		<!-- End plugin js for this page -->
   		<!-- Custom js for this page-->
   		<script src="js/data-table.js"></script>
+  		
+  		  <script src="vendors/jquery-validation/jquery.validate.min.js"></script>
+  <script src="vendors/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- Custom js for this page-->
+  <script src="js/form-validation.js"></script>
+  <script src="js/bt-maxLength.js"></script>
   
 </body>
 

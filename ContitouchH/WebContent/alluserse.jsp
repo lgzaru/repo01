@@ -40,7 +40,7 @@
 		  
 		  <%@include file = 'viewuserse.jsp' %>
 		  
-		     		  <%String userName2 =  session.getAttribute("User").toString();%>
+		 <%String userName2 =  session.getAttribute("User").toString();%>
 		  
 		  
 		  

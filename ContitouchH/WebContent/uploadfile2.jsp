@@ -34,12 +34,13 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.ico" />
    <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-       <%@include file = 'sessions.jsp' %>
    
    
-   
-   		  <%String userName2 =  session.getAttribute("User").toString();%>
 
+		  
+		  <%@include file = 'sessions.jsp' %>
+		  
+		     		  <%String userName2 =  session.getAttribute("User").toString();%>
 		  
 		  
 		<script>
@@ -53,7 +54,7 @@
 		     }else{
 		         alert("Cancel");
 
-		        window.location.href = 'allclients.jsp';
+		        window.location.href = 'client.jsp';
 		     }
 		 }
 		</script>
@@ -120,114 +121,42 @@
           <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-		
-		
-		
+        
 <%@include file = '/Views/nav/header.jsp' %>							
-
-								
-	
-		<br><br><br>		
-		<div class="card">
-            <div class="card-body">
-              <h4 class="card-title">View all Clients</h4>
-              <div class="row">
-                <div class="col-12">
-                  <div class="table-responsive">
-                  <form name="form1" id="form1" action="/ContitouchH/ClientsAction"  method="post">
-                    <table id="order-listing" class="table">
-                     
-					  <thead>
-                        <tr>
-                              <th>ID #</th>
-                            <th>Client Name</th>
-                            <th>CreatedBy</th>
-                            <th>Actions</th>
-                        </tr>
-                      </thead>
-                      
-                      
-                      
-                      <tbody>
-                      
-                      <%Connection mysqlConn = null;
-						try{
-    					mysqlConn = ConMysqlLocalhost.getMySqlConnection();
-
-						Statement stmt = null;
-						stmt = mysqlConn.createStatement();
-						ResultSet resultset =null;
-						String val = "TRUE";
-						//String query="select *  from clients where del_indicator != '"+val+"'   ";
-						
-						String query="select clients.id, clients.name,  clients.createdby,users.name"
-								+	" from clients INNER JOIN users ON clients.createdby=users.email"
-								+	" where clients.del_indicator != '"+val+"'   ";
-						
-						ResultSet rs=stmt.executeQuery(query);
-				
-						while(rs.next()){  %>
-                        <tr>
-                        
-                        
-                        	<td><%=rs.getString("clients.id") %></td>
-        		  			<td><%=rs.getString("clients.name") %></td>
-            	  			<td><%=rs.getString("users.name") %></td>
-                           
-                            <td>
-                            
-                            
-                            
-                            	   <!-- get table values -->						
-	  							 <input type="hidden" name="first" id="first" >
-       							 <input type="hidden" name="second" id="second">
-       							 <input type="hidden" name="third" id="third">
-	  							 <!------------buttons ------ -->
-                              <!-- <button class="btn btn-outline-primary" onclick="window.location.href = 'alljobs.jsp';">View</button> -->
-                              <button  class="btn btn-info" name="view" id="view">View</button>
-                            
-                            
-                         
-                              <button class="btn btn-outline-warning" name="update" id="update" >Update</button>
-                         
-                            
-                            
-                              <button class="btn btn-outline-danger" name="delete" id="delete">Delete</button>
-                            
+<br><br><br>
+		
+		 <div class="row grid-margin">
+            <div class="col-lg-10">
+              <div class="card">
+                <div class="card-body" >
+                  <h4 class="card-title">Client Brief - File Upload</h4><br>
+                  <form class="cmxform" action="/ContitouchH/UploadDownloadFileServlet2" method="post" enctype="multipart/form-data">
+ 
+ 
+ 							<div class="panel-body">
+                               
+                                    
+                                    <div class="form-group">
+                                    <input class="form-control btn btn-default btn-lg btn-block" name="fileName" type="file" name="fileName">
+                                    </div><br><br><br><br>
                               
-                              
-                              
-                              
-                            </td>
-                        </tr>
-                   
-							<%}%>
-                                		</tbody>
-          					                                
-                			</table>
-    						<%rs.close();
-			    			stmt.close();
-    						mysqlConn.close();
-    							}
-							catch(Exception e){
-    							e.printStackTrace();
-    			
-									}%> 
-									
-									</form>
-									
-									
-                  </div>
+                       
+                            </div>
+ 
+ 
+                      <input class="btn btn-primary" type="submit" value="Save">
+					  <input class="btn btn-secondary" type="reset" value="Cancel">
+                  </form>
                 </div>
               </div>
             </div>
           </div>
-          
-          
-       
-            
-            
 		
+		
+
+		
+		
+	
 		
         </div>
         <!-- content-wrapper ends -->
@@ -247,29 +176,6 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
-  
-  
-          <script>
-    
-                var table = document.getElementById('order-listing');
-                
-                for(var i = 1; i < table.rows.length; i++)
-                {
-                    table.rows[i].onclick = function()
-                    {
-                         //rIndex = this.rowIndex;
-                         document.getElementById("first").value = this.cells[0].innerHTML;
-                         document.getElementById("second").value = this.cells[1].innerHTML;
-                         document.getElementById("third").value = this.cells[2].innerHTML;
-                    };
-                }
-                
-    
-    
-         </script>
-         
-         
-       
   <!-- base:js -->
   <script src="vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
@@ -281,22 +187,8 @@
   <script src="js/template.js"></script>
   <script src="js/settings.js"></script>
   <script src="js/todolist.js"></script>
-
-  <script src="vendors/datatables.net/jquery.dataTables.js"></script>
-  <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-  <!-- End plugin js for this page -->
-  <!-- Custom js for this page-->
-  <script src="js/data-table.js"></script>
-    <script src="js/modal-demo.js"></script>
-    
-    
-      <script src="vendors/sweetalert/sweetalert.min.js"></script>
-  <!-- End plugin js for this page -->
-  <!-- Custom js for this page-->
-  <script src="js/alerts.js"></script>
-  
-  <!-- End custom js for this page-->
-  <!-- End custom js for this page-->
+  <!-- endinject -->
+  <!-- plugin js for this page -->
   <!-- End plugin js for this page -->
   <!-- Custom js for this page-->
   <!-- End custom js for this page-->

@@ -130,7 +130,7 @@
               <div class="card">
                 <div class="card-body" >
                   <h4 class="card-title">Client Brief</h4><br>
-                  <form class="cmxform" action="/ContitouchH/MyRedirect" method="post" >
+                  <form class="cmxform" action="/ContitouchH/MyRedirect" id="clientForm" method="post" >
                     <fieldset>
                     <div class="row">
                    	<% Connection mysqlConn = null;
@@ -169,7 +169,7 @@
                       <div class="col-md-6">
                       <div class="form-group">
                         <label for="projectname">Project Name*</label>
-                        <input id="projectname" class="form-control" name="projectname" minlength="2" type="text" required>
+                        <input id="projectname" class="form-control" name="projectname" maxlength="100" type="text" required>
                       </div>
                       </div>
                    
@@ -182,14 +182,14 @@
                       <div class="col-md-6">
                       <div class="form-group">
                         <label for="summary">Summary*</label>
-                        <textarea id="summary" class="form-control" type="text" name="summary" rows="10" required></textarea>
+                        <textarea id="summary" class="form-control" type="text" name="summary" maxlength="1000" rows="10" required></textarea>
                       </div>
                       </div>
                       
                        <div class="col-md-6">
                       <div class="form-group">
                         <label for="datereceived">Date Received*</label>
-                        <input id="datereceived" class="form-control" name="datereceived" minlength="2" type="date" >
+                        <input id="datereceived" class="form-control" name="datereceived"  type="date" >
                       </div>
                       </div>
                      
@@ -242,10 +242,13 @@
   <script src="js/settings.js"></script>
   <script src="js/todolist.js"></script>
   <!-- endinject -->
-  <!-- plugin js for this page -->
+    <!-- plugin js for this page -->
+  <script src="vendors/jquery-validation/jquery.validate.min.js"></script>
+  <script src="vendors/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
   <!-- End plugin js for this page -->
   <!-- Custom js for this page-->
-  <!-- End custom js for this page-->
+  <script src="js/form-validation.js"></script>
+  <script src="js/bt-maxLength.js"></script>
 </body>
 
 </html>

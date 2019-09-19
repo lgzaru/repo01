@@ -70,7 +70,7 @@ if (error != null) {
                     <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Email Address">
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Password">
+                    <input type="password" class="form-control form-control-lg"  id="password" name="password" placeholder="Password">
                   </div>
                   
                  <input name="lastLogon" type="hidden" value="<%= new java.lang.Long(System.currentTimeMillis()).toString() %>"/>
@@ -124,7 +124,7 @@ if (error != null) {
                           <p>Please enter your registered email address.</p>
                         </div>
                   <div class="modal-body">
-                    <input type="email"  id="fpass" name="fpass" class="form-control " placeholder="Enter Email Address">
+                    <input type="email" maxlength="50"  id="fpass" name="fpass" class="form-control " placeholder="Enter Email Address">
                   </div>
                         <div class="modal-footer">
                           <button type="submit" class="btn btn-success">Submit</button>
@@ -180,7 +180,7 @@ if (error != null) {
   <!-- End plugin js for this page -->
   <!-- Custom js for this page-->
   <script src="js/form-validation.js"></script>
-  <script src="js/bt-maxLength.js"></script> 
+
   
   
   

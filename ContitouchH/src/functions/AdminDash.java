@@ -74,7 +74,7 @@ public class AdminDash extends HttpServlet {
 		 
 		//2. Total Pending Projects
 			stmt2 = mysqlConn.createStatement();
-			String stus1 = "1";
+			String stus1 = "8";
 			rs = stmt2.executeQuery("SELECT COUNT(status) AS 'result'  FROM projects where status='"+stus1+"' AND del_indicator != '"+val+"' ");
 			
 			while(rs.next()){
@@ -219,9 +219,173 @@ public class AdminDash extends HttpServlet {
 													HttpSession session = request.getSession(true);
 													session.setAttribute("overduetasks",countp);
 													
+												
+												 
+											 }
+											
+											
+											//10. Projects Pending Action
+											 
+										    
+											stmt2 = mysqlConn.createStatement();
+											String stus01 = "1";
+											rs = stmt2.executeQuery("SELECT COUNT(status) AS 'result'  FROM projects where status='"+stus01+"' AND del_indicator != '"+val+"' ");
+											 
+											while(rs.next()){
+												 
+												 String countp = rs.getString(1);
+												 System.out.println("Projects Pending Action :" +countp);
+												 
+													HttpSession session = request.getSession(true);
+													session.setAttribute("pendingaction",countp);
 													
+												 
+											 }
+											
+//											11. Projects in Studio
+											 
+										    
+											stmt2 = mysqlConn.createStatement();
+											String stus02 = "2";
+											rs = stmt2.executeQuery("SELECT COUNT(status) AS 'result'  FROM projects where status='"+stus02+"' AND del_indicator != '"+val+"' ");
+											 
+											while(rs.next()){
+												 
+												 String countp = rs.getString(1);
+												 System.out.println(" Projects in studio:" +countp);
+												 
+													HttpSession session = request.getSession(true);
+													session.setAttribute("instudio",countp);
 													
+												 
+											 }
+											
+												//12. Projects Waiting Further Details From Client
+											 
+										    
+											stmt2 = mysqlConn.createStatement();
+											String stus03 = "3";
+											rs = stmt2.executeQuery("SELECT COUNT(status) AS 'result'  FROM projects where status='"+stus03+"' AND del_indicator != '"+val+"' ");
+											 
+											while(rs.next()){
+												 
+												 String countp = rs.getString(1);
+												 System.out.println("Projects Waiting Further Details From Client :" +countp);
+												 
+													HttpSession session = request.getSession(true);
+													session.setAttribute("waitingdetails",countp);
 													
+												 
+											 }
+											
+											
+											//13. Projects In Photography
+											 
+										    
+											stmt2 = mysqlConn.createStatement();
+											String stus04 = "4";
+											rs = stmt2.executeQuery("SELECT COUNT(status) AS 'result'  FROM projects where status='"+stus04+"' AND del_indicator != '"+val+"' ");
+											 
+											while(rs.next()){
+												 
+												 String countp = rs.getString(1);
+												 System.out.println(" Projects In Photography :" +countp);
+												 
+													HttpSession session = request.getSession(true);
+													session.setAttribute("inphoto",countp);
+													
+												 
+											 }
+											
+										//14. Projects Waiting Approval
+											 
+										    
+											stmt2 = mysqlConn.createStatement();
+											String stus05 = "5";
+											rs = stmt2.executeQuery("SELECT COUNT(status) AS 'result'  FROM projects where status='"+stus05+"' AND del_indicator != '"+val+"' ");
+											 
+											while(rs.next()){
+												 
+												 String countp = rs.getString(1);
+												 System.out.println("Projects Waiting Approval :" +countp);
+												 
+													HttpSession session = request.getSession(true);
+													session.setAttribute("waitingapproval",countp);
+													
+												 
+											 }
+											
+											//15. Projects Waiting Feedback
+											 
+										    
+											stmt2 = mysqlConn.createStatement();
+											String stus06 = "6";
+											rs = stmt2.executeQuery("SELECT COUNT(status) AS 'result'  FROM projects where status='"+stus06+"' AND del_indicator != '"+val+"' ");
+											 
+											while(rs.next()){
+												 
+												 String countp = rs.getString(1);
+												 System.out.println(" Projects Waiting Feedback :" +countp);
+												 
+													HttpSession session = request.getSession(true);
+													session.setAttribute("waitingfeedback",countp);
+													
+												 
+											 }
+											
+											
+//										16. Projects Client Still Reviewing
+											 
+										    
+											stmt2 = mysqlConn.createStatement();
+											String stus07 = "7";
+											rs = stmt2.executeQuery("SELECT COUNT(status) AS 'result'  FROM projects where status='"+stus07+"' AND del_indicator != '"+val+"' ");
+											 
+											while(rs.next()){
+												 
+												 String countp = rs.getString(1);
+												 System.out.println(" Client Still Reviewing :" +countp);
+												 
+													HttpSession session = request.getSession(true);
+													session.setAttribute("clientreview",countp);
+													
+												 
+											 }
+											
+											
+											// 17. Tasks pending approval
+											 
+										    
+											stmt2 = mysqlConn.createStatement();
+											String stus09 = "2";
+											rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks where todo_status='"+stus09+"' AND del_indicator != '"+val+"' ");
+											 
+											while(rs.next()){
+												 
+												 String countp = rs.getString(1);
+												 System.out.println(" Total tasks pending approval :" +countp);
+												 
+													HttpSession session = request.getSession(true);
+													session.setAttribute("pendingadminappr",countp);
+													
+												 
+											 }
+											
+											
+											//18. Projects In UAT
+											 
+										    
+											stmt2 = mysqlConn.createStatement();
+											String stus002 = "10";
+											rs = stmt2.executeQuery("SELECT COUNT(status) AS 'result'  FROM projects where status='"+stus002+"' AND del_indicator != '"+val+"' ");
+											 
+											while(rs.next()){
+												 
+												 String countp = rs.getString(1);
+												 System.out.println(" Project in UAT :" +countp);
+												 
+													HttpSession session = request.getSession(true);
+													session.setAttribute("projectuat",countp);
 													
 												 
 											 }

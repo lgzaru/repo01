@@ -17,7 +17,6 @@ import conn.ConMysqlLocalhost;
 import functions.MD5;
 /*import functions.SendEmail;*/
 
-import functions.UserNotifications;
 
 /**
  * Servlet implementation class Register
@@ -54,7 +53,12 @@ public class Register extends HttpServlet {
 		
 		String passwordMD5 =null;
 		
-		passwordMD5 = MD5.getMD5(password);
+		try {
+			passwordMD5 = MD5.getMD5(password);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 	   
 		

@@ -111,7 +111,7 @@
               <div class="card">
                 <div class="card-body" style="background-color:#E5E4E2">
                   <h4 class="card-title">Create Project</h4>
-                  <form class="form-sample" action="/ContitouchH/CreateProject" method="post">
+                  <form class="form-sample" action="/ContitouchH/CreateProject" method="post" id ="createProjectForm">
                     <p class="text-danger">
                               <i class="mdi mdi-alert-octagon mr-2"  ></i><a href="#"  data-toggle="modal" data-target="#exampleModal-2">Click to populate Client Brief.</a>
                               <br><br>
@@ -121,7 +121,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Project Name</label>
                           <div class="col-sm-9">
-                            <input type="text" name="pname" id="pname" class="form-control" />
+                            <input type="text" name="pname" id="pname" maxlength="45" class="form-control" />
                           </div>
                         </div>
                       </div>
@@ -149,7 +149,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Time</label>
                           <div class="col-sm-9">
-                          <input type="text" name="time" id="time" class="form-control" />
+                          <input type="text" name="time" id="time" maxlength="45" class="form-control" />
 
                           </div>
                         </div>
@@ -180,7 +180,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Requester</label>
                           <div class="col-sm-9">
-                            <input name="requester" id="requester" type="text" class="form-control" />
+                            <input name="requester" id="requester" maxlength="50" type="text" class="form-control" />
                           </div>
                         </div>
                       </div>
@@ -255,7 +255,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Responsibility</label>
                           <div class="col-sm-9">
-                            <input class="form-control" id="responsibility" name="responsibility" type="text">
+                            <input class="form-control" id="responsibility" maxlength="45" name="responsibility" type="text">
                           </div>
                         </div>
                       </div>
@@ -353,7 +353,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Comments</label>
                           <div class="col-sm-9">
-                            <textarea name="comments" id="comments" type="text" rows="8" class="form-control" /></textarea>
+                            <textarea name="comments" id="comments" type="text" maxlength="500" rows="8" class="form-control" /></textarea>
                           </div>
                         </div>
                       </div>
@@ -480,10 +480,13 @@
   <script src="js/settings.js"></script>
   <script src="js/todolist.js"></script>
   <!-- endinject -->
-  <!-- plugin js for this page -->
+    <!-- plugin js for this page -->
+  <script src="vendors/jquery-validation/jquery.validate.min.js"></script>
+  <script src="vendors/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
   <!-- End plugin js for this page -->
   <!-- Custom js for this page-->
-  <!-- End custom js for this page-->
+  <script src="js/form-validation.js"></script>
+  <script src="js/bt-maxLength.js"></script>
 </body>
 
 </html>

@@ -48,7 +48,13 @@ public static void main(String[] args) {
 				System.out.println("Project ID:"+projectid);	
 				
 				 
-			SendEmail.SendMailDue24hrs(pname, lead, assignedto, duedate, projectid,tname, assignedto);
+			try {
+				SendEmail.SendMailDue24hrs(pname, lead, assignedto, duedate, projectid,tname, assignedto);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("No internet, cant sent email");
+				e.printStackTrace();
+			}
 			
 			System.out.println("Email lead:"+lead+" sent");
 			System.out.println("Email assignedto:"+assignedto+" sent");
@@ -70,7 +76,13 @@ public static void main(String[] args) {
 				String msg = "You have overdue tasks on the Project: "+pname+". Please login and clear your tasks. Task Name:"+tname+" Due Date: "+duedate+" "
 						+ "Assigned to: "+assignedto+" Project Lead: "+lead;
 				
-				ContiSMS.SendSMS(pnumber, msg);
+				try {
+					ContiSMS.SendSMS(pnumber, msg);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("No internet, cant sent app msg");
+					e.printStackTrace();
+				}
 				
 			     }
 			

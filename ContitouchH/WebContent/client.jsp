@@ -130,20 +130,20 @@
               <div class="card">
                 <div class="card-body" >
                   <h4 class="card-title">Create Client</h4><br>
-                  <form class="cmxform" id="commentForm" method="post" action="/ContitouchH/CreateClient">
+                  <form class="cmxform" id="clientForm" method="post" action="/ContitouchH/CreateClient">
                     <fieldset>
                     <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="name">Name*</label>
-                        <input id="name" class="form-control" name="name" minlength="2" type="text" required>
+                        <input id="name" class="form-control" name="name" maxlength="45" type="text" required>
                       </div>
                       </div>
                       
                        <div class="col-md-6">
                       <div class="form-group">
                         <label for="vatreg">VAT Registration*</label>
-                        <input id="vatreg" class="form-control" name="vatreg" minlength="2" type="text" >
+                        <input id="vatreg" class="form-control" name="vatreg" maxlength="45" type="text" >
                       </div>
                       </div>
                       
@@ -156,14 +156,14 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="email">Email Address*</label>
-                        <input id="email" class="form-control" name="email" minlength="2" type="text" required>
+                        <input id="email" class="form-control" name="email" maxlength="50" type="text" required>
                       </div>
                       </div>
                       
                       <div class="col-md-6">
                       <div class="form-group">
                         <label for="pnumber">Phone Number*</label>
-                        <input id="pnumber" class="form-control" type="text" name="pnumber" rows="10" required>
+                        <input id="pnumber" class="form-control" maxlength="12" type="text" name="pnumber"  required>
                       </div>
                       </div>
                       </div>
@@ -174,14 +174,14 @@
                       <div class="col-md-6">
                       <div class="form-group">
                         <label for="address">Address*</label>
-                        <textarea id="address" class="form-control" type="text" name="address" rows="10" required></textarea>
+                        <textarea id="address" class="form-control" maxlength="500" rows="2" type="text" name="address" required></textarea>
                       </div>
                       </div>
                       
                       <div class="col-md-6">
                       <div class="form-group">
                         <label for="finances">Finances*</label>
-                        <input id="finances" class="form-control" type="text" name="finances" rows="10" required>
+                        <input id="finances" class="form-control" maxlength="50" type="text" name="finances" rows="10" required>
                       </div>
                       </div>
                       </div>
@@ -230,10 +230,13 @@
   <script src="js/settings.js"></script>
   <script src="js/todolist.js"></script>
   <!-- endinject -->
-  <!-- plugin js for this page -->
+    <!-- plugin js for this page -->
+  <script src="vendors/jquery-validation/jquery.validate.min.js"></script>
+  <script src="vendors/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
   <!-- End plugin js for this page -->
   <!-- Custom js for this page-->
-  <!-- End custom js for this page-->
+  <script src="js/form-validation.js"></script>
+  <script src="js/bt-maxLength.js"></script>
 </body>
 
 </html>

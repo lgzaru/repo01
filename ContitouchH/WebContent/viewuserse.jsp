@@ -77,8 +77,8 @@
                             </select>
                             </td> 
                                        	  			
-                            <td><input class=" form-control type="text" name="email" value="<%=rs.getString("email") %>"  ></td>
-            	  			<td><input class=" form-control type="text" name="title" value="<%=rs.getString("title") %>"   ></td>
+                            <td><input class=" form-control type="text" name="email" value="<%=rs.getString("email") %>" required  ></td>
+            	  			<td><input class=" form-control type="text" name="title" value="<%=rs.getString("title") %>" required   ></td>
       
             	  	
                         </tr>

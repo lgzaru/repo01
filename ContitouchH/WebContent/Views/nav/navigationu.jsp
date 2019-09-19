@@ -36,14 +36,14 @@
             <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
             <i class="mdi mdi-view-quilt menu-icon"></i>
            
-            <span class="menu-title">Projects<span class="badge badge-pill badge-info"><% if(totaltodos != 0){ out.print(totaltodos); }%></span></span>
+            <span class="menu-title">Tasks<span class="badge badge-pill badge-info"><% if(totaltodos != 0){ out.print(totaltodos); }%></span></span>
             <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="general-pages">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="timeline.jsp">My tasks<span class="badge badge-pill badge-info"><%if(totaltodos != 0){ out.print(totaltodos);} %></span> </a></li>
                 <li class="nav-item"> <a class="nav-link" href="pending-approval.jsp">Pending Approval </a></li>
-                <li class="nav-item"> <a class="nav-link" href="fallprojects.jsp">Completed </a></li>
+                <li class="nav-item"> <a class="nav-link" href="fallprojects.jsp">Completed Tasks </a></li>
              
               </ul>
             </div>

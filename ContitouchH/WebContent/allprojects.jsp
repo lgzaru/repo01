@@ -141,10 +141,10 @@
                         <tr>
                             <th>ID #</th>
                             <th>Project Name</th>
-                            <th>Company</th>
+                            <!-- <th>Company</th> -->
                             <!-- <th>AssignedTo</th> -->
                             <th>Lead</th>
-                            <th>Priority</th>
+                            <!-- <th>Priority</th> -->
                             <th>StartDate</th>
                             <th>EndDate</th>
                             <th>Status</th>
@@ -164,26 +164,27 @@
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
-						String query="select *  from projects where del_indicator != '"+val+"'   ";
+						String query="select projects.status, projects.id, projects.pname, users.name, projects.project_start, projects.project_end  from projects INNER JOIN users ON projects.leader=users.email where projects.del_indicator != '"+val+"'   ";
+
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){ 
 							
-							String status = rs.getString("status");
+							String status = rs.getString("projects.status");
 							int statusp = Integer.parseInt(status);
 							
 							%>
                         <tr>
                         
                         
-                        	<td><%=rs.getString("id") %></td>
-        		  			<td><%=rs.getString("pname") %></td>
-            	  			<td><%=rs.getString("company") %></td>
+                        	<td><%=rs.getString("projects.id") %></td>
+        		  			<td><%=rs.getString("projects.pname") %></td>
+            	  			<%-- <td><%=rs.getString("company") %></td> --%>
             	  			<%-- <td><%=rs.getString("assignedto") %></td> --%>
-            	  			<td><%=rs.getString("leader") %></td>
-            	  			<td><%=rs.getString("priority") %></td>
-            	  			<td><%=rs.getString("project_start") %></td>
-            	  			<td><%=rs.getString("project_end") %></td>
+            	  			<td><%=rs.getString("users.name") %></td>
+            	  			<%-- <td><%=rs.getString("priority") %></td> --%>
+            	  			<td><%=rs.getString("projects.project_start") %></td>
+            	  			<td><%=rs.getString("projects.project_end") %></td>
             	  		
             	  			<% if(statusp == 9 ) { %>
             	  				<td><label class="badge badge-success">Completed</label></td>
@@ -209,6 +210,9 @@
             	  			<%} else if(statusp == 7){%>
             	  			<td><label class="badge badge-warning">Client Still Reviewing</label>
             	  			
+            	  			<%} else if(statusp == 10){%>
+            	  			<td><label class="badge badge-warning">UAT</label>
+            	  			
             	  			
             	  			<input type="hidden" name="first" id="first" >
             	  			
@@ -231,8 +235,8 @@
                               <!-- <button class="btn btn-outline-primary" onclick="window.location.href = 'alljobs.jsp';">View</button> -->
                               <button  class="btn btn-info" name="view" id="view">View</button>
                             
-                            
-                         
+                         </td>   
+                         <td>
                               <button class="btn btn-outline-warning" name="update" id="update" >Update</button>
                          
                             

@@ -107,7 +107,7 @@
               <div class="card">
                 <div class="card-body" >
                   <h4 class="card-title">Create User</h4><br>
-                  <form class="cmxform" id="commentForm" method="post" action="/ContitouchH/CreateUser">
+                  <form class="cmxform" id="createUserForm" method="post" action="/ContitouchH/CreateUser">
                     <fieldset>
                     
                     
@@ -117,7 +117,7 @@
                       
                       <div class="form-group">
                         <label for="name">Name*</label>
-                        <input id="name" class="form-control" name="name" minlength="2" type="text" required>
+                        <input id="name" class="form-control" name="name" maxlength="45" type="text" required>
                       </div>
                       </div>
                       
@@ -164,7 +164,7 @@
                
                       <div class="form-group">
                         <label for="email">E-Mail*</label>
-                        <input id="email" class="form-control" type="email" name="email" required>
+                        <input id="email" class="form-control" maxlength="50" type="email" name="email" required>
                       </div>
                       </div>
                       
@@ -172,7 +172,7 @@
                  <div class="col-md-6">  
                       <div class="form-group">
                         <label for="title">Title*</label>
-                        <input id="title" class="form-control" type="text" name="title" required>
+                        <input id="title" class="form-control" maxlength="45" type="text" name="title" required>
                       </div>
                       </div>
                       
@@ -183,7 +183,7 @@
                        <div class="col-md-6">  
                       <div class="form-group">
                         <label for="title">Phone Number*</label>
-                        <input id="pnumber" class="form-control" type="text" name="pnumber" placeholder="eg 263776345234" required>
+                        <input id="pnumber" class="form-control" maxlength="12"  type="text" name="pnumber" placeholder="eg 263776345234" required>
                       </div>
                       </div>
                       
@@ -196,14 +196,14 @@
                   <div class="col-md-6">  
                       <div class="form-group">
                         <label for="password">Password</label>
-                        <input id="pass1" class="form-control" type="password" name="pass1">
+                        <input id="password" class="form-control" maxlength="45" type="password" name="password">
                       </div>
                       </div>
                       
                   <div class="col-md-6">  
                       <div class="form-group">
                         <label for="password">Confirm Password</label>
-                        <input id="pass" class="form-control" type="password" name="pass">
+                        <input id="confirm_password" class="form-control" maxlength="45" type="password" name="confirm_password">
                       </div>
                       </div>  
                       
@@ -272,7 +272,7 @@
 		
 		
 		    <div class="card">
-               <form action="/ContitouchH/CreateUser" method="post">
+               <form action="/ContitouchH/CreateUser"  method="post">
                   <div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
@@ -286,7 +286,7 @@
                           <p>Create More Roles...</p>
                         </div>
                   <div class="modal-body">
-                    <input type="text"  id="mroles" name="mroles" class="form-control " placeholder="Enter Role">
+                    <input type="text" maxlength="50"  id="mroles" name="mroles" class="form-control " placeholder="Enter Role" required>
                   </div>
                   
                   <div class="modal-body">
@@ -343,10 +343,13 @@
   <script src="js/settings.js"></script>
   <script src="js/todolist.js"></script>
   <!-- endinject -->
-  <!-- plugin js for this page -->
+    <!-- plugin js for this page -->
+  <script src="vendors/jquery-validation/jquery.validate.min.js"></script>
+  <script src="vendors/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
   <!-- End plugin js for this page -->
   <!-- Custom js for this page-->
-  <!-- End custom js for this page-->
+  <script src="js/form-validation.js"></script>
+  <script src="js/bt-maxLength.js"></script>>
 </body>
 
 </html>

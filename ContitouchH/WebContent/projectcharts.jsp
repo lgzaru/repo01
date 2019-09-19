@@ -13,6 +13,7 @@
 		  String overduetasksp =  session.getAttribute("overduetasksp").toString();
 		  String inprogresstasksp =  session.getAttribute("inprogresstasksp").toString();
 		  String pendingactionp =  session.getAttribute("pendingactionp").toString();
+		  String pendingapprovaltasksp = session.getAttribute("pendingapprovaltasksp").toString();
 		  
 		  System.out.println("........."+pendingactionp);
 	
@@ -30,7 +31,7 @@ $(function() {
 	  if ($("#morris-donut-example").length) {
 	    Morris.Donut({
 	      element: 'morris-donut-example',
-	      colors: ['#76C1FA', '#F36368', '#63CF72', '#FABA66'],
+	      colors: ['#76C1FA', '#F36368', '#63CF72', '#FABA66', '#9bcfa3'],
 	      data: [{
 	          label: "Tasks In Progress",
 	          value: <%out.print(inprogresstasksp); %>
@@ -46,7 +47,12 @@ $(function() {
 	        {
 		          label: "Pending Action",
 		          value: <%out.print(pendingactionp); %>
-		        }
+		        },
+		        
+		        {
+			          label: "Pending Approval Tasks",
+			          value: <%out.print(pendingapprovaltasksp); %>
+			        }
 	      ]
 	    });
 	  }

@@ -39,7 +39,7 @@
                             <th>ID #</th>
                             <th>Project Name</th>
                             <th>Company</th>
-                            <th>AssignedTo</th>
+                            <!-- <th>AssignedTo</th> -->
                             <th>Lead</th>
                             <th>StartDate</th>
                             <th>EndDate</th>
@@ -65,27 +65,30 @@
 						stmt = mysqlConn1.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
-						String query="select *  from projects where del_indicator != '"+val+"' and id = '"+jid+"'   ";
+						//String query="select *  from projects where del_indicator != '"+val+"' and id = '"+jid+"'   ";
+						String query="select projects.id, projects.pname,projects.company,users.name, projects.project_start, projects.project_end,projects.status,projects.priority from projects INNER JOIN users ON projects.leader=users.email where projects.del_indicator != '"+val+"' AND projects.id = '"+jid+"'   ";
+
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){  %>
                         <tr>
                         
                         
-                        	<td><input class=" form-control type="text" name="id"  value="<%=rs.getString("id") %>" disabled></td>
-        		  			<td><input class=" form-control type="text" name="pname" value="<%=rs.getString("pname") %>" disabled ></td>
-            	  			<td><input class=" form-control type="text" name="company" value="<%=rs.getString("company") %>" disabled ></td>
+                        	<td><input class=" form-control" type="text" name="id"  value="<%=rs.getString("projects.id") %>" disabled></td>
+        		  			<td><input class=" form-control" type="text" name="pname" value="<%=rs.getString("projects.pname") %>" disabled ></td>
+            	  			<td><input class=" form-control" type="text" name="company" value="<%=rs.getString("projects.company") %>" disabled ></td>
             	  			
             	  			
                             
-            	  			<td><input class=" form-control type="text" name="assignedto" value="<%=rs.getString("assignedto") %>" disabled ></td>
-            	  			<td><input class=" form-control type="text" name="lead" value="<%=rs.getString("leader") %>"disabled ></td>
-            	  			<td><input class="form-control type="text" name="project_start" value="<%=rs.getString("project_start") %>" disabled></td>
+            	  			<%-- <td><input class=" form-control" type="text" name="assignedto" value="<%=rs.getString("assignedto") %>" disabled ></td> --%>
+            	  			<td><input class=" form-control" type="text" name="lead" value="<%=rs.getString("users.name") %>"disabled ></td>
+            	  			<td><input class="form-control" type="date" name="project_start" value="<%=rs.getString("projects.project_start") %>" ></td>
+            	  			           	  			
             	  			
-            	  			<td><input class=" form-control type="text" name="project_end" value="<%=rs.getString("project_end") %>" disabled ></td>
+            	  			<td><input class=" form-control" type="date" name="project_end" value="<%=rs.getString("projects.project_end") %>"  ></td>
             	  			<td>
             	  			<select name="status" id="status" class="form-control" >
-                              <option  value="<%=rs.getString("status") %>">Status</option>
+                              <option  value="<%=rs.getString("projects.status") %>">Status</option>
                               <option value="1">Pending Action</option>
             	  			 <option value="8">In Progress</option>
                               <option value="2">In Studio</option>
@@ -95,13 +98,14 @@
                               <option value="6">Waiting Feedback</option>
                               <option value="7">Client Still Reviewing</option>
 							  <option value="9">Completed</option>
+							   <option value="10">UAT</option>
                             </select>
             	  			</td>
             	  			
             	  			
             	  			<td>
             	  			<select name="priority" id="priority" class="form-control" >
-                              <option  value="high"><%=rs.getString("priority") %></option>
+                              <option  value="high"><%=rs.getString("projects.priority") %></option>
                               <option  value="high">High</option>
                               <option  value="low">Low</option>
                             </select>

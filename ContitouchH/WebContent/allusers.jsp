@@ -192,10 +192,9 @@
                             
                          
                               <button class="btn btn-outline-warning" name="update" id="update" >Update</button>
-                         
-                            
-                            
+                              
                               <button class="btn btn-outline-danger" name="delete" id="delete">Delete</button>
+                         
                             
                               
                               

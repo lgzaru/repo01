@@ -141,13 +141,13 @@
                         <tr>
                             <th>Task-ID#</th>
                             <th>Task Name</th>
-                            <th>AssignedTo</th>
+                            <!-- <th>AssignedTo</th> -->
                             <th>Lead</th>
                             <th>AssignedDate</th>
                             <th>DueDate</th>
-                            <th>Priority</th>
-                            <th>ProjectName</th>
-                            <th>CLient</th>
+                             <th>Priority</th>
+                            <!--<th>ProjectName</th>
+                            <th>CLient</th> -->
                             <th>Actions</th>
                         </tr>
                       </thead>
@@ -164,22 +164,19 @@
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
-						String query="select *  from tasks where del_indicator != '"+val+"'   ";
+						String query="SELECT users.name, tasks.task_id, tasks.tname,tasks.assigneddate,tasks.duedate, tasks.priority FROM tasks INNER JOIN users ON tasks.leader=users.email where tasks.del_indicator != '"+val+"'   ";
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){  %>
                         <tr>
                         
                         
-                        	<td><%=rs.getString("task_id") %></td>
-        		  			<td><%=rs.getString("tname") %></td>
-            	  			<td><%=rs.getString("assignedto") %></td>
-            	  			<td><%=rs.getString("leader") %></td>
-            	  			<td><%=rs.getString("assigneddate") %></td>
-            	  			<td><%=rs.getString("duedate") %></td>
-            	  			<td><%=rs.getString("priority") %></td>
-            	  			<td><%=rs.getString("project_name") %></td>
-            	  			<td><%=rs.getString("client") %></td>
+                        	<td><%=rs.getString("tasks.task_id") %></td>
+        		  			<td><%=rs.getString("tasks.tname") %></td>
+            	  			<td><%=rs.getString("users.name") %></td>
+            	  			<td><%=rs.getString("tasks.assigneddate") %></td>
+            	  			<td><%=rs.getString("tasks.duedate") %></td>
+            	  			 <td><%=rs.getString("priority") %></td>
                            
                             <td>
                             
@@ -191,7 +188,7 @@
        							 <input type="hidden" name="third" id="third">
 	  							 <!------------buttons ------ -->
                               <!-- <button class="btn btn-outline-primary" onclick="window.location.href = 'alljobs.jsp';">View</button> -->
-                              <button  class="btn btn-info" name="viewtasks" id="viewtasks">View</button>
+                             <!--  <button  class="btn btn-info" name="viewtasks" id="viewtasks">View</button> -->
                             
                             
                          

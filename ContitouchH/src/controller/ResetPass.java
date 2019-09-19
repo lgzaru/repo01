@@ -103,10 +103,18 @@ public class ResetPass extends HttpServlet {
 catch(Exception e)
 {
       System.out.println(e); 
-      out.println("<script type=\"text/javascript\">");  
-		out.println("alert('OTP not found');");
-		out.println("window.location = 'resetpass.jsp'  ");
+      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+		out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+		out.println("<script src='js/alerts.js'></script>");
+		out.println("<script>");
+		out.println("$(document).ready(function(){  ");
+		out.println("  showSwal('otp-incorrect')        ");
+		out.println("});");
 		out.println("</script>");
+		
+		RequestDispatcher rd = request.getRequestDispatcher("resetpass.jsp");
+		rd.include(request, response);
+     
 }
 
 finally {		

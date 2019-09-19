@@ -32,11 +32,18 @@
         try {
         	
         	//Whatsapp API
-        	String requestUrl =" https://sms.contitouch.co.zw/api.json?cmd=sendwapp&"+
-        			"username=projtracker&password=password01&gsm=263773814511&msg=Here+we+go" +
+        	//String requestUrl =" https://sms.contitouch.co.zw/api.json?cmd=sendwapp&"+
+        		//	"username=projtracker&password=password01&gsm=263773814511&msg=Here+we+go" +
+        	
+        				
         	
         	//sms API
         	//String requestUrl  = "https://sms.contitouch.co.zw/api.json?cmd=send&" +
+        	
+        	//Whatsapp API       			
+        	String requestUrl =" https://sms.contitouch.co.zw/api.json?cmd=sendwapp&"+
+        	
+        	
                     "username=" + URLEncoder.encode(username, "UTF-8") +
                     "&password=" + URLEncoder.encode(password, "UTF-8") +
                     //"&senderid=" + URLEncoder.encode(senderid, "UTF-8") +

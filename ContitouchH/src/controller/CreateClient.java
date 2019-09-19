@@ -81,18 +81,29 @@ try{
 			out.println("});");
 			out.println("</script>");
 			
-			ContiSMS.SendSMS(pnumber, msg);
+			try {
+				ContiSMS.SendSMS(pnumber, msg);
+			} catch (Exception e) {
+				
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+				out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+				out.println("<script src='js/alerts.js'></script>");
+				out.println("<script>");
+				out.println("$(document).ready(function(){  ");
+				out.println("  showSwal('no-internet1')        ");
+				out.println("});");
+				out.println("</script>");
+				
+				RequestDispatcher rd = request.getRequestDispatcher("HomeAdmin.jsp");
+				rd.include(request, response);
+			}
 			
 			RequestDispatcher rd = request.getRequestDispatcher("clientbrief.jsp");
 			rd.include(request, response);
 		
-		
-		
-		
-		
-		
-		
-		
+
 	
 } 
 		

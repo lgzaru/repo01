@@ -82,13 +82,7 @@ try{
 			RequestDispatcher rd = request.getRequestDispatcher("project.jsp");
 			rd.include(request, response);
 		
-		
-		
-		
-		
-		
-		
-		
+	
 	
 } 
 		

@@ -143,8 +143,6 @@
                         <tr>
      						 <th>ID #</th>
                             <th>Client Name</th>
-                            <th>Address</th>
-                            <th>Date Created</th>
                             <th>CreatedBy</th>
                              <th>Actions</th>
                         </tr>
@@ -162,18 +160,23 @@
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
-						String query="select *  from clients where del_indicator != '"+val+"'   ";
+						//String query="select *  from clients where del_indicator != '"+val+"'   ";
+						
+						
+						String query="select clients.id, clients.name, clients.createdby,users.name"
+								+	" from clients INNER JOIN users ON clients.createdby=users.email"
+								+	" where clients.del_indicator != '"+val+"'   ";
+						
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){  %>
                         <tr>
                         
                         
-                        	<td><%=rs.getString("id") %></td>
-        		  			<td><%=rs.getString("name") %></td>
-            	  			<td><%=rs.getString("address") %></td>
-            	  			<td><%=rs.getString("regdate") %></td>
-            	  			<td><%=rs.getString("createdby") %></td>
+                        	<td><%=rs.getString("clients.id") %></td>
+        		  			<td><%=rs.getString("clients.name") %></td>
+            	  			<%-- <td><%=rs.getString("clients.address") %></td> --%>
+            	  			<td><%=rs.getString("users.name") %></td>
                            
                             <td>
                             

@@ -37,7 +37,6 @@
 					  <thead>
                         <tr>
                              <th>Task-ID#</th>
-                            <th>AssignedTo</th>
                             <th>Lead</th>
                             <th>ProjectName</th>
                             <th>Client</th>
@@ -45,6 +44,8 @@
                             <th>AssignedDate</th>
                             <th>DueDate</th>
                             <th>Priority</th>
+                            
+                        
                             
                         </tr>
                       </thead>
@@ -65,22 +66,22 @@
 						stmt = mysqlConn1.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
-						String query="select *  from tasks where del_indicator != '"+val+"' and task_id = '"+jid+"'   ";
+						String query="SELECT users.name, tasks.task_id,tasks.client,tasks.project_name, tasks.tname,tasks.assigneddate,tasks.duedate, tasks.priority FROM tasks INNER JOIN users ON tasks.leader=users.email where tasks.del_indicator != '"+val+"' AND tasks.task_id = '"+jid+"'   ";
+
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){  %>
                         <tr>
                         
                         
-                        	<td><input class=" form-control type="text" name="taskid"  value="<%=rs.getString("task_id") %>" disabled></td>
-        		  			<td><input class=" form-control type="text" name="assignedto" value="<%=rs.getString("assignedto") %>" disabled ></td>
-        		  			<td><input class=" form-control type="text" name="lead" value="<%=rs.getString("leader") %>" disabled ></td>
-        		  			<td><input class="form-control type="text" name="project_name" value="<%=rs.getString("project_name") %>" disabled></td>
-            	  			<td><input class=" form-control type="text" name="client" value="<%=rs.getString("client") %>" disabled ></td>
-        		  			<td><input class=" form-control type="text" name="tname" value="<%=rs.getString("tname") %>"  ></td>
+                        	<td><input class= " form-control" type="text" name="taskid"  value="<%=rs.getString("tasks.task_id") %>" disabled></td>
+        		  			<td><input class=" form-control" type="text" name="lead" value="<%=rs.getString("users.name") %>" disabled ></td>
+        		  			<td><input class="form-control" type="text" name="project_name" value="<%=rs.getString("tasks.project_name") %>" disabled></td>
+            	  			<td><input class=" form-control" type="text" name="client" value="<%=rs.getString("tasks.client") %>" disabled ></td>
+        		  			<td><input class=" form-control" type="text" name="tname" value="<%=rs.getString("tasks.tname") %>"  ></td>
         		  			
-        		  			<td><input class=" form-control type="text" name="assigneddate" value="<%=rs.getString("assigneddate") %>"  ></td>
-            	  			<td><input class=" form-control type="text" name="duedate" value="<%=rs.getString("duedate") %>"  ></td>
+        		  			<td><input class=" form-control" type="date" name="assigneddate" value="<%=rs.getString("tasks.assigneddate") %>"  ></td>
+            	  			<td><input class=" form-control" type="date" name="duedate" value="<%=rs.getString("tasks.duedate") %>"  ></td>
             	  			<td>
             	  			<select name="priority" id="priority" class="form-control" >
                               <option  value="high"><%=rs.getString("priority") %></option>

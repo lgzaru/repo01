@@ -23,6 +23,17 @@
 		  String taskstotal = session.getAttribute("taskstotal").toString();
 		  String overduetasks_graph = session.getAttribute("overduetasks").toString();
 		  
+		  String clientreview = session.getAttribute("clientreview").toString();
+		  String waitingfeedback = session.getAttribute("waitingfeedback").toString();
+		  String waitingapproval = session.getAttribute("waitingapproval").toString();
+		  String inphoto = session.getAttribute("inphoto").toString();
+		  String waitingdetails = session.getAttribute("waitingdetails").toString();
+		  String instudio = session.getAttribute("instudio").toString();
+		  String pendingaction = session.getAttribute("pendingaction").toString();
+		  String projectuat = session.getAttribute("projectuat").toString();
+		  
+	
+		  
 		  %>
 		  
 <script>
@@ -35,7 +46,15 @@ function drawChart() {
     ['Completed Projects', <%out.print(totalcomp);%>],
     ['Pending Projects', <%out.print(totalpending);%>],
     ['Overdue Projects', <%out.print(totalcancelled);%>],
-    ['On Hold', <%out.print(onhold);%>]
+    ['On Hold', <%out.print(onhold);%>],
+    ['Client Stil reviewing', <%out.print(clientreview);%>],
+    ['Waiting Feedback', <%out.print(waitingfeedback);%>],
+    ['Waiting Approval', <%out.print(waitingapproval);%>],
+    ['In Photography', <%out.print(inphoto);%>],
+    ['Waiting Details', <%out.print(waitingdetails);%>],
+    ['In Studio', <%out.print(instudio);%>],
+    ['Pending Action', <%out.print(pendingaction);%>],
+    ['Project under UAT', <%out.print(projectuat);%>]
     
     
 
@@ -44,7 +63,7 @@ function drawChart() {
   var options = {
     title: 'Project Analysis',
     pieHole: 0.4,
-    colors: ['#76C1FA', '#63CF72', '#F36368', '#FABA66'],
+    colors: ['#76C1FA', '#63CF72', '#F36368', '#FABA66','#2e7382','#07c8f2','#323f73','#9995c9','#816899','#8c548f','#99babf','#c7c112'],
     chartArea: {
       width: 500
     },

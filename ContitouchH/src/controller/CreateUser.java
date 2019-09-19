@@ -51,7 +51,7 @@ if (request.getParameter("createuser") != null) {
 	
 	String name = request.getParameter("name");
 	String email = request.getParameter("email");		
-	String password1 = request.getParameter("pass");
+	String password1 = request.getParameter("password");
 	String role = request.getParameter("role");
 	String title = request.getParameter("title");
 	
@@ -66,7 +66,7 @@ try{
 	
     mysqlConn = ConMysqlLocalhost.getMySqlConnection();
     
-    String msg = " User account created. Credentials - Username:"+email+" Password:"+password1;
+    String msg = " User account created. Log on to http://projects.contitouch.co.zw. Credentials - Username:"+email+" Password:"+password1;
 
 	
 	Statement stmt = null;
@@ -115,7 +115,7 @@ try{
 			out.println("  showSwal('warning-message-and-cancel')        ");
 			out.println("});");
 			out.println("</script>");
-		    response.sendRedirect("HomeAdmin.jsp");
+		    response.sendRedirect("createuser.jsp");
 		}
 		
 		
@@ -133,7 +133,7 @@ catch(Exception e)
 		out.println("});");
 		out.println("</script>");
 		
-		RequestDispatcher rd = request.getRequestDispatcher("HomeAdmin.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("createuser.jsp");
 		rd.include(request, response);
 }
 
@@ -142,6 +142,18 @@ finally {
 		mysqlConn.close();
 	}
 	catch (Exception ignore) {
+		 System.out.println(ignore); 
+			out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+			out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+			out.println("<script src='js/alerts.js'></script>");
+			out.println("<script>");
+			out.println("$(document).ready(function(){  ");
+			out.println("  showSwal('warning-message-and-cancel')        ");
+			out.println("});");
+			out.println("</script>");
+			
+			RequestDispatcher rd = request.getRequestDispatcher("createuser.jsp");
+			rd.include(request, response);
 	}
 }
 
@@ -190,8 +202,20 @@ else if (request.getParameter("createrole") != null) {
 	}
 
 	catch(Exception e){
+		
+		 System.out.println(e); 
+			out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+			out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+			out.println("<script src='js/alerts.js'></script>");
+			out.println("<script>");
+			out.println("$(document).ready(function(){  ");
+			out.println("  showSwal('warning-message-and-cancel')        ");
+			out.println("});");
+			out.println("</script>");
+			
+			RequestDispatcher rd = request.getRequestDispatcher("createuser.jsp");
+			rd.include(request, response);
 	
-	      System.out.println(e); 
 	     
 	}
 
@@ -200,6 +224,19 @@ else if (request.getParameter("createrole") != null) {
 			mysqlConn.close();
 		}
 		catch (Exception ignore) {
+			
+			 System.out.println(ignore); 
+				out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+				out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+				out.println("<script src='js/alerts.js'></script>");
+				out.println("<script>");
+				out.println("$(document).ready(function(){  ");
+				out.println("  showSwal('warning-message-and-cancel')        ");
+				out.println("});");
+				out.println("</script>");
+				
+				RequestDispatcher rd = request.getRequestDispatcher("createuser.jsp");
+				rd.include(request, response);
 		}
 	}//close if condition = true
 	

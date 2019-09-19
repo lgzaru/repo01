@@ -91,6 +91,17 @@ public class UserAccountsActions extends HttpServlet {
 			catch(Exception e){
 			
 			      System.out.println(e); 
+			      PrintWriter out = response.getWriter();
+			      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+					out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+					out.println("<script src='js/alerts.js'></script>");
+					out.println("<script>");
+					out.println("$(document).ready(function(){  ");
+					out.println("  showSwal('error-occured')        ");
+					out.println("});");
+					out.println("</script>");
+					
+					response.sendRedirect("allusers.jsp");
 			     
 			}
 
@@ -175,6 +186,19 @@ public class UserAccountsActions extends HttpServlet {
 			catch(Exception e){
 			
 			      System.out.println(e); 
+			      
+			      PrintWriter out = response.getWriter();
+					out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+					out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+					out.println("<script src='js/alerts.js'></script>");
+					out.println("<script>");
+					out.println("$(document).ready(function(){  ");
+					out.println("  showSwal('error-occured')        ");
+					out.println("});");
+					out.println("</script>");
+					
+					RequestDispatcher rd = request.getRequestDispatcher("allusers.jsp");
+					rd.include(request, response);
 			     
 			}
 

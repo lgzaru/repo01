@@ -93,16 +93,7 @@
            
           </ul>
           <ul class="navbar-nav navbar-nav-right">
-            <li class="nav-item nav-search d-none d-lg-flex">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="search">
-                  <i class="mdi mdi-magnify"></i>
-                  </span>
-                </div>
-                <input type="text" class="form-control" placeholder="Type to search..." aria-label="search" aria-describedby="search">
-              </div>
-            </li>
+          
            
            
             
@@ -154,7 +145,7 @@
                       <h4 class="card-title">InProgress Tasks</h4>                      
                       <div class="d-flex justify-content-between">
                         <p class="text-muted">Total inprogress</p>
-                        <p class="text-muted">total: <code><%out.print(inprogress); %></code></p>
+                        <h3 class="text-muted">total: <%out.print(inprogress); %></h3>
                       </div>
                       <div class="progress progress-md">
                         <!-- <div class="progress-bar bg-success w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div> -->
@@ -169,7 +160,7 @@
                       <h4 class="card-title">Completed Tasks</h4>
                       <div class="d-flex justify-content-between">
                         <p class="text-muted">TotalCompleted</p>
-                        <p class="text-muted">total:<code><%out.print(completed); %></code></p>
+                        <h3 class="text-muted">total:<%out.print(completed); %></h3>
                       </div>
                       <div class="progress progress-md">
                         <!-- <div class="progress-bar bg-danger w-25" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div> -->
@@ -183,7 +174,7 @@
                       <h4 class="card-title">Total Jobs</h4>
                       <div class="d-flex justify-content-between">
                         <p class="text-muted">All Jobs</p>
-                        <p class="text-muted">total:<code> <%out.print(totaljobs); %></code></p>
+                        <h3 class="text-muted">total: <%out.print(totaljobs); %></h3p>
                       </div>
                       <div class="progress progress-md">
                         <!-- <div class="progress-bar bg-warning w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div> -->
@@ -322,8 +313,8 @@
                       <div class="card">
                         <div class="card-header" role="tab" id="heading-16">
                           <h6 class="mb-0">
-                            <a data-toggle="collapse" href="#collapse-16" aria-expanded="false" aria-controls="collapse-16">
-                              My Completed Projects!
+                            <a data-toggle="collapse" href="#collapse-16" aria-expanded="true" aria-controls="collapse-16">
+                              ---- Completed Tasks! ----
                             </a>
                           </h6>
                         </div>

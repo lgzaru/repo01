@@ -252,9 +252,6 @@
                             <th>Lead</th>
                             <th>AssignedDate</th>
                             <th>DueDate</th>
-                            <th>Priority</th>
-                            <th>ProjectName</th>
-                            <th>CLient</th>
                             <th>Status</th>
                             <!-- <th>Actions</th> -->
                         </tr>
@@ -273,30 +270,35 @@
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
-						String query="select *  from tasks where del_indicator != '"+val+"' AND projectid = '"+projectid+"'   ";
+
+						String query="SELECT tasks.todo_status, tasks.task_id, tasks.tname, l.name as leader, a.name assignedto,tasks.assigneddate,tasks.duedate FROM tasks"
+								+ " INNER JOIN users l ON tasks.leader=l.email "
+								+ " inner join users a on tasks.assignedto = a.email "
+								+ " where tasks.del_indicator != '"+val+"' AND tasks.projectid = '"+projectid+"' ";
+						
+						
+						
+						
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){ 
 						
-							String todo_status = rs.getString("todo_status");
+							String todo_status = rs.getString("tasks.todo_status");
 							int todostatus = Integer.parseInt(todo_status);%>
                         <tr>
                         
                         
-                        	<td><%=rs.getString("task_id") %></td>
-        		  			<td><%=rs.getString("tname") %></td>
+                        	<td><%=rs.getString("tasks.task_id") %></td>
+        		  			<td><%=rs.getString("tasks.tname") %></td>
             	  			<td><%=rs.getString("assignedto") %></td>
             	  			<td><%=rs.getString("leader") %></td>
-            	  			<td><%=rs.getString("assigneddate") %></td>
-            	  			<td><%=rs.getString("duedate") %></td>
-            	  			<td><%=rs.getString("priority") %></td>
-            	  			<td><%=rs.getString("project_name") %></td>
-            	  			<td><%=rs.getString("client") %></td>
+            	  			<td><%=rs.getString("tasks.assigneddate") %></td>
+            	  			<td><%=rs.getString("tasks.duedate") %></td>
             	  			
-            	  			<% if(todostatus == 1 ) { %>
+            	  			<% if(todostatus == 3 ) { %>
             	  				<td><label class="badge badge-success">Completed</label></td>
             	  			
-            	  			<%} else if(todostatus == 2){%>
+            	  			<%} else if(todostatus == 1){%>
             	  			<td><label class="badge badge-info">In Progress</label>
             	  			
             	  			

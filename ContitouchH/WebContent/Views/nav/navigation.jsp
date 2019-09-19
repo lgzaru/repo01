@@ -7,9 +7,11 @@
      			 
         		  String overduetasks_notify = session.getAttribute("overduetasks").toString();
         		  String tototaloverdueprojects = session.getAttribute("totalcancelled").toString();
+        		  String vall1 = session.getAttribute("pendingadminappr").toString();
         		  
                   int overduetasksadmin = Integer.parseInt(overduetasks_notify);
                   int tototaloverdue = Integer.parseInt(tototaloverdueprojects);
+                  int vall2 = Integer.parseInt(vall1);
 
                   
                   %>
@@ -54,14 +56,14 @@
             
             <div class="collapse" id="general-pages">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="project.jsp">Create Project</a></li>
-                 <li class="nav-item"> <a class="nav-link" href="addtask.jsp">Create Task</a></li>
-                 <li class="nav-item"> <a class="nav-link" href="project-tasks.jsp">All Tasks/Project</a></li>
-                 <li class="nav-item"> <a class="nav-link" href="alltasks.jsp">All Tasks </a></li>
-                 <li class="nav-item"> <a class="nav-link" href="approve-d.jsp">Approve/Decline Tasks </a></li>
-                <li class="nav-item"> <a class="nav-link" href="allprojects.jsp">Project Stats </a></li>
-                <li class="nav-item"> <a class="nav-link" href="alloverdue.jsp">Overdue Tasks<span class="badge badge-pill badge-danger"><% if(overduetasksadmin != 0){ out.print(overduetasksadmin); } else{}%> </span></a></li>
-				<li class="nav-item"> <a class="nav-link" href="allprojects.jsp">Overdue Projects<span class="badge badge-pill badge-danger"><% if(tototaloverdue != 0){ out.print(tototaloverdue); } else{}%> </span></a></li>
+                <li class="nav-item"> <a class="nav-link" href="project.jsp">Add Project</a></li>
+                 <li class="nav-item"> <a class="nav-link" href="addtask.jsp">Add Task</a></li>
+                 <!-- <li class="nav-item"> <a class="nav-link" href="project-tasks.jsp">All Tasks/Project</a></li> -->
+                 <li class="nav-item"> <a class="nav-link" href="alltasks.jsp">Tasks Statistics</a></li>
+                 <li class="nav-item"> <a class="nav-link" href="allprojects.jsp">Project Statistics </a></li>
+                 <li class="nav-item"> <a class="nav-link" href="approve-d.jsp">Approve Tasks<%if(vall2 != 0){ %><span class="badge badge-pill badge-danger"><% out.print(vall2); } else{}%> </span> </a></li>
+                 <li class="nav-item"> <a class="nav-link" href="alloverdue.jsp">Overdue Tasks<%if(overduetasksadmin != 0){ %><span class="badge badge-pill badge-danger"><% out.print(overduetasksadmin); } else{}%> </span></a></li>
+				<li class="nav-item"> <a class="nav-link" href="allprojectsdue.jsp">Overdue Projects<% if(tototaloverdue != 0){ %><span class="badge badge-pill badge-danger"><% out.print(tototaloverdue); } else{}%> </span></a></li>
 				             
               </ul>
             </div>

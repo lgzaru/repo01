@@ -70,10 +70,43 @@ public class ForgotPass extends HttpServlet {
 						
 						
 						//send email
-						SendEmail.SendMail(useremail,usercode);
+						try {
+							SendEmail.SendMail(useremail,usercode);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							
+							out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+							out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+							out.println("<script src='js/alerts.js'></script>");
+							out.println("<script>");
+							out.println("$(document).ready(function(){  ");
+							out.println("  showSwal('no-internet2')        ");
+							out.println("});");
+							out.println("</script>");
+							
+							RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+							rd.include(request, response);
+							e.printStackTrace();
+						}
 						
 						//send sms
-						ContiSMS.SendSMS(gsm, msg);
+						try {
+							ContiSMS.SendSMS(gsm, msg);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+							out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+							out.println("<script src='js/alerts.js'></script>");
+							out.println("<script>");
+							out.println("$(document).ready(function(){  ");
+							out.println("  showSwal('no-internet1')        ");
+							out.println("});");
+							out.println("</script>");
+							
+							RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+							rd.include(request, response);
+							e.printStackTrace();
+						}
 						
 						
 						

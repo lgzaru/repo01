@@ -142,12 +142,9 @@
                             <th>Task-ID#</th>
                             <th>Task Name</th>
                             <th>AssignedTo</th>
-                            <th>Lead</th>
                             <th>AssignedDate</th>
                             <th>DueDate</th>
-                            <th>Priority</th>
                             <th>ProjectName</th>
-                            <th>CLient</th>
                             <th>Status</th>
                         </tr>
                       </thead>
@@ -165,22 +162,24 @@
 						ResultSet resultset =null;
 						String val = "TRUE";
 						String val2 = "3";
-						String query="select *  from tasks where del_indicator != '"+val+"' AND duedate < CURDATE() AND todo_status !='"+val2+"'   ";
+						String query="select tasks.task_id, tasks.tname,users.name, tasks.assignedto,tasks.assigneddate,tasks.duedate,tasks.project_name "
+								+	" FROM tasks INNER JOIN users ON tasks.assignedto=users.email"
+								+	" where tasks.del_indicator != '"+val+"' AND tasks.duedate < CURDATE() AND tasks.todo_status !='"+val2+"'   ";
+					
+
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){  %>
                         <tr>
                         
                         
-                        	<td><%=rs.getString("task_id") %></td>
-        		  			<td><%=rs.getString("tname") %></td>
-            	  			<td><%=rs.getString("assignedto") %></td>
-            	  			<td><%=rs.getString("leader") %></td>
-            	  			<td><%=rs.getString("assigneddate") %></td>
-            	  			<td><%=rs.getString("duedate") %></td>
-            	  			<td><%=rs.getString("priority") %></td>
-            	  			<td><%=rs.getString("project_name") %></td>
-            	  			<td><%=rs.getString("client") %></td>
+                        	<td><%=rs.getString("tasks.task_id") %></td>
+        		  			<td><%=rs.getString("tasks.tname") %></td>
+            	  			<td><%=rs.getString("users.name") %></td>
+            	  			<td><%=rs.getString("tasks.assigneddate") %></td>
+            	  			<td><%=rs.getString("tasks.duedate") %></td>
+            	  			<td><%=rs.getString("tasks.project_name") %></td>
+            	  			
                            
                             <td>
                             

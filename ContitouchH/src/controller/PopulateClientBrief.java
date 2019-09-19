@@ -90,12 +90,21 @@ public class PopulateClientBrief extends HttpServlet {
 		}
 		
 		catch(Exception e)
-		{
-		      System.out.println(e); 
-		      out.println("<script type=\"text/javascript\">");  
-				out.println("alert('Error Error');");
-				out.println("window.location = 'addtask.jsp'  ");
+		{	System.out.println(e); 
+			
+				out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+				out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+				out.println("<script src='js/alerts.js'></script>");
+				out.println("<script>");
+				out.println("$(document).ready(function(){  ");
+				out.println("  showSwal('error-occured')        ");
+				out.println("});");
 				out.println("</script>");
+				
+				RequestDispatcher rd = request.getRequestDispatcher("addtask.jsp");
+				rd.include(request, response);
+		      
+		      
 		}
 
 		finally {		

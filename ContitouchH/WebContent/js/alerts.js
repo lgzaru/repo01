@@ -54,6 +54,36 @@
 
   }
     
+    else if (type === 'no-internet1') {
+        swal({
+          title: 'Connectivity!',
+          text: 'Failed to send Whatsapp message, please check your connectivity',
+          icon: 'warning',
+          button: {
+            text: "Continue",
+            value: true,
+            visible: true,
+            className: "btn btn-warning"
+          }
+        })
+
+      }
+    
+    else if (type === 'no-internet2') {
+        swal({
+          title: 'Connectivity!',
+          text: 'Failed to send email, please check your connectivity',
+          icon: 'warning',
+          button: {
+            text: "Continue",
+            value: true,
+            visible: true,
+            className: "btn btn-warning"
+          }
+        })
+
+      }
+    
     else if (type === 'task_rejected') {
         swal({
           title: 'Rejected!',
@@ -122,7 +152,66 @@
           }
         }
       )
-    } else if (type === 'warning-message-and-cancel') {
+    } 
+    
+    else if (type === 'error-occured') {
+        swal({
+          title: 'Success!',
+          text: 'The action was successfully deleted!!',
+          icon: 'success',
+          timer: 2000,
+          button: false
+        }).then(
+          function() {},
+          // handling the promise rejection
+          function(dismiss) {
+            if (dismiss === 'timer') {
+              console.log('I was closed by the timer')
+            }
+          }
+        )
+      } 
+    
+    
+    else if (type === 'otp-incorrect') {
+        swal({
+          title: 'Warning!',
+          text: 'OTP incorrect!!',
+          icon: 'warning',
+          timer: 2000,
+          button: false
+        }).then(
+          function() {},
+          // handling the promise rejection
+          function(dismiss) {
+            if (dismiss === 'timer') {
+              console.log('I was closed by the timer')
+            }
+          }
+        )
+      } 
+    
+    
+
+    else if (type === 'delete-item') {
+      swal({
+        title: 'Success!',
+        text: 'The action was successfully deleted!!',
+        icon: 'success',
+        timer: 2000,
+        button: false
+      }).then(
+        function() {},
+        // handling the promise rejection
+        function(dismiss) {
+          if (dismiss === 'timer') {
+            console.log('I was closed by the timer')
+          }
+        }
+      )
+    } 
+    
+    else if (type === 'warning-message-and-cancel') {
       swal({
         title: 'Error?',
         text: "Please Try Again!",

@@ -21,6 +21,10 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon1.png" />
   
+  
+  
+  
+  
 </head>
 
 <body>
@@ -40,22 +44,22 @@
                 
                 <fieldset>
                   <div class="form-group">
-                    <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Name">
+                    <input type="text" class="form-control form-control-lg" maxlength="45" id="name" name="name" placeholder="Name">
                   </div>
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Email">
+                    <input type="text" class="form-control form-control-lg" maxlength="50" id="email" name="email" placeholder="Email">
                   </div>
                   
                   <div class="form-group">
-                    <input type="pnumber" class="form-control form-control-lg" id="pnumber" name="pnumber" placeholder="formart 263776456123">
+                    <input type="text" class="form-control form-control-lg" maxlength="12" id="pnumber" name="pnumber" placeholder="formart 263776456123">
                   </div>
 				  
 				  <div class="form-group">
-                    <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Password">
+                    <input type="password" class="form-control form-control-lg" maxlength="45" id="password" name="password" placeholder="Password">
                   </div>
 				  
 				  <div class="form-group">
-                    <input type="password" class="form-control form-control-lg" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+                    <input type="password" class="form-control form-control-lg" maxlength="45" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
                   </div>
 				  
 				  <input name="lastLogon" type="hidden" value="<%= new java.lang.Long(System.currentTimeMillis()).toString() %>"/>
@@ -106,6 +110,9 @@
   <!-- Custom js for this page-->
   <script src="js/form-validation.js"></script>
   <script src="js/bt-maxLength.js"></script>
+  
+
+  
 </body>
 
 </html>

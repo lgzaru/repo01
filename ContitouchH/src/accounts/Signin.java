@@ -52,7 +52,12 @@ public class Signin extends HttpServlet {
 				
 				
 				String passwordMD5 = "null";
-				passwordMD5 = MD5.getMD5(pass);
+				try {
+					passwordMD5 = MD5.getMD5(pass);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 				
 				ResultSet rs = null;

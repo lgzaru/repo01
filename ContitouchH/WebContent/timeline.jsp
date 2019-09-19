@@ -223,15 +223,15 @@
                                 <h6 class="text-info">Lead: <%=rs.getString("leader") %></h6>
                                 <h6 class="text-warning">Project: <%=rs.getString("project_name") %></h6>
                                 
-                                <p class="mb-0 text-info">
+                                <div></div><p class="mb-0 text-info">
                                   Description: <%=rs.getString("tdesc") %> 
                                                                 
-                                </p>
+                                </p></div>
                                 
-                                <p class="mb-0 text-warning">
+                                <%-- <p class="mb-0 text-warning">
                                   <a href="<%=rs.getString("fileurl") %> "><%=rs.getString("filename") %> </a>
                                                                 
-                                </p>
+                                </p> --%>
                                 
  								
                                  
@@ -313,20 +313,19 @@
                                 <h6 class="text-primary" align="center">Task Name: <%=rs.getString("tname") %></h6>
                                 <pre class="text-danger">Due On: <%=rs.getString("duedate") %>
                                 <br>Days Left: <%out.print(dueOn); %>
-                                <br><a class="text-primary">Description: <%=rs.getString("tdesc") %></a> 
                                 </pre>
                                 <h6 class="text-info">Lead: <%=rs.getString("leader") %></h6>
                                 <h6 class="text-secondary">Project:<%=rs.getString("project_name") %></h6>
                                 
-                                <p class="text-secondary">
+                                 <div><p class="text-secondary">
                                   Description: <%=rs.getString("tdesc") %> 
                                                                 
-                                </p>
+                                </p></div> 
                                 
-                                <p class="text-primary">
+                                <%-- <p class="text-primary">
                                  <a href="<%=rs.getString("fileurl") %> "><%=rs.getString("filename") %> </a>
                                                                 
-                                </p>
+                                </p> --%>
                                 
  								
 

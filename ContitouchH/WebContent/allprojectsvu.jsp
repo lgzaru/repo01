@@ -142,10 +142,10 @@
                         <tr>
                             <th>ID #</th>
                             <th>Project Name</th>
-                            <th>Company</th>
+                            <!-- <th>Company</th>
                             <th>AssignedTo</th>
-                            <th>Lead</th>
-                            <th>Priority</th>
+                            <th>Lead</th> 
+                            <th>Priority</th> -->
                             <th>StartDate</th>
                             <th>EndDate</th>
                             <th>Status</th>
@@ -178,10 +178,10 @@
                         
                         	<td><%=rs.getString("id") %></td>
         		  			<td><%=rs.getString("pname") %></td>
-            	  			<td><%=rs.getString("company") %></td>
+            	  			<%-- <td><%=rs.getString("company") %></td>
             	  			<td><%=rs.getString("assignedto") %></td>
             	  			<td><%=rs.getString("leader") %></td>
-            	  			<td><%=rs.getString("priority") %></td>
+            	  			<td><%=rs.getString("priority") %></td> --%>
             	  			<td><%=rs.getString("project_start") %></td>
             	  			<td><%=rs.getString("project_end") %></td>
             	  			

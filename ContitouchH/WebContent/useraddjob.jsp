@@ -53,13 +53,13 @@ session.setAttribute("llead",lead);
                     <p class="card-description">
                       Details...
                     </p>
-                    <form class="form-sample" action="/ContitouchH/ProjectActions" method="post" >
+                    <form class="form-sample" action="/ContitouchH/ProjectActions" method="post" id="addTask" >
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label"><strong>Task Name</strong></label>
                           <div class="col-sm-9">
-                            <input type="text" name="tname" id="tname" class="form-control" />
+                            <input type="text" name="tname" id="tname" maxlength="45" class="form-control" />
                           </div>
                         </div>
                       </div>
@@ -133,8 +133,17 @@ session.setAttribute("llead",lead);
                       
                 
                 <div class="row">
+                
+                <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><strong>Assigned Date</strong></label>
+                          <div class="col-sm-9">
+                            <input class="form-control" type="date" name="assigneddate" id="assigneddate" placeholder="dd/mm/yyyy"/>
+                          </div>
+                        </div>
+                      </div>
                       
-                      <div class="col-md-6">
+                      <div class="col-md-4">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label"><strong>Due Date</strong></label>
                           <div class="col-sm-9">
@@ -144,7 +153,26 @@ session.setAttribute("llead",lead);
                       </div>
                     
                     
- 					<div class="col-md-4">
+ 					
+                    </div>
+					  
+
+                 
+                     
+                     
+                   <div class="row">	
+                 
+                     
+					<div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label"><strong>Task Description</strong></label>
+                          <div class="col-sm-9">
+                            <textarea class="form-control" id="tdesc" name="tdesc" maxlength="500" rows="8"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="col-md-4">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label"><strong>Project Name</strong></label>
                           <div class="col-sm-9">
@@ -153,23 +181,29 @@ session.setAttribute("llead",lead);
                           </div>
                         </div>
                       </div>
-                    </div>
-					  
-
-                 
+                      
                      
-                     
-                   <div class="row">	  
-					<div class="col-md-6">
+                      
+                      <div class="col-md-4">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label"><strong>Task Description</strong></label>
-                          <div class="col-sm-9">
-                            <textarea class="form-control" id="tdesc" name="tdesc" rows="8"></textarea>
+                      <div class="form-check form-check-primary">
+                            <label class="form-check-label">
+                            Mark as Completed
+                              <input type="checkbox" name="completedstatus" id = "completedstatus" value="3" class="form-check-input" >
+                              
+                            <i class="input-helper"></i></label>
                           </div>
-                        </div>
-                      </div>
+                          </div>
+                          </div>
                       
                       </div>
+                       
+                       
+                  
+                  
+                   
+                      
+                  
 					  
                   <button type="submit" class="btn btn-primary mr-2" name="addj2" id="addj2">Submit</button>
                     <button type="reset" class="btn btn-light">Cancel</button>
@@ -186,6 +220,14 @@ session.setAttribute("llead",lead);
                         
         </div>
     </div>
+    
+      <script src="vendors/jquery-validation/jquery.validate.min.js"></script>
+  <script src="vendors/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- Custom js for this page-->
+  <script src="js/form-validation.js"></script>
+  <script src="js/bt-maxLength.js"></script>
+    
 </body>
 </html>
 

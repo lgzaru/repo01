@@ -61,19 +61,22 @@
 						stmt = mysqlConn1.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
-						String query="select *  from clients where del_indicator != '"+val+"' and id = '"+jid+"'   ";
+						//String query="select *  from clients where del_indicator != '"+val+"' and id = '"+jid+"'   ";
+						String query="select clients.id, clients.name, clients.address,clients.regdate,  clients.createdby,users.name"
+								+	" from clients INNER JOIN users ON clients.createdby=users.email"
+								+	" where clients.del_indicator != '"+val+"' AND clients.id = '"+jid+"'   ";
 						ResultSet rs=stmt.executeQuery(query);
 				
 						while(rs.next()){  %>
                         <tr>
                         
                         
-                        	<td><input class=" form-control type="text" name="id"  value="<%=rs.getString("id") %>" disabled></td>
-        		  			<td><input class=" form-control type="text" name="name" value="<%=rs.getString("name") %>"  ></td>
-            	  			<td><input class=" form-control type="text" name="address" value="<%=rs.getString("address") %>"   ></td>
-            	  			<td><input class=" form-control type="text" name="createdby" value="<%=rs.getString("createdby") %>" disabled ></td>
+                        	<td><input class=" form-control" type="text" name="id"  value="<%=rs.getString("clients.id") %>" disabled></td>
+        		  			<td><input class=" form-control" type="text" name="name" value="<%=rs.getString("clients.name") %>"  ></td>
+            	  			<td><input class=" form-control" type="text" name="address" value="<%=rs.getString("clients.address") %>"   ></td>
+            	  			<td><input class=" form-control" type="text" name="createdby" value="<%=rs.getString("users.name") %>" disabled ></td>
             	  			 
-            	  			<td><input class=" form-control type="text" name="regdate" value="<%=rs.getString("regdate") %>" disabled  ></td>
+            	  			<td><input class=" form-control" type="date" name="regdate" value="<%=rs.getString("clients.regdate") %>" disabled  ></td>
       
             	  			
             	  		

@@ -38,16 +38,12 @@ java.sql.Connection mysqlConn = null;
 		String jid = request.getParameter("first");
 		System.out.println("firstID="+jid);
 
-		
+		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession(true);
 		session.setAttribute("mycon1",jid);
 		
 		
 
-		
-		
-		
-		
 		
 		
  if (request.getParameter("delete") != null) {
@@ -72,7 +68,7 @@ java.sql.Connection mysqlConn = null;
 				
 			
 				
-				PrintWriter out = response.getWriter();
+				
 				out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
 				out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
 				out.println("<script src='js/alerts.js'></script>");
@@ -88,16 +84,24 @@ java.sql.Connection mysqlConn = null;
 				RequestDispatcher rd = request.getRequestDispatcher("allclients.jsp");
 				rd.include(request, response);
 				
-				
-				
-				
-				
+
 				
 			}
 
 			catch(Exception e){
 			
-			      System.out.println(e); 
+			      System.out.println(e);
+			      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+					out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+					out.println("<script src='js/alerts.js'></script>");
+					out.println("<script>");
+					out.println("$(document).ready(function(){  ");
+					out.println("  showSwal('warning-message-and-cancel')        ");
+					out.println("});");
+					out.println("</script>");
+					
+					RequestDispatcher rd = request.getRequestDispatcher("HomeAdmin.jsp");
+					rd.include(request, response);;
 			     
 			}
 
@@ -157,10 +161,6 @@ java.sql.Connection mysqlConn = null;
 				java.sql.Statement stmt = null;
 				stmt = mysqlConn.createStatement();
 				
-				
-				
-				
-				PrintWriter out = response.getWriter();
 				out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
 				out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
 				out.println("<script src='js/alerts.js'></script>");
@@ -183,6 +183,17 @@ java.sql.Connection mysqlConn = null;
 			catch(Exception e){
 			
 			      System.out.println(e); 
+			      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+					out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+					out.println("<script src='js/alerts.js'></script>");
+					out.println("<script>");
+					out.println("$(document).ready(function(){  ");
+					out.println("  showSwal('warning-message-and-cancel')        ");
+					out.println("});");
+					out.println("</script>");
+					
+					RequestDispatcher rd = request.getRequestDispatcher("HomeAdmin.jsp");
+					rd.include(request, response);
 			     
 			}
 
