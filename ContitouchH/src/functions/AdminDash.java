@@ -128,8 +128,8 @@ public class AdminDash extends HttpServlet {
 					
 					//5. Overdue Projects
 					 stmt2 = mysqlConn.createStatement();
-					    //String stus4 = "Cancelled";
-						rs = stmt2.executeQuery("SELECT COUNT(id) AS 'result'  FROM projects  where project_end < CURDATE()  AND  del_indicator != '"+val+"'   ");
+					   String onhold = "11";
+						rs = stmt2.executeQuery("SELECT COUNT(id) AS 'result'  FROM projects  where project_end < CURDATE()  AND  del_indicator != '"+val+"' AND status != '"+onhold+"'   ");
 						while(rs.next()){
 							 
 							 String countp = rs.getString(1);
@@ -386,6 +386,24 @@ public class AdminDash extends HttpServlet {
 												 
 													HttpSession session = request.getSession(true);
 													session.setAttribute("projectuat",countp);
+													
+												 
+											 }
+											
+												//19. Projects On HOld
+											 
+										    
+											stmt2 = mysqlConn.createStatement();
+											String stus003 = "11";
+											rs = stmt2.executeQuery("SELECT COUNT(status) AS 'result'  FROM projects where status='"+stus003+"' AND del_indicator != '"+val+"' ");
+											 
+											while(rs.next()){
+												 
+												 String countp = rs.getString(1);
+												 System.out.println(" Project OnHold :" +countp);
+												 
+													HttpSession session = request.getSession(true);
+													session.setAttribute("projectsOnhold",countp);
 													
 												 
 											 }

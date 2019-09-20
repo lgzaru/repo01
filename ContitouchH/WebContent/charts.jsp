@@ -31,6 +31,7 @@
 		  String instudio = session.getAttribute("instudio").toString();
 		  String pendingaction = session.getAttribute("pendingaction").toString();
 		  String projectuat = session.getAttribute("projectuat").toString();
+		  String projectsOnhold = session.getAttribute("projectsOnhold").toString();
 		  
 	
 		  
@@ -54,6 +55,7 @@ function drawChart() {
     ['Waiting Details', <%out.print(waitingdetails);%>],
     ['In Studio', <%out.print(instudio);%>],
     ['Pending Action', <%out.print(pendingaction);%>],
+    ['On Hold', <%out.print(projectsOnhold);%>],
     ['Project under UAT', <%out.print(projectuat);%>]
     
     
@@ -63,7 +65,7 @@ function drawChart() {
   var options = {
     title: 'Project Analysis',
     pieHole: 0.4,
-    colors: ['#76C1FA', '#63CF72', '#F36368', '#FABA66','#2e7382','#07c8f2','#323f73','#9995c9','#816899','#8c548f','#99babf','#c7c112'],
+    colors: ['#76C1FA', '#63CF72', '#F36368', '#FABA66','#2e7382','#07c8f2','#323f73','#9995c9','#816899','#8c548f','#99babf','#7bc7b1','#489e16'],
     chartArea: {
       width: 500
     },

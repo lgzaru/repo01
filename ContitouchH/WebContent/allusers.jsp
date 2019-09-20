@@ -143,7 +143,7 @@
                             <th>ID #</th>
                             <th>Name</th>
                             <th>Role</th>
-                            <th>Email</th>
+                            <!-- <th>Email</th> -->
                             <th>Title</th>
                             <th>Actions</th>
                         </tr>
@@ -174,7 +174,7 @@
                         	<td><%=rs.getString("id") %></td>
         		  			<td><%=rs.getString("name") %></td>
             	  			<td><%=rs.getString("userroles") %></td>
-            	  			<td><%=rs.getString("email") %></td>
+            	  			<%-- <td><%=rs.getString("email") %></td> --%>
             	  			<td><%=rs.getString("title") %></td>
                            
                             <td>

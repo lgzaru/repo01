@@ -76,7 +76,8 @@ public class Signin extends HttpServlet {
 				
 					Statement stmt = null;
 					stmt = mysqlConn.createStatement();
-					rs = stmt.executeQuery("select password,userroles,lastLogon from users where email = '" + email + "'");	
+					String vall = "TRUE";
+					rs = stmt.executeQuery("select password,userroles,lastLogon from users where del_indicator != '"+vall+"' AND email = '" + email + "'");	
 					if (rs.next()) { //query only returns 1 record in the result set
 						//role=rs.getString("role");
 						role=rs.getString("userroles");

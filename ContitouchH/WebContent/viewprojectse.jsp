@@ -99,6 +99,7 @@
                               <option value="7">Client Still Reviewing</option>
 							  <option value="9">Completed</option>
 							   <option value="10">UAT</option>
+							    <option value="11">On Hold</option>
                             </select>
             	  			</td>
             	  			

@@ -163,11 +163,12 @@
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
 						String val = "TRUE";
+						String onhold = "11";
 						//String query="select *  from projects where project_end < CURDATE() AND del_indicator != '"+val+"'   ";
 						
 						String query="select projects.status, projects.id, projects.pname, users.name,projects.priority, projects.project_start, projects.project_end"
 								+	" from projects INNER JOIN users ON projects.leader=users.email"
-								+	" where projects.project_end < CURDATE() AND projects.del_indicator != '"+val+"'   ";
+								+	" where projects.project_end < CURDATE() AND projects.del_indicator != '"+val+"' AND projects.status != '"+onhold+"'   ";
 
 						
 						ResultSet rs=stmt.executeQuery(query);

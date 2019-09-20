@@ -141,11 +141,9 @@
                         <tr>
                             <th>Task-ID#</th>
                             <th>Task Name</th>
-                            <th>AssignedTo</th>
-                            <th>AssignedDate</th>
-                            <th>DueDate</th>
-                            <th>Priority</th>
                             <th>ProjectName</th>
+                            <th>AssignedTo</th>
+                            <th>DueDate</th>
                             <th>Actions</th>
                         </tr>
                       </thead>
@@ -164,7 +162,7 @@
 						String val = "TRUE";
 						String val2 = "2";
 						//String query="select *  from tasks where todo_status = '"+val2+"' AND  del_indicator != '"+val+"'   ";
-						String query="SELECT users.name, tasks.task_id, tasks.tname,tasks.assigneddate,tasks.duedate, tasks.priority, tasks.client"
+						String query="SELECT users.name, tasks.task_id, tasks.tname,tasks.assigneddate,tasks.duedate, tasks.priority, tasks.project_name"
 								+ " FROM tasks INNER JOIN users ON tasks.leader=users.email "
 								+ " where tasks.del_indicator != '"+val+"' AND tasks.todo_status = '"+val2+"'   ";
 
@@ -176,11 +174,11 @@
                         
                         	<td><%=rs.getString("tasks.task_id") %></td>
         		  			<td><%=rs.getString("tasks.tname") %></td>
+        		  			<td><%=rs.getString("tasks.project_name") %></td>
             	  			<td><%=rs.getString("users.name") %></td>
-            	  			<td><%=rs.getString("tasks.assigneddate") %></td>
             	  			<td><%=rs.getString("tasks.duedate") %></td>
-            	  			<td><%=rs.getString("tasks.priority") %></td>
-            	  			<td><%=rs.getString("tasks.client") %></td>
+            	  			
+            	  			
                            
                             <td>
                             
@@ -201,6 +199,11 @@
                          	
                                                         
                               <button class="btn btn-outline-danger" name="decline_tasks" id="decline_tasks">Decline</button>
+                              
+                              
+                              
+<!--                               <button class="btn btn-outline-info"><a  data-toggle="modal" data-target="#exampleModal-2">More..</a></button>
+ -->                              
                             
                               
                               
@@ -253,7 +256,39 @@
       <!-- main-panel ends -->
     </div>
     <!-- page-body-wrapper ends -->
+    
+        <div class="card">
+               <form action="/ContitouchH/TaskActions"  method="post">
+                  <div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel-2">Task Details</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                          </button>
+                        </div>
+                        
+                  <div class="modal-body">
+                    <textarea  rows="5"  id="approve-comment" name="approve-comment" class="form-control " placeholder="Please Enter Custome Message"></textarea>
+                    
+                  </div>
+                        <div class="modal-footer">
+                          <button type="submit" name="approved_tasks" id="approved_tasks" class="btn btn-success">Approve</button>
+                          <button type="submit" name="decline_tasks" id="decline_tasks" class="btn btn-danger">Decline</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  </form>
+                  <!-- Modal Ends -->
+                </div>
   </div>
+  
+  
+  
+  
   <!-- container-scroller -->
   
   

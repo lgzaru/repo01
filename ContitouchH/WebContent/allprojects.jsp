@@ -145,7 +145,7 @@
                             <!-- <th>AssignedTo</th> -->
                             <th>Lead</th>
                             <!-- <th>Priority</th> -->
-                            <th>StartDate</th>
+<!--                             <th>StartDate</th> -->
                             <th>EndDate</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -183,7 +183,7 @@
             	  			<%-- <td><%=rs.getString("assignedto") %></td> --%>
             	  			<td><%=rs.getString("users.name") %></td>
             	  			<%-- <td><%=rs.getString("priority") %></td> --%>
-            	  			<td><%=rs.getString("projects.project_start") %></td>
+            	  			<%-- <td><%=rs.getString("projects.project_start") %></td> --%>
             	  			<td><%=rs.getString("projects.project_end") %></td>
             	  		
             	  			<% if(statusp == 9 ) { %>
@@ -209,6 +209,9 @@
             	  			
             	  			<%} else if(statusp == 7){%>
             	  			<td><label class="badge badge-warning">Client Still Reviewing</label>
+            	  			
+            	  			<%} else if(statusp == 11){%>
+            	  			<td><label class="badge badge-info">On Hold</label>
             	  			
             	  			<%} else if(statusp == 10){%>
             	  			<td><label class="badge badge-warning">UAT</label>

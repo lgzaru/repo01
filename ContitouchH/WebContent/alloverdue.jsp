@@ -142,7 +142,7 @@
                             <th>Task-ID#</th>
                             <th>Task Name</th>
                             <th>AssignedTo</th>
-                            <th>AssignedDate</th>
+                            <!-- <th>AssignedDate</th> -->
                             <th>DueDate</th>
                             <th>ProjectName</th>
                             <th>Status</th>
@@ -176,7 +176,7 @@
                         	<td><%=rs.getString("tasks.task_id") %></td>
         		  			<td><%=rs.getString("tasks.tname") %></td>
             	  			<td><%=rs.getString("users.name") %></td>
-            	  			<td><%=rs.getString("tasks.assigneddate") %></td>
+            	  			<%-- <td><%=rs.getString("tasks.assigneddate") %></td> --%>
             	  			<td><%=rs.getString("tasks.duedate") %></td>
             	  			<td><%=rs.getString("tasks.project_name") %></td>
             	  			

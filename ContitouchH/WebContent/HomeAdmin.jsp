@@ -235,7 +235,7 @@
 				
         <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Completed Projects!</h4>
+                  <h4 class="card-title">Completed/UAT Projects!</h4>
                <!--    <div class="row grid-margin">
                     <div class="col-12">
                       <div class="alert alert-secondary" role="alert">
@@ -254,9 +254,6 @@
                                 <th>Project #</th>
                                 <th>Project Name</th>
                                 <th>Company</th>
-                                <th>Lead-Developer</th>
-                                <th>Project-Start</th>
-                                <th>Project-End</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -279,9 +276,6 @@
                         	<td><%=rs.getString("id") %></td>
         		  			<td><%=rs.getString("pname") %></td>
             	  			<td><%=rs.getString("company") %></td>
-            	  			<td><%=rs.getString("leader") %></td>
-            	  			<td><%=rs.getString("project_start") %></td>
-            	  			<td><%=rs.getString("project_end") %></td>
                                 
                                 <td>
                                   <label class="badge badge-info">Completed</label>
