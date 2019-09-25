@@ -50,7 +50,7 @@ public static void main(String[] args) {
 	
 				if(result != 0)
 				{
-				ContiSMS.SendSMS(cellno, msg);
+				ContiSMS.SendSMS(cellno, msg, null);
 				 }
 				
 				else {

@@ -13,11 +13,38 @@
                 <div class="profile-name">
                   <p class="name">
                   <% 
-                  String todoz =  session.getAttribute("todos_session").toString();
-                  int totaltodos = Integer.parseInt(todoz);
+                  
+
+                  UserDash obj = new UserDash();
+	     			obj.getUserDash(request, response); 
+	     			
+                  String todos =  session.getAttribute("todos_session").toString();
+                  int totaltodos = Integer.parseInt(todos);
                   
                   String useremail2 =  session.getAttribute("User").toString();%>
-                   <%out.print(useremail2); %>
+                   <%out.print(useremail2); 
+                   
+                   
+	     			
+	     			
+	     			
+	     			String totaljobs =  session.getAttribute("totaljobs_session").toString();
+	     			int totaljobz = Integer.parseInt(totaljobs);
+	     			
+	     			String completed =  session.getAttribute("completed_session").toString();
+	     			int completedz = Integer.parseInt(completed);
+	     			
+	     			String inprogress =  session.getAttribute("inprogress_session").toString();	
+	     			int inprogresz = Integer.parseInt(inprogress);
+	     			
+	     			String totalpaproval =  session.getAttribute("totalpaproval_session").toString();
+	     			int totalpaprovalz = Integer.parseInt(totalpaproval);
+	     			
+	     			String tasksonhold =  session.getAttribute("tasksonhold_session").toString();
+	     			int tasksonholdz = Integer.parseInt(tasksonhold);
+                   
+                   
+                   %>
                   </p>
                   <p class="designation">
                     Standard User
@@ -36,14 +63,15 @@
             <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
             <i class="mdi mdi-view-quilt menu-icon"></i>
            
-            <span class="menu-title">Tasks<span class="badge badge-pill badge-info"><% if(totaltodos != 0){ out.print(totaltodos); }%></span></span>
+            <span class="menu-title">Tasks</span>
             <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="general-pages">
+            <div class="collapse" id="general-pages"> 
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="timeline.jsp">My tasks<span class="badge badge-pill badge-info"><%if(totaltodos != 0){ out.print(totaltodos);} %></span> </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pending-approval.jsp">Pending Approval </a></li>
-                <li class="nav-item"> <a class="nav-link" href="fallprojects.jsp">Completed Tasks </a></li>
+                <li class="nav-item"> <a class="nav-link" href="usertasks.jsp">My tasks<span class="badge badge-pill badge-warning"><%if(totaltodos != 0){ out.print(totaltodos);} %></span> </a></li>
+                <li class="nav-item"> <a class="nav-link" href="usertasksinprogress.jsp">In Progress<span class="badge badge-pill badge-warning"><%if(inprogresz != 0){ out.print(inprogresz);} %></span></a></li>
+                <li class="nav-item"> <a class="nav-link" href="pending-approval.jsp">Pending Approval<span class="badge badge-pill badge-info"><%if(totalpaprovalz != 0){ out.print(totalpaprovalz);} %></span> </a></li>
+                <li class="nav-item"> <a class="nav-link" href="fallprojects.jsp">Completed Tasks<span class="badge badge-pill badge-info"><%if(completedz != 0){ out.print(completedz);} %></span> </a></li>
              
               </ul>
             </div>

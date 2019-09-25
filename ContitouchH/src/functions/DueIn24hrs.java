@@ -17,7 +17,9 @@ public static void main(String[] args) {
     	Connection mysqlConn = null;
 		ResultSet rs, rs2 = null;
 		String val = "True";
-		String lead = null, assignedto = null;
+		String email = null;
+		String msg,name = null;
+		String role = "User";
 		
 		
 
@@ -29,62 +31,49 @@ public static void main(String[] args) {
 		 
 		//9. OverDue Tasks
 		 stmt = mysqlConn.createStatement();
-			rs = stmt.executeQuery("SELECT *  FROM tasks  where duedate <= CURDATE()  AND del_indicator != '"+val+"'  ");
+			rs = stmt.executeQuery("SELECT *  FROM users  where userroles = '"+role+"' AND del_indicator != '"+val+"'  ");
 			while(rs.next()){
 				 
-				 String pname = rs.getString("project_name");
-				 lead = rs.getString("leader");
-				 assignedto = rs.getString("assignedto");
-				 String duedate = rs.getString("duedate");
-				 String projectid = rs.getString("projectid");
-				 String tname = rs.getString("tname");
-				 
-				
-				
-				System.out.println("Project Name: "+pname); 
-				System.out.println("Lead: "+lead);
-				System.out.println("Admin:"+assignedto); 
-				System.out.println("Due Date: "+duedate);
-				System.out.println("Project ID:"+projectid);	
-				
-				 
-			try {
-				SendEmail.SendMailDue24hrs(pname, lead, assignedto, duedate, projectid,tname, assignedto);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				System.out.println("No internet, cant sent email");
-				e.printStackTrace();
-			}
-			
-			System.out.println("Email lead:"+lead+" sent");
-			System.out.println("Email assignedto:"+assignedto+" sent");
-			System.out.println("__________________________________________________________________________________________");
+					System.out.println("--------------------------------Start-------------------------------------------");
+				    email = rs.getString("email");
+			    	System.out.println("Email address: "+email); 
+			    	
+			    	name = rs.getString("name");
+			    	System.out.println("User Name: "+name);
+	
 			 
 			
 			
+			String val1 = "1";
 			
-			stmt2 = mysqlConn.createStatement();
-			
-			
-			
-			rs2 = stmt2.executeQuery("SELECT pnumber  FROM users  where email = '"+lead+"' OR email = '"+assignedto+"'  ");
-			while(rs2.next()){
+			 stmt2 = mysqlConn.createStatement();
+				rs2 = stmt2.executeQuery("SELECT COUNT(tasks.task_id) AS 'result', users.pnumber FROM tasks"
+				+	" INNER JOIN users ON tasks.assignedto=users.email"
+				+	" where tasks.todo_status <=  '"+val1+"' AND tasks.assignedto = '"+email+"' AND tasks.duedate < CURDATE() ") ;
 				
-				String pnumber = rs2.getString("pnumber");
-				System.out.println("Phone number is :"+pnumber);
 				
-				String msg = "You have overdue tasks on the Project: "+pname+". Please login and clear your tasks. Task Name:"+tname+" Due Date: "+duedate+" "
-						+ "Assigned to: "+assignedto+" Project Lead: "+lead;
 				
-				try {
-					ContiSMS.SendSMS(pnumber, msg);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					System.out.println("No internet, cant sent app msg");
-					e.printStackTrace();
+				while(rs2.next()){
+					 
+					 int result = rs2.getInt("result");
+					 String cellno = rs2.getString("users.pnumber");
+					 
+					 msg = "Hi "+name+"! You have ["+result+" task]s that are overdue. Please visit http://projects.contitouch.co.zw";
+		
+					if(result != 0)
+					{
+					ContiSMS.SendSMS(cellno, msg, null);
+					 }
+					
+					else {
+						System.out.println("No tasks due");
+					}
+					 
 				}
 				
-			     }
+
+			
+			//--------------------------------------------------------------------
 			
 			 }
 	

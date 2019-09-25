@@ -138,7 +138,7 @@ try{
 
 catch(Exception e)
 {
-      out.println(e); 
+      System.out.println(e); 
 		out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
 		out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
 		out.println("<script src='js/alerts.js'></script>");

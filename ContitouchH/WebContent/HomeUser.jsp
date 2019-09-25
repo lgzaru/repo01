@@ -17,27 +17,17 @@
         </style>
   <title>Contitouch</title>
   <!-- base:css -->
-  <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
+<link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
   <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
   <%@include file = 'sessions.jsp' %>
-  <% UserDash obj = new UserDash();
-	obj.getUserDash(request, response); 
-	
-	
-	
-	String totaljobs =  session.getAttribute("totaljobs_session").toString();	
-	String completed =  session.getAttribute("completed_session").toString();	
-	String inprogress =  session.getAttribute("inprogress_session").toString();	
-	String todos =  session.getAttribute("todos_session").toString();
-	
-	%>
+ 
   
   <!-- endinject -->
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="css/vertical-layout-light/style.css">
+    <link rel="stylesheet" href="css/vertical-layout-light/style.css">
   <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
   
   <!-- endinject -->
@@ -62,7 +52,7 @@
 		
   
 </head>
-<body class="sidebar-icon-only">
+<body >
   <div class="container-scroller">
    			<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-left navbar-brand-wrapper d-flex align-items-center justify-content-between">
@@ -130,12 +120,11 @@
                     <div class="card-body">
                       <h3 class="card-title">Todo Tasks</h3>
                       <div class="d-flex justify-content-between">
-                        <p class="text-muted">Total ToDos</p>
-                        <h3 class="text-muted">Total: <%out.print(todos); %></h3>
+                        <h5 class="text-muted">Total: <%out.print(todos); %></h5>
                       </div>
                       <div class="progress progress-md">
-                        <!-- <div class="progress-bar bg-info w-10" role="progressbar" aria-valuenow="10" aria-valuemin="10" aria-valuemax="100"></div> -->
-                      </div>
+					  <div class="progress-bar bg-warning" role="progressbar" style="width: <%out.print(todos); %>%" aria-valuenow="<%out.print(todos); %>" aria-valuemin="0" aria-valuemax="100"></div>   
+					  </div>
                     </div>
                   </div>
                 </div>
@@ -144,11 +133,10 @@
                     <div class="card-body">
                       <h4 class="card-title">InProgress Tasks</h4>                      
                       <div class="d-flex justify-content-between">
-                        <p class="text-muted">Total inprogress</p>
-                        <h3 class="text-muted">total: <%out.print(inprogress); %></h3>
+                        <h5 class="text-muted">Total: <%out.print(inprogress); %></h5>
                       </div>
                       <div class="progress progress-md">
-                        <!-- <div class="progress-bar bg-success w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div> -->
+					  <div class="progress-bar bg-primary" role="progressbar" style="width: <%out.print(inprogress); %>%" aria-valuenow="<%out.print(inprogress); %>" aria-valuemin="0" aria-valuemax="100"></div>   
                       </div>
                     </div>
                   </div>
@@ -159,11 +147,10 @@
                     
                       <h4 class="card-title">Completed Tasks</h4>
                       <div class="d-flex justify-content-between">
-                        <p class="text-muted">TotalCompleted</p>
-                        <h3 class="text-muted">total:<%out.print(completed); %></h3>
+                        <h5 class="text-muted">Total:<%out.print(completed); %></h5>
                       </div>
                       <div class="progress progress-md">
-                        <!-- <div class="progress-bar bg-danger w-25" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div> -->
+					  <div class="progress-bar bg-info" role="progressbar" style="width: <%out.print(completed); %>%" aria-valuenow="<%out.print(completed); %>" aria-valuemin="0" aria-valuemax="100"></div>   
                       </div>
                     </div>
                   </div>
@@ -171,13 +158,12 @@
                 <div class="col-12 col-sm-6 col-md-6 col-xl-3 grid-margin stretch-card">
                   <div class="card ">
                     <div class="card-body">
-                      <h4 class="card-title">Total Jobs</h4>
+                      <h4 class="card-title">Tasks Pending Approval</h4>
                       <div class="d-flex justify-content-between">
-                        <p class="text-muted">All Jobs</p>
-                        <h3 class="text-muted">total: <%out.print(totaljobs); %></h3p>
+                        <h5 class="text-muted">Total: <%out.print(totalpaproval); %></h5>
                       </div>
                       <div class="progress progress-md">
-                        <!-- <div class="progress-bar bg-warning w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div> -->
+					  <div class="progress-bar bg-danger" role="progressbar" style="width: <%out.print(totalpaproval); %>%" aria-valuenow="<%out.print(totalpaproval); %>" aria-valuemin="0" aria-valuemax="100"></div>   
                       </div>
                     </div>
                   </div>
@@ -186,244 +172,112 @@
               
             <!--   ---------------End user dash------- -->
 
-              <div class="tab-content tab-transparent-content pb-0">
-                <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
-                    <div class="row">
-                        
+            		<div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Tasks Pending Action</h4>
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive">
+                  <form name="form1" id="form1" action="/ContitouchH/TaskActions"  method="post">
+                    <table id="order-listing" class="table table-dark">
+                     
+					  <thead>
+                        <tr>
+                            <th>Task-ID#</th>
+                            <th>Task Name</th>
+                            <!-- <th>AssignedTo</th> -->
+                            <th>Lead</th>
+                            <!-- <th>AssignedDate</th> -->
+                            <th>DueDate</th>
+                             <th>Priority</th>
+                            <!--<th>ProjectName</th>
+                            <th>CLient</th> -->
+                            <th>Actions</th>
+                        </tr>
+                      </thead>
                       
-                <div class="card-body">
-                <div class="alert alert-info" role="alert">
-                  <h4 class="card-title">Recently Assigned task</h4>
-                  </div>
-                  
-               <!--    <div class="row grid-margin">
-                    <div class="col-12">
-                      <div class="alert alert-secondary" role="alert">
-                          <strong>Completed Project!</strong> This table shows all completed projects.<br><br> -->
-                          
                       
-                          
-                        <%Connection mysqlConn = null;
-                        
-                		String username =  session.getAttribute("User").toString();	
-                		System.out.println("Testing"+username);
-	
-
-
+                      
+                      <tbody>
+                      
+                      <%Connection mysqlConn = null;
 						try{
     					mysqlConn = ConMysqlLocalhost.getMySqlConnection();
 
 						Statement stmt = null;
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
-						String val = "0";
-						String val2 = "Completed";
-						String query="select *  from tasks where assignedto = '"+username+"' AND todo_status='"+val+"'  order by task_id desc limit 1";
+						String val = "TRUE", vall = "0";
+						String myuser = session.getAttribute("User").toString();
+						
+						
+						/* String query="SELECT users.name FROM tasks INNER JOIN users ON tasks.assignedto=users.email WHERE tasks.task_id = 8"; */
+						
+						String query="SELECT users.name, tasks.task_id, tasks.tname,tasks.assigneddate,tasks.duedate, tasks.priority, tasks.todo_status"
+						+	" FROM tasks INNER JOIN users ON tasks.leader=users.email"
+						+	" where tasks.todo_status = '"+vall+"' AND tasks.del_indicator != '"+val+"' AND tasks.assignedto = '"+myuser+"'  "
+						+	" order by tasks.task_id DESC ";
 						ResultSet rs=stmt.executeQuery(query);
 				
-						while(rs.next()){  %>
-						<div class="row">
-						<div class="col-12">
-                        <div class="card">
-						
-						<div class="card-body">
-                          <div class="d-flex flex-wrap justify-content-between">
-                          	<h4 class="card-title">Task ID-<%=rs.getString("task_id") %></h4>
-
-                          </div>
-						
-					
-                          <div class="container-fluid">
-                          <div class="row ticket-card mt-3 pb-2 border-bottom pb-3 mb-3">
-                          
-                          
-                            
-                              <div class="col-md-1">
-                                <img class="img-sm rounded-circle mb-4 mb-md-0" src="images/favicon.ico" alt="profile image">
-                              </div>
-                              <div class="ticket-details col-md-9">
-                                <div class="d-md-flex">
-                                  <h4 class="text-dark mr-2 no-wrap">Task Name:<%=rs.getString("tname") %></h4>
-                                  <h5 class="mr-1 text-primary">[ID # - <%=rs.getString("task_id") %>]</h5><br>
-                                  
-                                </div>
-                                <p class="font-weight-medium ellipsis">Client: [<%=rs.getString("Client") %>]</p>
-                                <p class="text-gray font-weight-medium">Project Lead: [<%=rs.getString("leader") %>]</p>
-                                <p class="text-gray font-weight-medium">Date Created: [<%=rs.getString("assigneddate") %>]</p>
-                                
-                                <p class="text-gray font-weight-medium">Comments:[<%=rs.getString("comments") %>]</p>
-                                <div class="row text-muted d-md-flex d-none">
-                                  <div class="col-12 d-flex">
-                                    <h6 class=" mdi mdi-alarm-multiple text-danger"> Duration:From[<%=rs.getString("assigneddate")%>]To[<%=rs.getString("duedate")%>]</h6>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="ticket-actions col-md-2 text-lg-right pr-md-0">
-                              <form action="timeline.jsp" >
-                                <!-- <div class="btn-group dropdown">
-                                  <button type="button" class="btn btn-success btn-md d-flex">More..</button>
-                                </div> -->
-                                
-                                <button class="btn btn-success btn-md d-flex" name="more" id="more">
-                                    
-                         
-                                    <i class=" text-primary"></i>More...
-                                  </button>
-                                </form>
-                              </div>
-                            </div>
+						while(rs.next()){ 
+							String status = rs.getString("tasks.todo_status");
+							int statusp = Integer.parseInt(status);
+							%>
+							
+                        <tr>
+                        
+                        
+                        	<td><%=rs.getString("tasks.task_id") %></td>
+        		  			<td><%=rs.getString("tasks.tname") %></td>
+            	  			<td><%=rs.getString("users.name") %></td>
+            	  			<%-- <td><%=rs.getString("tasks.assigneddate") %></td> --%>
+            	  			<td><%=rs.getString("tasks.duedate") %></td>
+            	  			 <td><%=rs.getString("priority") %></td>
+            	  			<%--<td><%=rs.getString("project_name") %></td>
+            	  			<td><%=rs.getString("client") %></td> --%>
                            
-
-                          </div>
-                          
+                            <td>
                             
                             
-                        </div>
-                        
-                      </div>
-                      
-                      <br>
-                      <%}%>
-                      
-                      
-                         <%rs.close();
-			    			stmt.close();
-    						mysqlConn.close();
-    							}
-							catch(Exception e){
-    							e.printStackTrace();
-    			
-									}%>
-                      
-                      
-                      
-                    </div>
-                  </div>
-                </div>
-                
-                
-                
-                 
-             <div class="card col-12">
-                <div class="card-body">
-                  <h4 class="card-title">All My TAsks</h4>
-                  <p class="card-description">Please click the<code>drop down arrow</code> to view</p>
-                  <div class="mt-4">
-                    <div class="accordion accordion-multi-colored" id="accordion-6" role="tablist">
-                      <div class="card">
-                        <div class="card-header" role="tab" id="heading-16">
-                          <h6 class="mb-0">
-                            <a data-toggle="collapse" href="#collapse-16" aria-expanded="true" aria-controls="collapse-16">
-                              ---- Completed Tasks! ----
-                            </a>
-                          </h6>
-                        </div>
-                        <div id="collapse-16" class="collapse" role="tabpanel" aria-labelledby="heading-16" data-parent="#accordion-6">
-                          <div class="card-body">
-                            <!-- -------------- -->
                             
-                              <div class="card-body">
-                  <h4 class="card-title">View All</h4>
-               <!--    <div class="row grid-margin">
-                    <div class="col-12">
-                      <div class="alert alert-secondary" role="alert">
-                          <strong>Completed Project!</strong> This table shows all completed projects.<br><br>
-                      </div>
-                    </div>
-                  </div> -->
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="table-responsive">
-                      <form name="form1" id="form1" action="/ContitouchH/ProjectActions"  method="post">
-                      
-                        <table id="order-listing" class="table table-bordered" bgcolor="#FFFFFF">
-                          <thead>
-                            <tr class="bg-primary text-white">
-                                <th>Task #</th>
-                                <th>Task Name</th>
-                                <th>Company</th>
-                                <th>Lead-Developer</th>
-                                <th>Task-Start</th>
-                                <th>Task-End</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                       <% 	
-						try{
-    					mysqlConn = ConMysqlLocalhost.getMySqlConnection();
-
-						Statement stmt = null;
-						stmt = mysqlConn.createStatement();
-						ResultSet resultset =null;
-						String val = "TRUE";
-						String val2 = "3";
-						String query="select *  from tasks where assignedto='"+username+"' AND del_indicator != '"+val+"' and todo_status = '"+val2+"'   ";
-						ResultSet rs=stmt.executeQuery(query);
-				
-						while(rs.next()){  %>
-                            <tr>
-                        	<td><%=rs.getString("task_id") %></td>
-        		  			<td><%=rs.getString("tname") %></td>
-            	  			<td><%=rs.getString("client") %></td>
-            	  			<td><%=rs.getString("leader") %></td>
-            	  			<td><%=rs.getString("assigneddate") %></td>
-            	  			<td><%=rs.getString("duedate") %></td>
-                                
-                                <td>
-                                  <label class="badge badge-info">Completed</label>
-                                </td>
-                                <td class="text-right">
-                                  <!-- Hidden field with table id -->
-                                  <input type="hidden" name="first" id="first" >
-                                  <button class="btn btn-light" name="viewf" id="viewf">
-                                    
+                            	   <!-- get table values -->						
+	  							 <input type="hidden" name="first" id="first" >
+       							 <input type="hidden" name="second" id="second">
+       							 <input type="hidden" name="third" id="third">
+	  							 <!------------buttons ------ -->
+                              <!-- <button class="btn btn-outline-primary" onclick="window.location.href = 'alljobs.jsp';">View</button> -->
+                              <!-- <button  class="btn btn-info" name="viewtasks" id="viewtasks">View</button> -->
+                            
+                            
                          
-                                    <i class="mdi mdi-eye text-primary"></i>View
-                                  </button>
-                                  
-                             
-                                </td>
-                            </tr>
-        
-                       <%}%>
-                          </tbody>
-                        
-                          
-                          
-                        </table>
-                        
-                        	<%rs.close();
+                              <button class="btn btn-outline-info" name="todo_addnote" id="todo_addnote" >Pick</button>
+                         
+                            
+                              
+                            </td>
+                        </tr>
+                   
+							<%}%>
+                                		</tbody>
+          					                                
+                			</table>
+    						<%rs.close();
 			    			stmt.close();
     						mysqlConn.close();
     							}
 							catch(Exception e){
-    							e.printStackTrace();
+								System.out.println(e); 
+    							
+								e.printStackTrace();
+    							
     			
 									}%> 
-						</form>
-                      </div>
-                    </div>
+									
+									</form>
+									
+									
                   </div>
                 </div>
-                            
-                            <!-- -------------- -->
-                          </div>
-                        </div>
-                      </div>
-                      
-                      
-                      
-                      <!-- ---------------------end card-------------- -->
-             
-            
-                    </div>
-                  </div>
-                </div>
-              </div>  
-  
-          
               </div>
             </div>
           </div>
@@ -435,7 +289,7 @@
         </div>
         
         
-         <div class="footer-wrapper">
+          <div class="footer-wrapper">
             <footer class="footer">
               <div class="d-sm-flex justify-content-center justify-content-sm-between">
                 <span class="text-center text-sm-left d-block d-sm-inline-block">Copyright &copy; 2019. All rights reserved. </span>
@@ -444,11 +298,14 @@
             </footer>
           </div>
         <!-- partial -->
+        </div>
       </div>
       <!-- main-panel ends -->
     </div>
     <!-- page-body-wrapper ends -->
   </div>
+  <!-- container-scroller -->
+
   		   <script>
     
                 var table = document.getElementById('order-listing');

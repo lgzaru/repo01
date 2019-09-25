@@ -160,7 +160,8 @@ public class AdminDash extends HttpServlet {
 							//7. Tasks due today
 							 stmt2 = mysqlConn.createStatement();
 							    String stus6 = "3";
-								rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where duedate = CURDATE() AND todo_status != '"+stus6+"' AND  del_indicator != '"+val+"'   ");
+							    String holdtask = "4";
+								rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where todo_status != '"+holdtask+"' AND duedate = CURDATE() AND todo_status != '"+stus6+"' AND  del_indicator != '"+val+"'   ");
 								while(rs.next()){
 									 
 									 String countp = rs.getString(1);
@@ -209,7 +210,7 @@ public class AdminDash extends HttpServlet {
 										//9. OverDue Tasks
 										 stmt2 = mysqlConn.createStatement();
 										    String condition1 = "3";
-											rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where duedate < CURDATE() AND todo_status !='"+condition1+"' AND del_indicator != '"+val+"'   ");
+											rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where todo_status != '"+holdtask+"' AND duedate < CURDATE() AND todo_status !='"+condition1+"' AND del_indicator != '"+val+"'   ");
 											
 											while(rs.next()){
 												 

@@ -10,13 +10,15 @@
     import javax.net.ssl.SSLContext;
     import javax.net.ssl.TrustManager;
     import javax.net.ssl.X509TrustManager;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
 
 
     public class ContiSMS {
 
  
     	
-       public static void SendSMS (String gsm, String msg) {
+       public static void SendSMS (String gsm, String msg, HttpServletResponse response) throws ServletException, IOException {
         	
 
           URL url;
@@ -102,13 +104,19 @@
 
             System.out.println("Ouch - a MalformedURLException happened.");
             mue.printStackTrace();
-            System.exit(1);
+            //System.exit(1);
 
          } catch (IOException ioe) {
-
-            System.out.println("Oops- an IOException happened.");
+        	
+        	System.out.println("Oops- an IOException happened.");
+        	PrintWriter out = response.getWriter();
+        	out.println("<script type=\"text/javascript\">");  
+			out.println("alert('Please check your internet connection...');");
+			out.println("window.location = 'logout.jsp'  ");
+			out.println("</script>");
+     		
             ioe.printStackTrace();
-            System.exit(1);
+            //System.exit(1);
 
          } catch (KeyManagementException e) {
 			// TODO Auto-generated catch block

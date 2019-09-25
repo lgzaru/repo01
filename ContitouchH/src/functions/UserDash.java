@@ -98,8 +98,41 @@ public class UserDash extends HttpServlet {
 				
 				 }
 				
+				//4. Tasks Pending Approval
 				 
-				//4. Total jobs
+				stmt2 = mysqlConn.createStatement();
+				String stuss = "2";
+				rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks where assignedto='"+username+"' AND todo_status = '"+stuss+"'  AND del_indicator != '"+val+"' ");
+				
+				while(rs.next()){
+					 
+					 String totalpaproval = rs.getString(1);
+					 System.out.println("Total pending approval :" +totalpaproval);
+					 
+						
+						session.setAttribute("totalpaproval_session",totalpaproval);
+				
+				 }
+				
+				//4. Tasks on hold
+				 
+				stmt2 = mysqlConn.createStatement();
+				String stuss1 = "4";
+				rs = stmt2.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks where assignedto='"+username+"' AND todo_status = '"+stuss1+"'  AND del_indicator != '"+val+"' ");
+				
+				while(rs.next()){
+					 
+					 String tasksonhold = rs.getString(1);
+					 System.out.println("Total pending approval :" +tasksonhold);
+					 
+						
+						session.setAttribute("tasksonhold_session",tasksonhold);
+				
+				 }
+				
+				
+				 
+				//5. Total jobs
 				 stmt2 = mysqlConn.createStatement();
 				
 				 

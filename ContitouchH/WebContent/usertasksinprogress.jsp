@@ -38,9 +38,11 @@
    
 
 		  
-		  <%@include file = 'viewprojectsvu.jsp' %>
+		  <%@include file = 'sessions.jsp' %> 
 		  
-		   <%String userName2 =  session.getAttribute("User").toString();%>
+		     		  <%String userName2 =  session.getAttribute("User").toString();
+		     	
+		     		  %>
 		  
 		  
 		<script>
@@ -54,7 +56,7 @@
 		     }else{
 		         alert("Cancel");
 
-		        window.location.href = 'allprojects.jsp';
+		        window.location.href = 'alltasks.jsp';
 		     }
 		 }
 		</script>
@@ -79,7 +81,7 @@
               <span class="nav-profile-name">Ctrl Links</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="pagesDropdown">
-                <a class="dropdown-item" href="HomeUser.jsp">
+                <a class="dropdown-item" href="HomeAdmin.jsp">
                 <i class="mdi mdi-settings text-primary"></i>
                 Home
                 </a>
@@ -117,38 +119,76 @@
         
       <!-- partial -->
       <!-- partial:../../partials/_sidebar.html -->
-<%@include file = '/Views/nav/navigation.jsp' %>
+<%@include file = '/Views/nav/navigationu.jsp' %>
           <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
 		
 		
 		
-<%@include file = '/Views/nav/header.jsp' %>							
+<%@include file = '/Views/nav/header.jsp' %>	
 
-								
-	
-				
+         <div class="mt-4 py-2 border-top border-bottom">
+                        <ul class="nav profile-navbar">
+                          <li class="nav-item">
+                            <a class="nav-link active" href="usertasks.jsp">
+                              <i class="mdi mdi-checkbox-blank-circle-outline"></i>
+                              ToDo Tasks : <%out.print(todos); %>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link active" href="usertasksinprogress.jsp">
+                              <i class="mdi mdi-check"></i>
+                              In Progress: <%out.print(inprogress); %>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link active" href="fallprojects.jsp">
+                              <i class="mdi mdi-check-all"></i>
+                              Completed Tasks:<%out.print(completed); %>
+                            </a>
+                          </li>
+                          
+                          <li class="nav-item">
+                            <a class="nav-link active" href="pending-approval.jsp">
+                              <i class="mdi mdi-av-timer"></i>
+                              Pending Approval: <%out.print(totalpaproval); %>
+                            </a>
+                          </li>
+                          
+                          
+                          <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                              <i class="mdi mdi-clock-start"></i>
+                              On Hold: <%out.print(tasksonhold); %>
+                            </a>
+                          </li>
+                      
+                        </ul>
+           </div>	
+
+
+		<br><br>		
 		<div class="card">
             <div class="card-body">
-              <h4 class="card-title">View all Projects</h4>
+              <h4 class="card-title">Tasks Pending Action</h4>
               <div class="row">
                 <div class="col-12">
                   <div class="table-responsive">
-                  <form name="form1" id="form1" action="/ContitouchH/ProjectActions"  method="post">
+                  <form name="form1" id="form1" action="/ContitouchH/TaskActions"  method="post">
                     <table id="order-listing" class="table">
                      
 					  <thead>
                         <tr>
-                            <th>ID #</th>
-                            <th>Project Name</th>
-                            <!-- <th>Company</th>
-                            <th>AssignedTo</th>
-                            <th>Lead</th> 
-                            <th>Priority</th> -->
-                            <th>StartDate</th>
-                            <th>EndDate</th>
-                            <th>Status</th>
+                            <th>Task-ID#</th>
+                            <th>Task Name</th>
+                            <!-- <th>AssignedTo</th> -->
+                            <th>Lead</th>
+                            <!-- <th>AssignedDate</th> -->
+                            <th>DueDate</th>
+                             <th>Priority</th>
+                            <!--<th>ProjectName</th>
+                            <th>CLient</th> -->
                             <th>Actions</th>
                         </tr>
                       </thead>
@@ -164,62 +204,34 @@
 						Statement stmt = null;
 						stmt = mysqlConn.createStatement();
 						ResultSet resultset =null;
-						String val = "TRUE";
-						String val2 = "9";
-						String query="select *  from projects where  del_indicator != '"+val+"' and  status != '"+val2+"'   ";
+						String val = "TRUE", vall = "1";
+						String myuser = session.getAttribute("User").toString();
+						
+						
+						/* String query="SELECT users.name FROM tasks INNER JOIN users ON tasks.assignedto=users.email WHERE tasks.task_id = 8"; */
+						
+						String query="SELECT users.name, tasks.task_id, tasks.tname,tasks.assigneddate,tasks.duedate, tasks.priority, tasks.todo_status"
+						+	" FROM tasks INNER JOIN users ON tasks.leader=users.email"
+						+	" where tasks.todo_status = '"+vall+"' AND tasks.del_indicator != '"+val+"' AND tasks.assignedto = '"+myuser+"'  "
+						+	" order by tasks.task_id DESC ";
 						ResultSet rs=stmt.executeQuery(query);
 				
-						while(rs.next()){
+						while(rs.next()){ 
+							String status = rs.getString("tasks.todo_status");
+							int statusp = Integer.parseInt(status);
+							%>
 							
-							String status = rs.getString("status");
-							int statusp = Integer.parseInt(status);%>
                         <tr>
                         
                         
-                        	<td><%=rs.getString("id") %></td>
-        		  			<td><%=rs.getString("pname") %></td>
-            	  			<%-- <td><%=rs.getString("company") %></td>
-            	  			<td><%=rs.getString("assignedto") %></td>
-            	  			<td><%=rs.getString("leader") %></td>
-            	  			<td><%=rs.getString("priority") %></td> --%>
-            	  			<td><%=rs.getString("project_start") %></td>
-            	  			<td><%=rs.getString("project_end") %></td>
-            	  			
-            	  				<% if(statusp == 9 ) { %>
-            	  				<td><label class="badge badge-success">Completed</label></td>
-            	  	            	  			
-            	  			<%} else if(statusp == 8){%>
-            	  			<td><label class="badge badge-info">In Progress</label>
-            	  			
-            	  			<%} else if(statusp == 2){%>
-            	  			<td><label class="badge badge-info">In Studio</label>
-            	  			
-            	  			<%} else if(statusp == 4){%>
-            	  			<td><label class="badge badge-info">In Photography</label>
-            	  			
-            	  			<%} else if(statusp == 3){%>
-            	  			<td><label class="badge badge-warning">Waiting Further Details From Client</label>
-            	  			
-            	  			<%} else if(statusp == 5){%>
-            	  			<td><label class="badge badge-warning">Waiting Approval</label>
-            	  			
-            	  			<%} else if(statusp == 6){%>
-            	  			<td><label class="badge badge-warning">Waiting Feedback</label>
-            	  			
-            	  			<%} else if(statusp == 7){%>
-            	  			<td><label class="badge badge-warning">Client Still Reviewing</label>
-            	  			
-            	  			
-            	  			<input type="hidden" name="first" id="first" >
-            	  			
-            	  			</td>
-                           <%} else if(statusp == 1 ){ %>
-                            <td><label class="badge badge-danger">Pending Action</label></td>
-                           
-                           
-                           <%} else if(statusp == 11 ){ %>
-                            <td><label class="badge badge-warning">On Hold</label></td>
-                           <%} %>
+                        	<td><%=rs.getString("tasks.task_id") %></td>
+        		  			<td><%=rs.getString("tasks.tname") %></td>
+            	  			<td><%=rs.getString("users.name") %></td>
+            	  			<%-- <td><%=rs.getString("tasks.assigneddate") %></td> --%>
+            	  			<td><%=rs.getString("tasks.duedate") %></td>
+            	  			 <td><%=rs.getString("priority") %></td>
+            	  			<%--<td><%=rs.getString("project_name") %></td>
+            	  			<td><%=rs.getString("client") %></td> --%>
                            
                             <td>
                             
@@ -231,23 +243,13 @@
        							 <input type="hidden" name="third" id="third">
 	  							 <!------------buttons ------ -->
                               <!-- <button class="btn btn-outline-primary" onclick="window.location.href = 'alljobs.jsp';">View</button> -->
-                             <!-- view project user -->
-                              <button  class="btn btn-info" name="viewpv" id="viewpv">View</button>
+                              <!-- <button  class="btn btn-info" name="viewtasks" id="viewtasks">View</button> -->
                             
                             
                          
-                             <button class="btn btn-light" name="addj" id="addj">
-                                    
-                         
-                                    <i class="mdi mdi-pin text-primary"></i>Add Task
-                                  </button>
+                              <button class="btn btn-outline-info" name="todo_addnote" id="todo_addnote" >View</button>
                          
                             
-                            
-                            
-                              
-                              
-                              
                               
                             </td>
                         </tr>
@@ -261,7 +263,10 @@
     						mysqlConn.close();
     							}
 							catch(Exception e){
-    							e.printStackTrace();
+								System.out.println(e); 
+    							
+								e.printStackTrace();
+    							
     			
 									}%> 
 									

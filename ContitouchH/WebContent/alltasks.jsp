@@ -167,10 +167,14 @@
 						
 						/* String query="SELECT users.name FROM tasks INNER JOIN users ON tasks.assignedto=users.email WHERE tasks.task_id = 8"; */
 						
-						String query="SELECT users.name, tasks.task_id, tasks.tname,tasks.assigneddate,tasks.duedate, tasks.priority FROM tasks INNER JOIN users ON tasks.leader=users.email where tasks.del_indicator != '"+val+"'   ";
+						String query="SELECT users.name, tasks.task_id, tasks.tname,tasks.assigneddate,tasks.duedate, tasks.priority, tasks.todo_status FROM tasks INNER JOIN users ON tasks.leader=users.email where tasks.del_indicator != '"+val+"'   ";
 						ResultSet rs=stmt.executeQuery(query);
 				
-						while(rs.next()){  %>
+						while(rs.next()){ 
+							String status = rs.getString("tasks.todo_status");
+							int statusp = Integer.parseInt(status);
+							%>
+							
                         <tr>
                         
                         
@@ -197,11 +201,18 @@
                             
                             
                          
-                              <button class="btn btn-outline-warning" name="updatetask1" id="updatetask1" >Update</button>
+                              <button class="btn btn-outline-primary" name="updatetask1" id="updatetask1" >Update</button>
                          
-                            
-                            
                               <button class="btn btn-outline-danger" name="deletetask" id="deletetask">Delete</button>
+                              
+                              <% if(statusp !=  4) { %>
+            	  				<button class="btn btn-outline-warning" name="hold" id="hold">onHold</button>
+            	  	            	  			
+            	  			  <%}
+                              
+                               else if(statusp == 4 ) { %>
+                                 <button class="btn btn-outline-info" name="resume" id="resume">Resume</button>
+                              <%}%> 
                             
                               
                               

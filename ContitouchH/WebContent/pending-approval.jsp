@@ -32,6 +32,12 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.ico" />
   
+  	  <%@include file = 'sessions.jsp' %> 
+		  
+		     		  <%String userName2 =  session.getAttribute("User").toString();
+		     		
+		     		  %>
+  
   
   		 <script>
 		 function Log_out()
@@ -51,7 +57,7 @@
 		
   
 </head>
-<body class="sidebar-icon-only">
+<body>
   <div class="container-scroller">
    			<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-left navbar-brand-wrapper d-flex align-items-center justify-content-between">
@@ -119,7 +125,46 @@
             <div class="col-md-12">
             
 		<%@include file = '/Views/nav/header.jsp' %>	
-		<br><br>
+		
+		         <div class="mt-4 py-2 border-top border-bottom">
+                        <ul class="nav profile-navbar">
+                          <li class="nav-item">
+                            <a class="nav-link active" href="usertasks.jsp">
+                              <i class="mdi mdi-checkbox-blank-circle-outline"></i>
+                              ToDo Tasks : <%out.print(todos); %>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link active" href="usertasksinprogress.jsp">
+                              <i class="mdi mdi-check"></i>
+                              In Progress: <%out.print(inprogress); %>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link active" href="fallprojects.jsp">
+                              <i class="mdi mdi-check-all"></i>
+                              Completed Tasks:<%out.print(completed); %>
+                            </a>
+                          </li>
+                          
+                          <li class="nav-item">
+                            <a class="nav-link active" href="pending-approval.jsp">
+                              <i class="mdi mdi-av-timer"></i>
+                              Pending Approval: <%out.print(totalpaproval); %>
+                            </a>
+                          </li>
+                          
+                          
+                          <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                              <i class="mdi mdi-clock-start"></i>
+                              On Hold: <%out.print(tasksonhold); %>
+                            </a>
+                          </li>
+                      
+                        </ul>
+           </div>
+	
 
               <div class="tab-content tab-transparent-content pb-0">
                 <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
@@ -343,6 +388,7 @@
       </div>
     <!-- page-body-wrapper ends -->
     </div>
+  </div>
   </div>
   <!-- container-scroller -->
   <!-- base:js -->

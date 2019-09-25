@@ -201,6 +201,9 @@
             	  			<%} else if(statusp == 6){%>
             	  			<td><label class="badge badge-warning">Waiting Feedback</label>
             	  			
+            	  			<%} else if(statusp == 11){%>
+            	  			<td><label class="badge badge-warning">OnHold</label>
+            	  			
             	  			<%} else if(statusp == 7){%>
             	  			<td><label class="badge badge-warning">Client Still Reviewing</label>
             	  			

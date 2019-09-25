@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import conn.ConMysqlLocalhost;
 
@@ -91,7 +90,7 @@ public class ForgotPass extends HttpServlet {
 						
 						//send sms
 						try {
-							ContiSMS.SendSMS(gsm, msg);
+							ContiSMS.SendSMS(gsm, msg, response);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");

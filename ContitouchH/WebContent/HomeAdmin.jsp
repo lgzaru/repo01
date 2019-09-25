@@ -159,7 +159,7 @@
                         <p class="text-muted">total:<%out.print(totalcomp); %></p>
                       </div>
                       <div class="progress progress-md">
-                        <div class="progress-bar bg-info w-25" role="progressbar" aria-valuenow="<%out.print(totalcomp); %>" aria-valuemin="0" aria-valuemax="100"></div>
+					  <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: <%out.print(totalcomp); %>%" aria-valuenow="<%out.print(totalcomp); %>" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                     </div>
                   </div>
@@ -173,7 +173,7 @@
                         <p class="text-muted">total: <%out.print(totalpending); %></p>
                       </div>
                       <div class="progress progress-md">
-                        <div class="progress-bar bg-success w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+					  <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" style="width: <%out.print(totalpending); %>%" aria-valuenow="<%out.print(totalpending); %>" aria-valuemin="0" aria-valuemax="100"></div>   
                       </div>
                     </div>
                   </div>
@@ -187,7 +187,7 @@
                         <p class="text-muted">total:<%out.print(overduetasksadmin); %></p>
                       </div>
                       <div class="progress progress-md">
-                        <div class="progress-bar bg-danger w-25" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+					  <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="width: <%out.print(overduetasksadmin); %>%" aria-valuenow="<%out.print(overduetasksadmin); %>" aria-valuemin="0" aria-valuemax="100"></div>   
                       </div>
                     </div>
                   </div>
@@ -201,7 +201,7 @@
                         <p class="text-muted">total: <%out.print(totalcompleted); %>
                       </div>
                       <div class="progress progress-md">
-                        <div class="progress-bar bg-warning w-25" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+					  <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: <%out.print(totalcompleted); %>%" aria-valuenow="<%out.print(totalcompleted); %>" aria-valuemin="0" aria-valuemax="100"></div>   
                       </div>
                     </div>
                   </div>

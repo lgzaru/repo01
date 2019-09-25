@@ -91,7 +91,7 @@ try{
 			out.println("});");
 			out.println("</script>");
 			
-			ContiSMS.SendSMS(pnumber, msg);
+			ContiSMS.SendSMS(pnumber, msg, response);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("createuser.jsp");
 			rd.include(request, response);

@@ -36,17 +36,14 @@
 	<classpathentry kind="lib" path="C:/apache-tomcat-9.0.22/eclipse/My JARS/jt400-9.5.jar"/>
 	<classpathentry kind="lib" path="C:/apache-tomcat-9.0.22/eclipse/My JARS/mail-1.4.1.jar"/>
 	<classpathentry kind="lib" path="C:/apache-tomcat-9.0.22/eclipse/My JARS/mail-1.4.5.jar"/>
-	<classpathentry kind="lib" path="C:/apache-tomcat-9.0.22/eclipse/My JARS/mysql-connector-java-5.1.11-bin.jar"/>
-	<classpathentry kind="lib" path="C:/apache-tomcat-9.0.22/eclipse/My JARS/mysql-connector-java-5.1.18-bin.jar"/>
-	<classpathentry kind="lib" path="C:/apache-tomcat-9.0.22/eclipse/My JARS/mysql-connector-java-5.1.31-bin.jar"/>
 	<classpathentry kind="lib" path="C:/apache-tomcat-9.0.22/eclipse/My JARS/opencsv-3.1.jar"/>
 	<classpathentry kind="lib" path="C:/apache-tomcat-9.0.22/eclipse/My JARS/poi-3.0-FINAL.jar"/>
 	<classpathentry kind="lib" path="C:/apache-tomcat-9.0.22/eclipse/My JARS/rs2xml.jar"/>
 	<classpathentry kind="lib" path="C:/apache-tomcat-9.0.22/eclipse/My JARS/servlet-api.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Groupview/.m2/repository/io/rest-assured/rest-assured/3.2.0/rest-assured-3.2.0.jar" sourcepath="C:/Users/Groupview/.m2/repository/io/rest-assured/rest-assured/3.2.0/rest-assured-3.2.0-sources.jar">
 		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
 			<attribute name="test" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
 			<attribute name="maven.groupId" value="io.rest-assured"/>
 			<attribute name="maven.artifactId" value="rest-assured"/>
 			<attribute name="maven.version" value="3.2.0"/>
@@ -63,5 +60,6 @@
 			<attribute name="maven.scope" value="compile"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/apache-tomcat-9.0.22/eclipse/My JARS/mysql-connector-java-5.1.44.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

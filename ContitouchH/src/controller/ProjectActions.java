@@ -33,6 +33,7 @@ public class ProjectActions extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -40,11 +41,13 @@ public class ProjectActions extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		java.sql.Connection mysqlConn = null;
 		
+		
 		PrintWriter out = response.getWriter();
 		
 		
 		String jid = request.getParameter("first");
 		System.out.println("firstID="+jid);
+		int onhold = 4;
 
 		
 		HttpSession session = request.getSession(true);
@@ -232,8 +235,27 @@ public class ProjectActions extends HttpServlet {
 						
 						session.setAttribute("completedtasksp",countp);
 				}
+				
+				
+				//onhold tasks count
+			 	String val0="4";
+				rs = stmt.executeQuery("SELECT COUNT(projectid) AS 'result'  FROM tasks  where todo_status ='"+val0+"'  AND  del_indicator != '"+val+"' AND projectid = '"+projectid+"'   ");
+				while(rs.next()){
+					 
+					 	String countp = rs.getString(1);
+					 	System.out.println("Completed tasks per project:" +countp);
+						
+						session.setAttribute("onholdtask",countp);
+				}
+				
+				
+				
+				
+				
+				
 				//overdue tasks count
-				rs = stmt.executeQuery("SELECT COUNT(projectid) AS 'result'  FROM tasks  where duedate < CURDATE() AND todo_status !='"+val1+"' AND del_indicator != '"+val+"' AND projectid = '"+projectid+"'    ");
+				
+				rs = stmt.executeQuery("SELECT COUNT(projectid) AS 'result'  FROM tasks where todo_status !='"+onhold+"' AND duedate < CURDATE() AND todo_status !='"+val1+"' AND del_indicator != '"+val+"' AND projectid = '"+projectid+"'    ");
 				while(rs.next()){
 					 
 					 	String countp = rs.getString(1);
@@ -264,8 +286,8 @@ public class ProjectActions extends HttpServlet {
 				}
 				
 				//Assigned tasks but not yet picked by user count
-				String val0="0";
-				rs = stmt.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where todo_status ='"+val0+"'  AND del_indicator != '"+val+"' AND projectid = '"+projectid+"'   ");
+				String vall0="0";
+				rs = stmt.executeQuery("SELECT COUNT(task_id) AS 'result'  FROM tasks  where todo_status ='"+vall0+"'  AND del_indicator != '"+val+"' AND projectid = '"+projectid+"'   ");
 				while(rs.next()){
 					 
 					 	String countp = rs.getString(1);
@@ -414,13 +436,17 @@ public class ProjectActions extends HttpServlet {
 	    	//	tname, assigneddate,duedate,priority
 
 	    	
-			String newid =  session.getAttribute("mycon2").toString();
-			System.out.println("newID="+newid);
+			
+			
 	    	
+			String newid = request.getParameter("mycon2");
+			System.out.println("newID="+newid);
+			
 	    	String tname = request.getParameter("tname");
 	    	String assigneddate = request.getParameter("assigneddate");
 	    	String duedate = request.getParameter("duedate");
 	    	String priority = request.getParameter("priority");
+	    	String tdesc = request.getParameter("tdesc");
 			System.out.println("hw far2="+priority);
 			//from viewprojectse.jsp
 	    	
@@ -432,7 +458,8 @@ public class ProjectActions extends HttpServlet {
 				java.sql.Statement stmt = null;
 				stmt = mysqlConn.createStatement();
 				
-				stmt.executeUpdate("UPDATE tasks SET tname = '"+tname+"',assigneddate='"+assigneddate+"',duedate='"+duedate+"', priority='"+priority+"'   WHERE  task_id ='"+newid+"'  ");
+				stmt.executeUpdate("UPDATE tasks SET tname = '"+tname+"',assigneddate='"+assigneddate+"',duedate='"+duedate+"', priority='"+priority+"', tdesc ='"+tdesc+"' "
+						+ "  WHERE  task_id ='"+newid+"'  ");
 				System.out.print("Update Successfull!");
 
 				out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
@@ -487,10 +514,11 @@ public class ProjectActions extends HttpServlet {
 	          //delete button is clicked
 	          //Do the delete action or forward the request to the servlet to do delete action
 	    	
-
+	    	String taskid = request.getParameter("first");
+			session.setAttribute("taskid001",taskid); 
 		
 				System.out.print("Success redirect");
-				response.sendRedirect("alltasksedit.jsp");
+				response.sendRedirect("task_detailsedit.jsp");
 				
 			}
  
@@ -685,7 +713,7 @@ public class ProjectActions extends HttpServlet {
 					
 					//JavaSMS.SendSMS(pnumber, messagebody);
 					try {
-						ContiSMS.SendSMS(pnumber, messagebody);
+						ContiSMS.SendSMS(pnumber, messagebody, response);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
@@ -770,7 +798,7 @@ public class ProjectActions extends HttpServlet {
 					
 					//JavaSMS.SendSMS(pnumber, messagebody);
 					try {
-						ContiSMS.SendSMS(pnumber, messagebody);
+						ContiSMS.SendSMS(pnumber, messagebody, response);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
@@ -917,6 +945,187 @@ public class ProjectActions extends HttpServlet {
 				response.sendRedirect("project-tasksv.jsp");
 				
 			}
+ 
+ if (request.getParameter("hold") != null) {
+	   
+	 String gsm = null;
+		String msg = null;
+		String tname = null;
+	
+
+	try{
+
+		
+	    mysqlConn = ConMysqlLocalhost.getMySqlConnection();
+
+	    Statement stmt = null;
+		stmt = mysqlConn.createStatement();
+		ResultSet rs =null;
+		
+		
+		
+		String query="SELECT users.pnumber, tasks.tname "
+				+ "FROM tasks "
+				+ "INNER JOIN users "
+				+ "ON tasks.assignedto=users.email "
+			    + "WHERE tasks.task_id = '"+jid+"'  ";
+				rs=stmt.executeQuery(query);
+
+				while(rs.next()) {
+					
+					//String assignedto = rs.getString("assignedto");
+					gsm = rs.getString(1);
+					tname = rs.getString(2);
+					System.out.println("Phone number: :"+gsm);
+					System.out.println("Task name: :"+tname);
+				
+				}
+		
+
+		
+		msg = "[Task #"+jid+", Name: "+tname+"] has been put onhold by the Administrator";
+		ContiSMS.SendSMS(gsm, msg, response);
+		System.out.print("Checking connectivity error!");
+
+		
+		String val2 = "4";
+		
+		stmt.executeUpdate("UPDATE tasks SET todo_status='"+val2+"', duedate = CURDATE() + INTERVAL 1 DAY   WHERE  task_id ='"+jid+"'  ");
+		System.out.print("Successfull!");
+
+		out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+		out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+		out.println("<script src='js/alerts.js'></script>");
+		out.println("<script>");
+		out.println("$(document).ready(function(){  ");
+		out.println("  showSwal('auto-close')        ");
+		out.println("});");
+		out.println("</script>");
+		
+		RequestDispatcher rd = request.getRequestDispatcher("alltasks.jsp");
+		rd.include(request, response);
+		
+		
+		
+	}
+
+	catch(Exception e){
+	
+	      System.out.println(e);
+	      e.printStackTrace();
+	      
+	      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+			out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+			out.println("<script src='js/alerts.js'></script>");
+			out.println("<script>");
+			out.println("$(document).ready(function(){  ");
+			out.println("  showSwal('error-occured')        ");
+			out.println("});");
+			out.println("</script>");
+			
+			RequestDispatcher rd = request.getRequestDispatcher("alltasks.jsp");
+			rd.include(request, response);
+	     
+	}
+
+	finally {		
+		try {
+			mysqlConn.close();
+		}
+		catch (Exception ignore) {
+		}
+	}//close if condition = true
+	
+}
+ 
+ 
+ if (request.getParameter("resume") != null) {
+     //delete button is clicked
+     //Do the delete action or forward the request to the servlet to do delete action
+	String gsm = null;
+	String msg,tname = null;
+
+
+	try{
+
+		
+	    mysqlConn = ConMysqlLocalhost.getMySqlConnection();
+
+	    Statement stmt = null;
+		stmt = mysqlConn.createStatement();
+		ResultSet rs =null;
+		
+		
+		
+		String query="SELECT users.pnumber, tasks.tname "
+				+ "FROM tasks "
+				+ "INNER JOIN users "
+				+ "ON tasks.assignedto=users.email "
+			    + "WHERE tasks.task_id = '"+jid+"'  ";
+				rs=stmt.executeQuery(query);
+
+				while(rs.next()) {
+					
+					//String assignedto = rs.getString("assignedto");
+					gsm = rs.getString(1);
+					tname = rs.getString(2);
+					System.out.println("Phone number: :"+gsm);
+					System.out.println("Task name: :"+tname);
+				
+				}
+		
+		
+	
+		String val = "1";
+		
+		msg = "[Task #"+jid+", Name: "+tname+"] has been reactivated";
+		ContiSMS.SendSMS(gsm, msg, response);
+		System.out.print("Testing connectivity error!");
+		
+		stmt.executeUpdate("UPDATE tasks SET todo_status='"+val+"'   WHERE  task_id ='"+jid+"'  ");
+		System.out.print("Successfull!");
+		
+		
+
+		out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+		out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+		out.println("<script src='js/alerts.js'></script>");
+		out.println("<script>");
+		out.println("$(document).ready(function(){  ");
+		out.println("  showSwal('auto-close')        ");
+		out.println("});");
+		out.println("</script>");
+		
+		RequestDispatcher rd = request.getRequestDispatcher("alltasks.jsp");
+		rd.include(request, response);
+		
+		
+		
+	}
+
+	catch(Exception e){
+	
+	      System.out.println(e);
+	      
+      	    out.println("<script type=\"text/javascript\">");  
+			out.println("alert('Error occured..');");
+			out.println("window.location = 'alltasks.jsp'  ");
+			out.println("</script>");
+	     
+			
+	     
+	}
+
+	finally {		
+		try {
+			mysqlConn.close();
+		}
+		catch (Exception ignore) {
+		}
+	}//close if condition = true
+	
+}
+ 
 
 		        
 	}

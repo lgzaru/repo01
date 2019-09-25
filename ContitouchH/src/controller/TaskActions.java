@@ -41,6 +41,7 @@ public class TaskActions extends HttpServlet {
 		
 		java.sql.Connection mysqlConn = null;
 		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession(true);
 		
 
 		
@@ -66,7 +67,6 @@ public class TaskActions extends HttpServlet {
 				System.out.println("statusval is="+statusval);
 				
 				String taskid = request.getParameter("taskid");
-				HttpSession session = request.getSession(true);
 				String username = session.getAttribute("User").toString();
 
 				//String val2 = "1";
@@ -105,7 +105,7 @@ public class TaskActions extends HttpServlet {
 							out.println("});");
 							out.println("</script>");
 							
-							RequestDispatcher rd = request.getRequestDispatcher("timeline.jsp");
+							RequestDispatcher rd = request.getRequestDispatcher("usertasksinprogress.jsp");
 							rd.include(request, response);
 							
 							
@@ -121,7 +121,7 @@ public class TaskActions extends HttpServlet {
 						out.println("});");
 						out.println("</script>");
 						
-						RequestDispatcher rd = request.getRequestDispatcher("timeline.jsp");
+						RequestDispatcher rd = request.getRequestDispatcher("usertasksinprogress.jsp");
 						rd.include(request, response);
 						
 						System.out.print("Email sent successfully to admin!");
@@ -139,7 +139,7 @@ public class TaskActions extends HttpServlet {
 						out.println("  showSwal('warning-message-and-cancel')  ");
 						out.println("});");
 						out.println("</script>");
-						RequestDispatcher rd = request.getRequestDispatcher("timeline.jsp");
+						RequestDispatcher rd = request.getRequestDispatcher("usertasksinprogress.jsp");
 						rd.include(request, response);
 						
 					}
@@ -163,7 +163,7 @@ public class TaskActions extends HttpServlet {
 					out.println("});");
 					out.println("</script>");
 					
-					response.sendRedirect("timeline.jsp");
+					response.sendRedirect("usertasksinprogress.jsp");
 					
 					break;
 				
@@ -188,7 +188,7 @@ public class TaskActions extends HttpServlet {
 					out.println("});");
 					out.println("</script>");
 					
-					response.sendRedirect("timeline.jsp");
+					response.sendRedirect("usertasksinprogress.jsp");
 			     
 			}
 
@@ -251,7 +251,8 @@ public class TaskActions extends HttpServlet {
 	          //delete button is clicked
 	          //Do the delete action or forward the request to the servlet to do delete action
 	    	
-	    		String taskid = request.getParameter("taskid");
+	    		String taskid = request.getParameter("first");
+	    		session.setAttribute("newtask_id",taskid); 
 		
 				System.out.print("Success view:"+taskid);
 			    //response.sendRedirect("timelineu.jsp");
@@ -282,7 +283,7 @@ public class TaskActions extends HttpServlet {
 				out.println("});");
 				out.println("</script>");
 				
-				response.sendRedirect("timeline.jsp");
+				response.sendRedirect("usertasksaction.jsp");
 				
 			}
 
@@ -298,7 +299,7 @@ public class TaskActions extends HttpServlet {
 					out.println("});");
 					out.println("</script>");
 					
-					response.sendRedirect("timeline.jsp");
+					response.sendRedirect("usertasks.jsp");
 			     
 			}
 
@@ -355,7 +356,7 @@ public class TaskActions extends HttpServlet {
 				
 				String msg = "Task ID-"+taskid+", has been approved";
 				try {
-					ContiSMS.SendSMS(gsm, msg);
+					ContiSMS.SendSMS(gsm, msg, response);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					 out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
@@ -439,7 +440,7 @@ public class TaskActions extends HttpServlet {
 				
 				String msg = "Task ID-"+taskid+", has been rejected.Please login for more info...";
 				try {
-					ContiSMS.SendSMS(gsm, msg);
+					ContiSMS.SendSMS(gsm, msg, response);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					 out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
@@ -493,6 +494,281 @@ public class TaskActions extends HttpServlet {
 			}//close if condition = true
 	    	
 	    }
+ 
+ 
+	    else if (request.getParameter("more_details") != null) {
+	          //delete button is clicked
+	          //Do the delete action or forward the request to the servlet to do delete action
+	    	
+
+		
+				System.out.print("Successfull!");
+				response.sendRedirect("task_details.jsp");
+				
+				String taskid = request.getParameter("first");
+				session.setAttribute("sss_taskid",taskid); 
+				
+				
+			}
+ 
+	    else if (request.getParameter("update_taskdesc") != null) {
+	          //delete button is clicked
+	          //Do the delete action or forward the request to the servlet to do delete action
+	    	
+	    		String taskid = request.getParameter("taskid");
+	    		
+	    		System.out.print("taskid = "+taskid);
+	    		
+	    		String tdesc_update = request.getParameter("tdesc_update");
+	    		System.out.print("tdesc_update = "+tdesc_update);
+	    		
+	    		String val = "TRUE";
+		
+			
+			try{
+
+				
+			    mysqlConn = ConMysqlLocalhost.getMySqlConnection();
+
+				
+				java.sql.Statement stmt = null;
+				stmt = mysqlConn.createStatement();
+		
+				
+				
+				
+				stmt.executeUpdate("UPDATE tasks SET tdesc='"+tdesc_update+"'  WHERE  task_id ='"+taskid+"' AND del_indicator != '"+val+"'  ");
+				System.out.print("Update Successfull!");
+				
+				out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+				out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+				out.println("<script src='js/alerts.js'></script>");
+				out.println("<script>");
+				out.println("$(document).ready(function(){  ");
+				out.println("  showSwal('auto-close')  ");
+				out.println("});");
+				out.println("</script>");
+				
+				response.sendRedirect("task_details.jsp");
+				
+			}
+
+			catch(Exception e){
+			
+			      System.out.println(e); 
+			      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+					out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+					out.println("<script src='js/alerts.js'></script>");
+					out.println("<script>");
+					out.println("$(document).ready(function(){  ");
+					out.println("  showSwal('error-occured')        ");
+					out.println("});");
+					out.println("</script>");
+					
+					response.sendRedirect("task_details.jsp");
+			     
+			}
+
+			finally {		
+				try {
+					mysqlConn.close();
+				}
+				catch (Exception ignore) {
+				}
+			}//close if condition = true
+			
+	
+			
+				
+			}
+ 
+	    else if (request.getParameter("approve_notify") != null) {
+	          //delete button is clicked
+	          //Do the delete action or forward the request to the servlet to do delete action
+	    	
+	    		String taskid = request.getParameter("taskid");
+	    		
+	    		System.out.print("taskid = "+taskid);
+	    		
+	    		String msg = request.getParameter("msg");
+	    		
+	    		String val = "TRUE";
+	    		int statusval = 3;
+	    		
+	    		String name = null, tname = null, projectname = null;
+	    		String pnumber = null;
+	    		
+	    		
+		
+			
+			try{
+
+				
+			    mysqlConn = ConMysqlLocalhost.getMySqlConnection();
+
+				
+				java.sql.Statement stmt = null;
+				stmt = mysqlConn.createStatement();
+		
+				String query="SELECT users.name,users.pnumber, tasks.task_id, tasks.tname, tasks.project_name"
+						+ " FROM tasks INNER JOIN users ON tasks.assignedto=users.email "
+						+ " where tasks.del_indicator != '"+val+"' AND tasks.task_id = '"+taskid+"'   ";
+				ResultSet rs=stmt.executeQuery(query);
+				
+				while(rs.next()){ 
+					
+					 name = rs.getString("users.name");
+					 pnumber = rs.getString("users.pnumber");
+					 tname = rs.getString("tasks.tname");
+					 projectname = rs.getString("tasks.project_name");
+									
+					
+				}
+				
+				String message = "Hi "+name+" Tasks Approved details... [Task name: "+tname+"] [Project name: "+projectname+"] Message: "+msg;
+				
+				System.out.print("Message: "+message);
+				
+				ContiSMS.SendSMS(pnumber, message, response);
+				
+				stmt.executeUpdate("UPDATE tasks SET todo_status ='"+statusval+"'  WHERE  task_id ='"+taskid+"' AND del_indicator != '"+val+"'  ");
+				System.out.print("Update Successfull!");
+				
+				out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+				out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+				out.println("<script src='js/alerts.js'></script>");
+				out.println("<script>");
+				out.println("$(document).ready(function(){  ");
+				out.println("  showSwal('auto-close')  ");
+				out.println("});");
+				out.println("</script>");
+				
+				response.sendRedirect("approve-d.jsp");
+				
+			}
+
+			catch(Exception e){
+			
+			      System.out.println(e); 
+			      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+					out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+					out.println("<script src='js/alerts.js'></script>");
+					out.println("<script>");
+					out.println("$(document).ready(function(){  ");
+					out.println("  showSwal('error-occured')        ");
+					out.println("});");
+					out.println("</script>");
+					
+					response.sendRedirect("approve-d.jsp");
+			     
+			}
+
+			finally {		
+				try {
+					mysqlConn.close();
+				}
+				catch (Exception ignore) {
+				}
+			}//close if condition = true
+			
+	
+			
+				
+			}
+ 
+	    else if (request.getParameter("decline_notify") != null) {
+	          //delete button is clicked
+	          //Do the delete action or forward the request to the servlet to do delete action
+	    	
+	    		String taskid = request.getParameter("taskid");
+	    		
+	    		System.out.print("taskid = "+taskid);
+	    		
+	    		String msg = request.getParameter("msg");
+	    		
+	    		String val = "TRUE";
+	    		int statusval = 1;
+	    		
+	    		String name = null, tname = null, projectname = null;
+	    		String pnumber = null;
+	    		
+	    		
+		
+			
+			try{
+
+				
+			    mysqlConn = ConMysqlLocalhost.getMySqlConnection();
+
+				
+				java.sql.Statement stmt = null;
+				stmt = mysqlConn.createStatement();
+		
+				String query="SELECT users.name,users.pnumber, tasks.task_id, tasks.tname, tasks.project_name"
+						+ " FROM tasks INNER JOIN users ON tasks.assignedto=users.email "
+						+ " where tasks.del_indicator != '"+val+"' AND tasks.task_id = '"+taskid+"'   ";
+				ResultSet rs=stmt.executeQuery(query);
+				
+				while(rs.next()){ 
+					
+					 name = rs.getString("users.name");
+					 pnumber = rs.getString("users.pnumber");
+					 tname = rs.getString("tasks.tname");
+					 projectname = rs.getString("tasks.project_name");
+									
+					
+				}
+				
+				String message = "Hi "+name+". Tasks Declined details... [Task name: "+tname+"] [Project name: "+projectname+"] Message: "+msg;
+				
+				System.out.print("Message: "+message);
+				
+				ContiSMS.SendSMS(pnumber, message, response);
+				
+				stmt.executeUpdate("UPDATE tasks SET todo_status ='"+statusval+"'  WHERE  task_id ='"+taskid+"' AND del_indicator != '"+val+"'  ");
+				System.out.print("Update Successfull!");
+				
+				out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+				out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+				out.println("<script src='js/alerts.js'></script>");
+				out.println("<script>");
+				out.println("$(document).ready(function(){  ");
+				out.println("  showSwal('auto-close')  ");
+				out.println("});");
+				out.println("</script>");
+				
+				response.sendRedirect("approve-d.jsp");
+				
+			}
+
+			catch(Exception e){
+			
+			      System.out.println(e); 
+			      out.println("<script src='vendors/js/vendor.bundle.base.js'></script>");
+					out.println("<script src='vendors/sweetalert/sweetalert.min.js'></script>");
+					out.println("<script src='js/alerts.js'></script>");
+					out.println("<script>");
+					out.println("$(document).ready(function(){  ");
+					out.println("  showSwal('error-occured')        ");
+					out.println("});");
+					out.println("</script>");
+					
+					response.sendRedirect("approve-d.jsp");
+			     
+			}
+
+			finally {		
+				try {
+					mysqlConn.close();
+				}
+				catch (Exception ignore) {
+				}
+			}//close if condition = true
+			
+	
+			
+				
+			}
 	    
 	    
 		

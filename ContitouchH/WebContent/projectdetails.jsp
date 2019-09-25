@@ -302,16 +302,21 @@
             	  			<td><label class="badge badge-info">In Progress</label>
             	  			
             	  			
-            	  			<%} else if(todostatus == 2){%>
+            	  			<%} else if(todostatus == 2){ %>
             	  			<td><label class="badge badge-success">Pending Approval</label>
-            	  			
-            	  			
             	  			<input type="hidden" name="first" id="first" >
-            	  			
             	  			</td>
+            	  			
                            <%} else if(todostatus == 0 ){ %>
                             <td><label class="badge badge-warning">Pending Action</label></td>
+                           
+                           
+                           <%} else if(todostatus == 4 ){ %>
+                            <td><label class="badge badge-warning">OnHold</label></td>
+                          
                            <%} %>
+                           
+                           
 						   
 						
                            
